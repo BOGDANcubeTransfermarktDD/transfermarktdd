@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Борис Лов Ельцин — Профиль игрока</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f5f7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #003B7A;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.35);
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            border-bottom: 2px solid #00aaff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .player-header {
+            display: flex;
+            gap: 30px;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .player-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #003B7A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .player-info h1 {
+            font-size: 36px;
+            color: #003B7A;
+            margin-bottom: 5px;
+        }
+
+        .player-info .number {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .player-info .details {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            background: #f3f5f7;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .detail-item strong {
+            color: #003B7A;
+        }
+
+        .value-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .current-value {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .current-value .label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .current-value .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .current-value .change {
+            color: #2e7d32;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .chart-placeholder {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            flex: 2;
+            min-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-placeholder .chart-text {
+            text-align: center;
+            color: #999;
+        }
+
+        .chart-placeholder .chart-text .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            color: #003B7A;
+            border-left: 5px solid #00aaff;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: #003B7A;
+            color: white;
+            padding: 15px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f7ff;
+        }
+
+        .transfer-in {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .transfer-out {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .transfer-none {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #003B7A;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: auto;
+            background: #003B7A;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .player-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .player-info .details {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html">⚽ TransfermarktDD</a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Игроки</a></li>
+            <li><a href="#">Команды</a></li>
+            <li><a href="#">Трансферы</a></li>
+            <li><a href="#">Турнир</a></li>
+            <li><a href="#">Админ</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+    <a href="index.html" class="back-link">← Назад на главную</a>
+
+    <!-- Профиль игрока -->
+    <div class="player-header">
+        <div class="player-photo">👤</div>
+        <div class="player-info">
+            <h1>Борис Лов Ельцин</h1>
+            <p class="number">№8 • Полузащитник</p>
+            <div class="details">
+                <span class="detail-item"><strong>Возраст:</strong> 8 лет</span>
+                <span class="detail-item"><strong>Клуб:</strong> ФК ПАЦАНЧИКИ</span>
+                <span class="detail-item"><strong>Гражданство:</strong> Россия</span>
+                <span class="detail-item"><strong>Рост:</strong> 130 см</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Стоимость и график -->
+    <div class="value-section">
+        <div class="current-value">
+            <div class="label">Рыночная стоимость</div>
+            <div class="price">₽ 55</div>
+            <div class="change">▲ +5 (10.0%)</div>
+            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 10.06.2026</p>
+        </div>
+        <div class="chart-placeholder">
+            <div class="chart-text">
+                <div class="icon">📈</div>
+                <p>График изменения стоимости</p>
+                <p style="font-size: 12px; margin-top: 5px;">Здесь будет график (в разработке)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Трансферная история -->
+    <h2 class="section-title">🔄 Трансферная история</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Сезон</th>
+                    <th>Дата</th>
+                    <th>Откуда</th>
+                    <th>Куда</th>
+                    <th>Стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>25/26</td>
+                    <td>01.09.2025</td>
+                    <td>—</td>
+                    <td>ФК ПАЦАНЧИКИ</td>
+                    <td class="transfer-in">Свободный агент</td>
+                </tr>
+
+                <tr>
+                    <td>23/24</td>
+                    <td>01.06.2023</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td class="transfer-none">—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Карьера -->
+    <h2 class="section-title">📊 Карьера</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Сезон</th>
+                    <th>Клуб</th>
+                    <th>Турнир</th>
+                    <th>Матчи</th>
+                    <th>Голы</th>
+                    <th>Передачи</th>
+                    <th>ЖК</th>
+                    <th>КК</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>25/26</td>
+                    <td>ФК ПАЦАНЧИКИ</td>
+                    <td>Высшая лига</td>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 TransfermarktDD
+</footer>
+
+</body>
+</html>
