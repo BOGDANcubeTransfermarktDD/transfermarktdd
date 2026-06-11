@@ -20,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* Шапка */
         header {
             background: #003B7A;
             color: white;
@@ -58,7 +57,6 @@
             border-bottom: 2px solid #00aaff;
         }
 
-        /* Контейнер */
         .container {
             max-width: 1200px;
             margin: auto;
@@ -67,7 +65,6 @@
             flex: 1;
         }
 
-        /* Профиль игрока */
         .player-header {
             display: flex;
             gap: 30px;
@@ -109,6 +106,7 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
 
         .detail-item {
@@ -122,7 +120,34 @@
             color: #003B7A;
         }
 
-        /* Блок с рыночной стоимостью */
+        /* Блок позиций */
+        .positions-block {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .positions-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .position-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            background: #e8e8e8;
+            color: #555;
+        }
+
+        .position-tag.main {
+            background: #003B7A;
+            color: white;
+        }
+
         .value-section {
             display: flex;
             gap: 30px;
@@ -136,7 +161,7 @@
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             flex: 1;
-            min-width: 250px;
+            min-width: 200px;
             text-align: center;
         }
 
@@ -158,6 +183,47 @@
             color: #2e7d32;
             font-weight: bold;
             margin-top: 5px;
+        }
+
+        /* Блок рейтинга */
+        .rating-box {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .rating-box .label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .rating-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #003B7A;
+        }
+
+        .rating-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: #00aaff;
+            border-radius: 4px;
+            transition: width 0.5s;
         }
 
         .chart-placeholder {
@@ -182,7 +248,6 @@
             margin-bottom: 10px;
         }
 
-        /* Таблицы */
         .section-title {
             margin-bottom: 20px;
             color: #003B7A;
@@ -242,7 +307,6 @@
             font-weight: bold;
         }
 
-        /* Кнопка "Назад" */
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -255,7 +319,6 @@
             text-decoration: underline;
         }
 
-        /* Футер */
         footer {
             margin-top: auto;
             background: #003B7A;
@@ -283,15 +346,25 @@
             .player-info .details {
                 justify-content: center;
             }
+            .positions-block {
+                justify-content: center;
+            }
         }
     </style>
+
+    <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+
+    <script src="players-data.js"></script>
 </head>
 
 <body>
 
 <header>
     <div class="logo">
-        <a href="index.html">⚽ TransfermarktDD</a>
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: white;">
+        <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип" style="height: 40px; border-radius: 8px;">
+        TransfermarktDD
+    </a>
     </div>
     <nav>
         <ul>
@@ -310,11 +383,17 @@
 
     <!-- Профиль игрока -->
     <div class="player-header">
-        <div class="player-photo">👤</div>
+        <div class="player-photo"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotuvU1F-EcpDkUCT7EvWbaTqi4PqKgM2Ek2hqD_lAdUA8" alt="Богдан" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
         <div class="player-info">
             <h1>Богдан</h1>
-            <p class="number">№12 • Нападающий</p>
-            <div class="details">
+            <p class="number">№12</p>
+            <!-- Блок позиций -->
+            <div class="positions-block">
+                <span class="positions-label">Позиции:</span>
+                <span class="position-tag main">Нападающий</span>
+                <span class="position-tag">Вратарь</span>
+            </div>
+            <div class="details" style="margin-top: 15px;">
                 <span class="detail-item"><strong>Возраст:</strong> 16 лет</span>
                 <span class="detail-item"><strong>Клуб:</strong> ФК ПАЦАНЧИКИ</span>
                 <span class="detail-item"><strong>Гражданство:</strong> Россия</span>
@@ -323,7 +402,7 @@
         </div>
     </div>
 
-    <!-- Стоимость и график -->
+    <!-- Стоимость, рейтинг и график -->
     <div class="value-section">
         <div class="current-value">
             <div class="label">Рыночная стоимость</div>
@@ -331,6 +410,17 @@
             <div class="change">▲ +5 (8.3%)</div>
             <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 10.06.2026</p>
         </div>
+
+        <!-- Блок рейтинга -->
+        <div class="rating-box">
+            <div class="label">Рейтинг (осн. позиция)</div>
+            <div class="rating-number" id="ratingValue">—</div>
+            <div class="rating-bar">
+                <div class="rating-fill" id="ratingFill" style="width: 0%;"></div>
+            </div>
+            <p style="color: #999; font-size: 12px; margin-top: 8px;">Нападающий</p>
+        </div>
+
         <div class="chart-placeholder">
             <div class="chart-text">
                 <div class="icon">📈</div>
@@ -361,7 +451,6 @@
                     <td>ФК ПАЦАНЧИКИ</td>
                     <td class="transfer-in">Свободный агент</td>
                 </tr>
-
                 <tr>
                     <td>23/24</td>
                     <td>01.06.2023</td>
@@ -373,10 +462,10 @@
         </table>
     </div>
 
-    <!-- Карьера -->
-    <h2 class="section-title">📊 Карьера</h2>
+    <!-- Карьера (полевой) -->
+    <h2 class="section-title">📊 Карьера (Нападающий)</h2>
     <div class="table-wrapper">
-        <table>
+        <table id="fieldStats">
             <thead>
                 <tr>
                     <th>Сезон</th>
@@ -394,10 +483,41 @@
                     <td>25/26</td>
                     <td>ФК ПАЦАНЧИКИ</td>
                     <td>Высшая лига</td>
-                    <td>12</td>
+                    <td>2</td>
+                    <td>5</td>
                     <td>4</td>
-                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Карьера (вратарь) -->
+    <h2 class="section-title">🥅 Карьера (Вратарь)</h2>
+    <div class="table-wrapper">
+        <table id="goalieStats">
+            <thead>
+                <tr>
+                    <th>Сезон</th>
+                    <th>Клуб</th>
+                    <th>Турнир</th>
+                    <th>Матчи</th>
+                    <th>Пропущено</th>
+                    <th>Сухие матчи</th>
+                    <th>ЖК</th>
+                    <th>КК</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>25/26</td>
+                    <td>ФК ПАЦАНЧИКИ</td>
+                    <td>Высшая лига</td>
                     <td>1</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
                     <td>0</td>
                 </tr>
             </tbody>
@@ -409,6 +529,99 @@
 <footer>
     © 2026 TransfermarktDD
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Определяем ID игрока из имени файла
+        const path = window.location.pathname;
+        let playerId = 'bogdan'; // по умолчанию
+
+        if (path.includes('vlad')) playerId = 'vlad';
+        else if (path.includes('danila')) playerId = 'danila';
+        else if (path.includes('boris')) playerId = 'boris';
+
+        // Ищем данные игрока
+        const player = playersData.find(p => p.id === playerId);
+        if (!player) return;
+
+        // Считаем рейтинг
+        const rating = calculateRating(player);
+        
+        // Выводим рейтинг
+        const ratingValue = document.getElementById('ratingValue');
+        const ratingFill = document.getElementById('ratingFill');
+        if (ratingValue) ratingValue.textContent = rating;
+        if (ratingFill) ratingFill.style.width = rating + '%';
+    });
+
+    function calculateRating(player) {
+        const stats = player.stats;
+        const totalMatches = stats.matches;
+        const totalGoals = stats.goals;
+        const totalAssists = stats.assists;
+        const totalYC = stats.yellowCards;
+        const totalRC = stats.redCards;
+        const price = player.price;
+        const age = player.age;
+        const position = player.position;
+
+        // Возрастной коэффициент
+        let ageCoef;
+        if (age >= 8 && age <= 11) ageCoef = 0.6;
+        else if (age >= 12 && age <= 13) ageCoef = 0.7;
+        else if (age >= 14 && age <= 15) ageCoef = 0.8;
+        else if (age >= 16 && age <= 18) ageCoef = 1.0;
+        else if (age >= 19 && age <= 21) ageCoef = 0.9;
+        else ageCoef = 0.8;
+
+        // Дисциплина
+        let discipline;
+        if (totalRC >= 2) discipline = 0.3;
+        else if (totalRC >= 1) discipline = 0.5;
+        else if (totalYC >= 4) discipline = 0.7;
+        else if (totalYC >= 2) discipline = 0.9;
+        else discipline = 1.0;
+
+        const priceNorm = price / 10;
+
+        // Базовый рейтинг
+        const baseRating = (priceNorm * 5 * 0.5) + (ageCoef * 30 * 0.5);
+
+        // Сезонный бонус
+        let seasonBonus = 0;
+
+        if (position === 'forward') {
+            seasonBonus = (totalGoals * 5 * 0.4)
+                        + (totalAssists * 3 * 0.3)
+                        + (totalMatches * 1 * 0.2)
+                        + (discipline * 50 * 0.1);
+        }
+        else if (position === 'midfielder') {
+            seasonBonus = (totalAssists * 4 * 0.35)
+                        + (totalGoals * 3 * 0.25)
+                        + (totalMatches * 2 * 0.2)
+                        + (discipline * 50 * 0.2);
+        }
+        else if (position === 'defender') {
+            seasonBonus = (totalMatches * 2 * 0.3)
+                        + (totalAssists * 3 * 0.2)
+                        + (totalGoals * 4 * 0.15)
+                        + (discipline * 50 * 0.35);
+        }
+        else if (position === 'goalkeeper') {
+            const goalieStats = player.goalieStats;
+            let cleanSheets = 0;
+            if (goalieStats) {
+                cleanSheets = goalieStats.cleanSheets || 0;
+            }
+            seasonBonus = (cleanSheets * 6 * 0.4)
+                        + (totalMatches * 2 * 0.2)
+                        + (discipline * 50 * 0.4);
+        }
+
+        return Math.round(baseRating + seasonBonus);
+    }
+</script>
 
 </body>
 </html>
