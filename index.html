@@ -81,6 +81,68 @@
             .prev { left: 2px; }
             .next { right: 2px; }
         }
+
+                /* Гамбургер */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        #mainNav {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            #mainNav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #003B7A;
+                padding: 15px;
+                z-index: 200;
+            }
+
+            #mainNav.open {
+                display: block;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .nav-menu a {
+                padding: 12px 15px;
+            }
+
+            .dropdown-menu {
+                position: static;
+                background: rgba(255,255,255,0.1);
+                box-shadow: none;
+                border-radius: 0;
+                padding-left: 15px;
+            }
+
+            .dropdown-menu li a {
+                color: white;
+            }
+
+            .dropdown-menu li a:hover {
+                background: rgba(255,255,255,0.1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -89,7 +151,8 @@
     <div class="logo">
         <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
     </div>
-    <nav>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav id="mainNav">
         <ul class="nav-menu">
             <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
             <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li><li><a href="market-by-position.html">По позициям</a></li></ul></li>
@@ -271,5 +334,12 @@
 
     resetNewsTimer();
 </script>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+
 </body>
 </html>
