@@ -4,588 +4,278 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Влад — Профиль игрока</title>
-
+    <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+    <script src="players-data.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); }
+        .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+        .logo img { height: 40px; border-radius: 8px; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.2s; padding-bottom: 5px; border-bottom: 2px solid transparent; }
+        nav a:hover { border-bottom: 2px solid #00aaff; }
+        .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; }
+        .player-header { display: flex; gap: 30px; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px; align-items: center; flex-wrap: wrap; }
+        .player-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+        .player-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .player-info h1 { font-size: 36px; color: #003B7A; margin-bottom: 5px; }
+        .player-info .number { font-size: 20px; color: #666; margin-bottom: 10px; }
+        .player-info .details { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; }
+        .detail-item { background: #f3f5f7; padding: 8px 15px; border-radius: 20px; font-size: 14px; }
+        .detail-item strong { color: #003B7A; }
+        .positions-block { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .positions-label { font-size: 14px; color: #666; font-weight: 500; }
+        .position-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; background: #e8e8e8; color: #555; }
+        .position-tag.main { background: #003B7A; color: white; }
+        .value-section { display: flex; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
+        .current-value, .rating-box { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 1; min-width: 200px; text-align: center; }
+        .current-value .label, .rating-box .label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .current-value .price { font-size: 48px; font-weight: bold; color: #2e7d32; }
+        .rating-number { font-size: 48px; font-weight: bold; color: #003B7A; }
+        .rating-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+        .rating-fill { height: 100%; background: #00aaff; border-radius: 4px; transition: width 0.5s; }
+        .chart-placeholder { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 2; min-width: 300px; display: flex; align-items: center; justify-content: center; }
+        .chart-placeholder .chart-text { text-align: center; color: #999; }
+        .chart-placeholder .chart-text .icon { font-size: 48px; margin-bottom: 10px; }
+        .section-title { margin-bottom: 20px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; margin-top: 30px; }
+        .table-wrapper { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { background: #003B7A; color: white; padding: 15px; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; }
+        td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background-color: #f0f7ff; }
+        .transfer-in { color: #2e7d32; font-weight: bold; }
+        .transfer-none { color: #666; font-weight: bold; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
+        @media (max-width: 600px) {
+            header { flex-direction: column; gap: 10px; padding: 15px; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .player-header { flex-direction: column; text-align: center; }
+            .player-info .details { justify-content: center; }
+            .positions-block { justify-content: center; }
         }
-
-        body {
-            background: #f3f5f7;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background: #003B7A;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.35);
-        }
-
-        .logo a {
-            color: white;
-            text-decoration: none;
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        nav ul {
+                /* Выпадающее меню */
+        .nav-menu {
             display: flex;
             list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            padding-bottom: 5px;
-            border-bottom: 2px solid transparent;
-        }
-
-        nav a:hover {
-            border-bottom: 2px solid #00aaff;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 40px 20px;
-            width: 100%;
-            flex: 1;
-        }
-
-        .player-header {
-            display: flex;
-            gap: 30px;
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .player-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: #003B7A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .player-info h1 {
-            font-size: 36px;
-            color: #003B7A;
-            margin-bottom: 5px;
-        }
-
-        .player-info .number {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .player-info .details {
-            display: flex;
             gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
         }
 
-        .detail-item {
-            background: #f3f5f7;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+        .nav-menu li {
+            position: relative;
         }
 
-        .detail-item strong {
-            color: #003B7A;
-        }
-
-        .positions-block {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .positions-label {
-            font-size: 14px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .position-tag {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            background: #e8e8e8;
-            color: #555;
-        }
-
-        .position-tag.main {
-            background: #003B7A;
+        .nav-menu a {
             color: white;
-        }
-
-        .value-section {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .current-value {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            flex: 1;
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .current-value .label {
-            font-size: 14px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .current-value .price {
-            font-size: 48px;
-            font-weight: bold;
-            color: #2e7d32;
-        }
-
-        .current-value .change {
-            color: #2e7d32;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        .rating-box {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            flex: 1;
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .rating-box .label {
-            font-size: 14px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .rating-number {
-            font-size: 48px;
-            font-weight: bold;
-            color: #003B7A;
-        }
-
-        .rating-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .rating-fill {
-            height: 100%;
-            background: #00aaff;
-            border-radius: 4px;
-            transition: width 0.5s;
-        }
-
-        .chart-placeholder {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            flex: 2;
-            min-width: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chart-placeholder .chart-text {
-            text-align: center;
-            color: #999;
-        }
-
-        .chart-placeholder .chart-text .icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            margin-bottom: 20px;
-            color: #003B7A;
-            border-left: 5px solid #00aaff;
-            padding-left: 15px;
-            margin-top: 30px;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 600px;
-        }
-
-        th {
-            background: #003B7A;
-            color: white;
-            padding: 15px;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            text-align: center;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tbody tr:hover {
-            background-color: #f0f7ff;
-        }
-
-        .transfer-in {
-            color: #2e7d32;
-            font-weight: bold;
-        }
-
-        .transfer-out {
-            color: #c62828;
-            font-weight: bold;
-        }
-
-        .transfer-none {
-            color: #666;
-            font-weight: bold;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #003B7A;
             text-decoration: none;
             font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.2s;
+            display: block;
+            white-space: nowrap;
         }
 
-        .back-link:hover {
-            text-decoration: underline;
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.15);
         }
 
-        footer {
-            margin-top: auto;
-            background: #003B7A;
-            color: white;
-            padding: 25px;
-            text-align: center;
-            font-size: 14px;
+        /* Выпадающее подменю */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            list-style: none;
+            padding: 8px 0;
+            min-width: 180px;
+            z-index: 100;
         }
 
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 10px;
-                padding: 15px;
-            }
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .player-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .player-info .details {
-                justify-content: center;
-            }
-            .positions-block {
-                justify-content: center;
-            }
+        .dropdown-menu li a {
+            color: #003B7A;
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #e8f0fe;
+        }
+
+        /* Показываем подменю при наведении */
+        .dropdown:hover .dropdown-menu {
+            display: block;
         }
     </style>
-
-    <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
-
-    <script src="players-data.js"></script>
 </head>
-
 <body>
-
 <header>
     <div class="logo">
-    <a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: white;">
-        <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип" style="height: 40px; border-radius: 8px;">
-        TransfermarktDD
-    </a>
+        <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
     </div>
     <nav>
-        <ul>
-            <li><a href="#">Игроки</a></li>
-            <li><a href="#">Команды</a></li>
-            <li><a href="#">Трансферы</a></li>
-            <li><a href="#">Турнир</a></li>
-            <li><a href="#">Админ</a></li>
-        </ul>
-    </nav>
+    <ul class="nav-menu">
+        <!-- Трансферы и слухи — выпадающее -->
+        <li class="dropdown">
+            <a href="#">Трансферы ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="transfers.html">Трансферы</a></li>
+                <li><a href="rumors.html">Слухи</a></li>
+            </ul>
+        </li>
+        <!-- Рыночные стоимости — выпадающее -->
+        <li class="dropdown">
+            <a href="#">Рыночные цены ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="market-values.html">Все игроки</a></li>
+                <li><a href="market-by-position.html">По позициям</a></li>
+            </ul>
+        </li>
+        <!-- Турниры — выпадающее -->
+        <li class="dropdown">
+            <a href="#">Турниры ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="tournaments.html">Таблица</a></li>
+                <li><a href="schedule.html">Расписание</a></li>
+            </ul>
+        </li>
+        <!-- Обычные ссылки -->
+        <li><a href="teams.html">Команды</a></li>
+        <li><a href="players.html">Игроки</a></li>
+        <li><a href="statistics.html">Статистика</a></li>
+    </ul>
+</nav>
 </header>
 
 <div class="container">
-
     <a href="index.html" class="back-link">← Назад на главную</a>
 
-    <!-- Профиль игрока -->
     <div class="player-header">
-        <div class="player-photo"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotMRmAJgu4rI1Sy6GhWyDp_ai4PqKgM2Ek2hqD_lAdUA8" alt="Влад" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
+        <div class="player-photo" id="playerPhoto"></div>
         <div class="player-info">
-            <h1>Влад</h1>
-            <p class="number">№10</p>
-            <div class="positions-block">
-                <span class="positions-label">Позиция:</span>
-                <span class="position-tag main">Нападающий</span>
-            </div>
-            <div class="details" style="margin-top: 15px;">
-                <span class="detail-item"><strong>Возраст:</strong> 15 лет</span>
-                <span class="detail-item"><strong>Клуб:</strong> ФК ПАЦАНЧИКИ</span>
-                <span class="detail-item"><strong>Гражданство:</strong> Россия</span>
-                <span class="detail-item"><strong>Рост:</strong> 175 см</span>
-            </div>
+            <h1 id="playerName"></h1>
+            <p class="number" id="playerNumber"></p>
+            <div class="positions-block" id="positionsBlock"><span class="positions-label">Позиции:</span></div>
+            <div class="details" style="margin-top: 15px;" id="playerDetails"></div>
         </div>
     </div>
 
-    <!-- Стоимость, рейтинг и график -->
     <div class="value-section">
         <div class="current-value">
             <div class="label">Рыночная стоимость</div>
-            <div class="price">₽ 65</div>
-            <div class="change">▲ +10 (18.2%)</div>
-            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 10.06.2026</p>
+            <div class="price" id="playerPrice"></div>
+            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 12.06.2026</p>
         </div>
-
         <div class="rating-box">
-            <div class="label">Рейтинг</div>
+            <div class="label">Рейтинг (осн. позиция)</div>
             <div class="rating-number" id="ratingValue">—</div>
-            <div class="rating-bar">
-                <div class="rating-fill" id="ratingFill" style="width: 0%;"></div>
-            </div>
-            <p style="color: #999; font-size: 12px; margin-top: 8px;">Нападающий</p>
+            <div class="rating-bar"><div class="rating-fill" id="ratingFill" style="width: 0%;"></div></div>
+            <p style="color: #999; font-size: 12px; margin-top: 8px;" id="ratingPosition"></p>
         </div>
-
         <div class="chart-placeholder">
-            <div class="chart-text">
-                <div class="icon">📈</div>
-                <p>График изменения стоимости</p>
-                <p style="font-size: 12px; margin-top: 5px;">Здесь будет график (в разработке)</p>
-            </div>
+            <div class="chart-text"><div class="icon">📈</div><p>График изменения стоимости</p><p style="font-size: 12px; margin-top: 5px;">Здесь будет график (в разработке)</p></div>
         </div>
     </div>
 
-    <!-- Трансферная история -->
     <h2 class="section-title">🔄 Трансферная история</h2>
     <div class="table-wrapper">
         <table>
-            <thead>
-                <tr>
-                    <th>Сезон</th>
-                    <th>Дата</th>
-                    <th>Откуда</th>
-                    <th>Куда</th>
-                    <th>Стоимость</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Сезон</th><th>Дата</th><th>Откуда</th><th>Куда</th><th>Стоимость</th></tr></thead>
             <tbody>
-                <tr>
-                    <td>25/26</td>
-                    <td>01.09.2025</td>
-                    <td>—</td>
-                    <td>ФК ПАЦАНЧИКИ</td>
-                    <td class="transfer-in">Свободный агент</td>
-                </tr>
-                <tr>
-                    <td>23/24</td>
-                    <td>01.06.2023</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td class="transfer-none">—</td>
-                </tr>
+                <tr><td>25/26</td><td>01.09.2025</td><td>—</td><td>ФК ПАЦАНЧИКИ</td><td class="transfer-in">Свободный агент</td></tr>
+                <tr><td>23/24</td><td>01.06.2023</td><td>—</td><td>—</td><td class="transfer-none">—</td></tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Карьера -->
-    <h2 class="section-title">📊 Карьера</h2>
+    <h2 class="section-title">📊 Карьера (<span id="fieldPositionTitle"></span>)</h2>
     <div class="table-wrapper">
-        <table id="fieldStats">
-            <thead>
-                <tr>
-                    <th>Сезон</th>
-                    <th>Клуб</th>
-                    <th>Турнир</th>
-                    <th>Матчи</th>
-                    <th>Голы</th>
-                    <th>Передачи</th>
-                    <th>ЖК</th>
-                    <th>КК</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>25/26</td>
-                    <td>ФК ПАЦАНЧИКИ</td>
-                    <td>Высшая лига</td>
-                    <td>2</td>
-                    <td>8</td>
-                    <td>6</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-            </tbody>
+        <table><thead><tr><th>Сезон</th><th>Клуб</th><th>Турнир</th><th>Матчи</th><th>Голы</th><th>Передачи</th><th>ЖК</th><th>КК</th></tr></thead>
+            <tbody id="fieldStatsBody"></tbody>
         </table>
     </div>
-
 </div>
 
-<footer>
-    © 2026 TransfermarktDD
-</footer>
+<footer>© 2026 TransfermarktDD</footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Определяем ID игрока из имени файла
-        const path = window.location.pathname;
-        let playerId = 'bogdan'; // по умолчанию
+    const playerId = 'vlad';
+    const player = playersData.find(p => p.id === playerId);
 
-        if (path.includes('vlad')) playerId = 'vlad';
-        else if (path.includes('danila')) playerId = 'danila';
-        else if (path.includes('boris')) playerId = 'boris';
+    document.getElementById('playerPhoto').innerHTML = `<img src="${player.photo}" alt="${player.name}">`;
+    document.getElementById('playerName').textContent = player.name;
+    document.getElementById('playerNumber').textContent = '№' + player.number;
 
-        // Ищем данные игрока
-        const player = playersData.find(p => p.id === playerId);
-        if (!player) return;
-
-        // Считаем рейтинг
-        const rating = calculateRating(player);
-        
-        // Выводим рейтинг
-        const ratingValue = document.getElementById('ratingValue');
-        const ratingFill = document.getElementById('ratingFill');
-        if (ratingValue) ratingValue.textContent = rating;
-        if (ratingFill) ratingFill.style.width = rating + '%';
+    const posBlock = document.getElementById('positionsBlock');
+    player.positions.forEach((pos, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'position-tag' + (i === 0 ? ' main' : '');
+        tag.textContent = pos;
+        posBlock.appendChild(tag);
     });
 
-    function calculateRating(player) {
-        const stats = player.stats;
-        const totalMatches = stats.matches;
-        const totalGoals = stats.goals;
-        const totalAssists = stats.assists;
-        const totalYC = stats.yellowCards;
-        const totalRC = stats.redCards;
-        const price = player.price;
-        const age = player.age;
-        const position = player.position;
+    document.getElementById('playerDetails').innerHTML = `
+        <span class="detail-item"><strong>Возраст:</strong> ${player.age} лет</span>
+        <span class="detail-item"><strong>Клуб:</strong> ${player.club}</span>
+        <span class="detail-item"><strong>Гражданство:</strong> ${player.nation}</span>
+        <span class="detail-item"><strong>Рост:</strong> ${player.height} см</span>
+    `;
 
-        // Возрастной коэффициент
+    document.getElementById('playerPrice').textContent = '₽ ' + player.price;
+    document.getElementById('ratingPosition').textContent = player.mainPosition;
+
+    document.getElementById('fieldStatsBody').innerHTML = `
+        <tr>
+            <td>25/26</td><td>${player.club}</td><td>Высшая лига</td>
+            <td>${player.stats.matches}</td><td>${player.stats.goals}</td><td>${player.stats.assists}</td>
+            <td>${player.stats.yellowCards}</td><td>${player.stats.redCards}</td>
+        </tr>
+    `;
+    document.getElementById('fieldPositionTitle').textContent = player.mainPosition;
+
+    function calcRating(p) {
+        const s = p.stats;
         let ageCoef;
-        if (age >= 8 && age <= 11) ageCoef = 0.6;
-        else if (age >= 12 && age <= 13) ageCoef = 0.7;
-        else if (age >= 14 && age <= 15) ageCoef = 0.8;
-        else if (age >= 16 && age <= 18) ageCoef = 1.0;
-        else if (age >= 19 && age <= 21) ageCoef = 0.9;
+        if (p.age >= 8 && p.age <= 11) ageCoef = 0.6;
+        else if (p.age >= 12 && p.age <= 13) ageCoef = 0.7;
+        else if (p.age >= 14 && p.age <= 15) ageCoef = 0.8;
+        else if (p.age >= 16 && p.age <= 18) ageCoef = 1.0;
+        else if (p.age >= 19 && p.age <= 21) ageCoef = 0.9;
         else ageCoef = 0.8;
 
-        // Дисциплина
         let discipline;
-        if (totalRC >= 2) discipline = 0.3;
-        else if (totalRC >= 1) discipline = 0.5;
-        else if (totalYC >= 4) discipline = 0.7;
-        else if (totalYC >= 2) discipline = 0.9;
+        if (s.redCards >= 2) discipline = 0.3;
+        else if (s.redCards >= 1) discipline = 0.5;
+        else if (s.yellowCards >= 4) discipline = 0.7;
+        else if (s.yellowCards >= 2) discipline = 0.9;
         else discipline = 1.0;
 
-        const priceNorm = price / 10;
-
-        // Базовый рейтинг
+        const priceNorm = p.price / 10;
         const baseRating = (priceNorm * 5 * 0.5) + (ageCoef * 30 * 0.5);
-
-        // Сезонный бонус
         let seasonBonus = 0;
 
-        if (position === 'forward') {
-            seasonBonus = (totalGoals * 5 * 0.4)
-                        + (totalAssists * 3 * 0.3)
-                        + (totalMatches * 1 * 0.2)
-                        + (discipline * 50 * 0.1);
+        if (p.position === 'forward') {
+            seasonBonus = (s.goals * 5 * 0.4) + (s.assists * 3 * 0.3) + (s.matches * 1 * 0.2) + (discipline * 50 * 0.1);
+        } else if (p.position === 'midfielder') {
+            seasonBonus = (s.assists * 4 * 0.35) + (s.goals * 3 * 0.25) + (s.matches * 2 * 0.2) + (discipline * 50 * 0.2);
+        } else if (p.position === 'defender') {
+            seasonBonus = (s.matches * 2 * 0.3) + (s.assists * 3 * 0.2) + (s.goals * 4 * 0.15) + (discipline * 50 * 0.35);
+        } else if (p.position === 'goalkeeper') {
+            const gs = p.goalieStats || { cleanSheets: 0 };
+            seasonBonus = (gs.cleanSheets * 6 * 0.4) + (s.matches * 2 * 0.2) + (discipline * 50 * 0.4);
         }
-        else if (position === 'midfielder') {
-            seasonBonus = (totalAssists * 4 * 0.35)
-                        + (totalGoals * 3 * 0.25)
-                        + (totalMatches * 2 * 0.2)
-                        + (discipline * 50 * 0.2);
-        }
-        else if (position === 'defender') {
-            seasonBonus = (totalMatches * 2 * 0.3)
-                        + (totalAssists * 3 * 0.2)
-                        + (totalGoals * 4 * 0.15)
-                        + (discipline * 50 * 0.35);
-        }
-        else if (position === 'goalkeeper') {
-            const goalieStats = player.goalieStats;
-            let cleanSheets = 0;
-            if (goalieStats) {
-                cleanSheets = goalieStats.cleanSheets || 0;
-            }
-            seasonBonus = (cleanSheets * 6 * 0.4)
-                        + (totalMatches * 2 * 0.2)
-                        + (discipline * 50 * 0.4);
-        }
-
         return Math.round(baseRating + seasonBonus);
     }
-</script>
 
+    const rating = calcRating(player);
+    document.getElementById('ratingValue').textContent = rating;
+    document.getElementById('ratingFill').style.width = rating + '%';
+</script>
 </body>
 </html>
