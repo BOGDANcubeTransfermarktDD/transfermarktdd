@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
     <title>Рыночные стоимости | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); }
+        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
         .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
+        .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
+        #mainNav { display: block; }
         .nav-menu { display: flex; list-style: none; gap: 20px; }
         .nav-menu li { position: relative; }
         .nav-menu a { color: white; text-decoration: none; font-weight: 500; padding: 8px 12px; border-radius: 6px; transition: 0.2s; display: block; white-space: nowrap; }
@@ -25,24 +28,26 @@
         .placeholder p { color: #666; font-size: 18px; }
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
 
-                @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 10px;
-                padding: 15px;
-            }
-            .nav-menu {
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            #mainNav.open { display: block; }
+            .nav-menu { flex-direction: column; gap: 5px; }
+            .nav-menu a { padding: 12px 15px; }
+            .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
+            .dropdown-menu li a { color: white; }
+            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
         }
     </style>
 </head>
 <body>
+
 <header>
-    <div class="logo"><a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a></div>
-    <nav>
+    <div class="logo">
+        <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav id="mainNav">
         <ul class="nav-menu">
             <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
             <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li><li><a href="market-by-position.html">По позициям</a></li></ul></li>
@@ -53,12 +58,22 @@
         </ul>
     </nav>
 </header>
+
 <div class="container">
     <div class="placeholder">
+        <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
         <h2>💰 Рыночные стоимости</h2>
+        <!-- ПОМЕНЯЙ ОПИСАНИЕ -->
         <p>Страница в разработке. Здесь будут отображаться рыночные стоимости всех игроков.</p>
     </div>
 </div>
+
 <footer>© 2026 TransfermarktDD</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
 </body>
 </html>

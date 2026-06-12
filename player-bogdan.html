@@ -6,15 +6,22 @@
     <title>Богдан — Профиль игрока</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
-    <style>
+        <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); }
+        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
         .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
-        nav ul { display: flex; list-style: none; gap: 30px; }
-        nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.2s; padding-bottom: 5px; border-bottom: 2px solid transparent; }
-        nav a:hover { border-bottom: 2px solid #00aaff; }
+        .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
+        #mainNav { display: block; }
+        .nav-menu { display: flex; list-style: none; gap: 20px; }
+        .nav-menu li { position: relative; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; padding: 8px 12px; border-radius: 6px; transition: 0.2s; display: block; white-space: nowrap; }
+        .nav-menu a:hover { background: rgba(255,255,255,0.15); }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); list-style: none; padding: 8px 0; min-width: 180px; z-index: 100; }
+        .dropdown-menu li a { color: #003B7A; padding: 10px 20px; border-radius: 0; }
+        .dropdown-menu li a:hover { background: #e8f0fe; }
+        .dropdown:hover .dropdown-menu { display: block; }
         .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; }
         .player-header { display: flex; gap: 30px; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px; align-items: center; flex-wrap: wrap; }
         .player-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
@@ -50,80 +57,24 @@
         .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
         .back-link:hover { text-decoration: underline; }
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
-        @media (max-width: 600px) {
-            header { flex-direction: column; gap: 10px; padding: 15px; }
-            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            #mainNav.open { display: block; }
+            .nav-menu { flex-direction: column; gap: 5px; }
+            .nav-menu a { padding: 12px 15px; }
+            .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
+            .dropdown-menu li a { color: white; }
+            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
             .player-header { flex-direction: column; text-align: center; }
             .player-info .details { justify-content: center; }
             .positions-block { justify-content: center; }
         }
-                /* Выпадающее меню */
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
 
-        .nav-menu li {
-            position: relative;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: 0.2s;
-            display: block;
-            white-space: nowrap;
-        }
-
-        .nav-menu a:hover {
-            background: rgba(255,255,255,0.15);
-        }
-
-        /* Выпадающее подменю */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            list-style: none;
-            padding: 8px 0;
-            min-width: 180px;
-            z-index: 100;
-        }
-
-        .dropdown-menu li a {
-            color: #003B7A;
-            padding: 10px 20px;
-            border-radius: 0;
-        }
-
-        .dropdown-menu li a:hover {
-            background: #e8f0fe;
-        }
-
-        /* Показываем подменю при наведении */
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-                @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 10px;
-                padding: 15px;
-            }
-            .nav-menu {
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        @media (max-width: 600px) {
+            header { flex-direction: column; gap: 10px; padding: 15px; }
+            .nav-menu { gap: 15px; flex-wrap: wrap; justify-content: center; }
         }
     </style>
 </head>
@@ -132,8 +83,9 @@
     <div class="logo">
         <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
     </div>
-    <nav>
-    <ul class="nav-menu">
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav id="mainNav">
+        <ul class="nav-menu">
         <!-- Трансферы и слухи — выпадающее -->
         <li class="dropdown">
             <a href="#">Трансферы ▾</a>
@@ -321,5 +273,12 @@
     document.getElementById('ratingValue').textContent = rating;
     document.getElementById('ratingFill').style.width = rating + '%';
 </script>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+
 </body>
 </html>
