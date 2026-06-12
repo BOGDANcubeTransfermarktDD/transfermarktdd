@@ -24,6 +24,19 @@
         .placeholder h2 { color: #003B7A; font-size: 32px; margin-bottom: 15px; }
         .placeholder p { color: #666; font-size: 18px; }
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
+
+                @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+            .nav-menu {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
