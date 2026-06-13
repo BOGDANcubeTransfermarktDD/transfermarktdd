@@ -9,19 +9,15 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
-                header {
-            background: #003B7A;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.35);
-            position: relative;
-            z-index: 300;
-        }
+        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
         .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
+        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; line-height: 1; transition: 0.2s; }
+        .theme-toggle:hover { transform: scale(1.1); }
+        .mobile-buttons { display: none; }
+        #mainNav { display: block; }
         .nav-menu { display: flex; list-style: none; gap: 20px; }
         .nav-menu li { position: relative; }
         .nav-menu a { color: white; text-decoration: none; font-weight: 500; padding: 8px 12px; border-radius: 6px; transition: 0.2s; display: block; white-space: nowrap; }
@@ -35,7 +31,6 @@
         .hero p { font-size: 22px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
         .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; }
         .section-title { margin-bottom: 25px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; }
-        /* Новостная карусель */
         .news-carousel-container { position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 50px; background: white; }
         .news-slides { display: flex; transition: transform 0.5s ease-in-out; }
         .news-slide { min-width: 100%; position: relative; }
@@ -51,7 +46,6 @@
         .news-arrow:hover { background: white; }
         .news-prev { left: 15px; }
         .news-next { right: 15px; }
-        /* Карусель игроков */
         .carousel-container { position: relative; display: flex; align-items: center; }
         .carousel { display: flex; gap: 20px; overflow-x: hidden; scroll-behavior: smooth; padding: 10px 0; width: 100%; }
         .carousel .card { min-width: 280px; max-width: 280px; flex-shrink: 0; }
@@ -70,7 +64,6 @@
         .carousel-btn:hover { background: #003B7A; color: white; }
         .prev { left: 5px; }
         .next { right: 5px; }
-        /* Таблица */
         .table-wrapper { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th { background: #003B7A; color: white; padding: 15px; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; }
@@ -81,175 +74,44 @@
         .pos-2 { font-weight: bold; color: #757575; }
         .pos-3 { font-weight: bold; color: #CE8946; }
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
-        @media (max-width: 600px) {
-            header { flex-direction: column; gap: 10px; padding: 15px; }
-            .nav-menu { gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+        /* Тёмная тема */
+        body.dark-theme { background: #1a1a2e; }
+        body.dark-theme header { background: #16213e; }
+        body.dark-theme .card,
+        body.dark-theme .news-carousel-container,
+        body.dark-theme .news-dots,
+        body.dark-theme .table-wrapper,
+        body.dark-theme .carousel-btn { background: #0f3460; color: #e0e0e0; }
+        body.dark-theme .player-name,
+        body.dark-theme .section-title { color: #00aaff; }
+        body.dark-theme .card p { color: #ccc; }
+        body.dark-theme td { border-bottom: 1px solid #333; }
+        body.dark-theme tbody tr:hover { background-color: #1a1a2e; }
+        body.dark-theme .market-value { background: #1a3a1a; }
+        body.dark-theme .mini-rating { background: #1a2a3a; color: #00aaff; }
+        body.dark-theme footer { background: #16213e; }
+        body.dark-theme .news-arrow { background: rgba(0,0,0,0.5); color: white; }
+        body.dark-theme .news-arrow:hover { background: rgba(0,0,0,0.8); }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: center; padding: 15px; }
+            .logo { margin-bottom: 10px; }
+            .header-right { flex-direction: row; justify-content: center; gap: 10px; }
+            .mobile-buttons { display: flex; }
+            .hamburger { display: block; }
+            .theme-toggle { display: block; }
+            #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            #mainNav.open { display: block; }
+            .nav-menu { flex-direction: column; gap: 5px; }
+            .nav-menu a { padding: 12px 15px; }
+            .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
+            .dropdown-menu li a { color: white; }
+            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
             .hero h1 { font-size: 36px; }
             .news-slide img { height: 200px; }
             .news-content h3 { font-size: 18px; }
             .carousel-btn { width: 32px; height: 32px; font-size: 16px; }
-            .prev { left: 2px; }
-            .next { right: 2px; }
-        }
-
-                /* Гамбургер */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            padding: 5px;
-            line-height: 1;
-        }
-
-        #mainNav {
-            display: block;
-        }
-
-                @media (max-width: 768px) {
-            header {
-                position: relative;
-                z-index: 300;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            #mainNav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #003B7A;
-                padding: 15px;
-                z-index: 300;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            }
-
-            #mainNav.open {
-                display: block;
-            }
-
-            .nav-menu {
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .nav-menu a {
-                padding: 12px 15px;
-            }
-
-            .dropdown-menu {
-                position: static;
-                background: rgba(255,255,255,0.1);
-                box-shadow: none;
-                border-radius: 0;
-                padding-left: 15px;
-            }
-
-            .dropdown-menu li a {
-                color: white;
-            }
-
-            .dropdown-menu li a:hover {
-                background: rgba(255,255,255,0.1);
-            }
-
-                        .theme-toggle {
-                position: absolute;
-                top: 15px;
-                right: 60px;
-                order: 0;
-            }
-            .hamburger {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-            }
-        }
-
-                /* Кнопка темы */
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 5px;
-            line-height: 1;
-            transition: 0.2s;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* Тёмная тема */
-        body.dark-theme {
-            background: #1a1a2e;
-        }
-        body.dark-theme header {
-            background: #16213e;
-        }
-        body.dark-theme .card,
-        body.dark-theme .player-header,
-        body.dark-theme .current-value,
-        body.dark-theme .rating-box,
-        body.dark-theme .chart-container,
-        body.dark-theme .chart-placeholder,
-        body.dark-theme .table-wrapper,
-        body.dark-theme .placeholder {
-            background: #0f3460;
-            color: #e0e0e0;
-        }
-        body.dark-theme .player-name,
-        body.dark-theme .player-info h1,
-        body.dark-theme .section-title,
-        body.dark-theme .current-value .price,
-        body.dark-theme .rating-number,
-        body.dark-theme .placeholder h2 {
-            color: #00aaff;
-        }
-        body.dark-theme .detail-item {
-            background: #1a1a2e;
-        }
-        body.dark-theme td {
-            border-bottom: 1px solid #333;
-        }
-        body.dark-theme tbody tr:hover {
-            background-color: #1a1a2e;
-        }
-        body.dark-theme .current-value .label,
-        body.dark-theme .rating-box .label,
-        body.dark-theme .placeholder p,
-        body.dark-theme .player-info .number,
-        body.dark-theme .card p {
-            color: #aaa;
-        }
-        body.dark-theme footer {
-            background: #16213e;
-        }
-
-                .header-buttons {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-            .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 5px;
-            line-height: 1;
-            transition: 0.2s;
-            order: 10;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.1);
         }
     </style>
 </head>
@@ -269,8 +131,12 @@
             <li><a href="statistics.html">Статистика</a></li>
         </ul>
     </nav>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button>
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button>
+        <div class="mobile-buttons">
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+        </div>
+    </div>
 </header>
 
 <section class="hero">

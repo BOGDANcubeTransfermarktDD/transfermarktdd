@@ -6,13 +6,17 @@
     <title>Данила — Профиль игрока</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
-        <style>
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
         header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
         .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
         .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
+        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; line-height: 1; transition: 0.2s; }
+        .theme-toggle:hover { transform: scale(1.1); }
+        .mobile-buttons { display: none; }
         #mainNav { display: block; }
         .nav-menu { display: flex; list-style: none; gap: 20px; }
         .nav-menu li { position: relative; }
@@ -42,9 +46,8 @@
         .rating-number { font-size: 48px; font-weight: bold; color: #003B7A; }
         .rating-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 10px; overflow: hidden; }
         .rating-fill { height: 100%; background: #00aaff; border-radius: 4px; transition: width 0.5s; }
-        .chart-placeholder { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 2; min-width: 300px; display: flex; align-items: center; justify-content: center; }
-        .chart-placeholder .chart-text { text-align: center; color: #999; }
-        .chart-placeholder .chart-text .icon { font-size: 48px; margin-bottom: 10px; }
+        .chart-container { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 2; min-width: 300px; }
+        .chart-container canvas { width: 100%; height: 250px; }
         .section-title { margin-bottom: 20px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; margin-top: 30px; }
         .table-wrapper { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
@@ -58,8 +61,41 @@
         .back-link:hover { text-decoration: underline; }
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
 
+        /* Тёмная тема */
+        body.dark-theme { background: #1a1a2e; }
+        body.dark-theme header { background: #16213e; }
+        body.dark-theme .player-header,
+        body.dark-theme .current-value,
+        body.dark-theme .rating-box,
+        body.dark-theme .chart-container,
+        body.dark-theme .table-wrapper { background: #0f3460; color: #e0e0e0; }
+        body.dark-theme .player-info h1,
+        body.dark-theme .section-title,
+        body.dark-theme .rating-number { color: #00aaff; }
+        body.dark-theme .detail-item { background: #1a1a2e; color: #ccc; }
+        body.dark-theme .detail-item strong { color: #00aaff; }
+        body.dark-theme td { border-bottom: 1px solid #333; color: #e0e0e0; }
+        body.dark-theme th { background: #16213e; }
+        body.dark-theme tbody tr:hover { background-color: #1a1a2e; }
+        body.dark-theme .player-info .number,
+        body.dark-theme .current-value .label,
+        body.dark-theme .rating-box .label { color: #aaa; }
+        body.dark-theme .transfer-none { color: #999; }
+        body.dark-theme .transfer-in { color: #4caf50; }
+        body.dark-theme .current-value .price { color: #4caf50; }
+        body.dark-theme .chart-container canvas { background: #0f3460; }
+        body.dark-theme .back-link { color: #00aaff; }
+        body.dark-theme .position-tag { background: #1a1a2e; color: #ccc; }
+        body.dark-theme .position-tag.main { background: #00aaff; color: white; }
+        body.dark-theme footer { background: #16213e; }
+
         @media (max-width: 768px) {
+            header { flex-direction: column; align-items: center; padding: 15px; }
+            .logo { margin-bottom: 10px; }
+            .header-right { flex-direction: row; justify-content: center; gap: 10px; }
+            .mobile-buttons { display: flex; }
             .hamburger { display: block; }
+            .theme-toggle { display: block; }
             #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
             #mainNav.open { display: block; }
             .nav-menu { flex-direction: column; gap: 5px; }
@@ -71,24 +107,6 @@
             .player-info .details { justify-content: center; }
             .positions-block { justify-content: center; }
         }
-
-        @media (max-width: 600px) {
-            header { flex-direction: column; gap: 10px; padding: 15px; }
-            .nav-menu { gap: 15px; flex-wrap: wrap; justify-content: center; }
-        }
-
-        .chart-container {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            flex: 2;
-            min-width: 300px;
-        }
-        .chart-container canvas {
-            width: 100%;
-            height: 250px;
-        }
     </style>
 </head>
 <body>
@@ -96,39 +114,22 @@
     <div class="logo">
         <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
     </div>
-        <button class="hamburger" onclick="toggleMenu()">☰</button>
     <nav id="mainNav">
         <ul class="nav-menu">
-        <!-- Трансферы и слухи — выпадающее -->
-        <li class="dropdown">
-            <a href="#">Трансферы ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="transfers.html">Трансферы</a></li>
-                <li><a href="rumors.html">Слухи</a></li>
-            </ul>
-        </li>
-        <!-- Рыночные стоимости — выпадающее -->
-        <li class="dropdown">
-            <a href="#">Рыночные цены ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="market-values.html">Все игроки</a></li>
-                <li><a href="market-by-position.html">По позициям</a></li>
-            </ul>
-        </li>
-        <!-- Турниры — выпадающее -->
-        <li class="dropdown">
-            <a href="#">Турниры ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="tournaments.html">Таблица</a></li>
-                <li><a href="schedule.html">Расписание</a></li>
-            </ul>
-        </li>
-        <!-- Обычные ссылки -->
-        <li><a href="teams.html">Команды</a></li>
-        <li><a href="players.html">Игроки</a></li>
-        <li><a href="statistics.html">Статистика</a></li>
-    </ul>
-</nav>
+            <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li><li><a href="market-by-position.html">По позициям</a></li></ul></li>
+            <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
+            <li><a href="teams.html">Команды</a></li>
+            <li><a href="players.html">Игроки</a></li>
+            <li><a href="statistics.html">Статистика</a></li>
+        </ul>
+    </nav>
+    <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button>
+        <div class="mobile-buttons">
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+        </div>
+    </div>
 </header>
 
 <div class="container">
@@ -183,7 +184,9 @@
 <footer>© 2026 TransfermarktDD</footer>
 
 <script>
-    const playerId = 'danila';
+    const playerId = window.location.pathname.includes('vlad') ? 'vlad' :
+                     window.location.pathname.includes('danila') ? 'danila' :
+                     window.location.pathname.includes('boris') ? 'boris' : 'bogdan';
     const player = playersData.find(p => p.id === playerId);
 
     document.getElementById('playerPhoto').innerHTML = `<img src="${player.photo}" alt="${player.name}">`;
@@ -216,6 +219,18 @@
         </tr>
     `;
     document.getElementById('fieldPositionTitle').textContent = player.mainPosition;
+
+    if (player.goalieStats) {
+        document.getElementById('goalieSection').style.display = 'block';
+        const g = player.goalieStats;
+        document.getElementById('goalieStatsBody').innerHTML = `
+            <tr>
+                <td>25/26</td><td>${player.club}</td><td>Высшая лига</td>
+                <td>${g.matches}</td><td>${g.conceded}</td><td>${g.cleanSheets}</td>
+                <td>${g.yellowCards}</td><td>${g.redCards}</td>
+            </tr>
+        `;
+    }
 
     function calcRating(p) {
         const s = p.stats;
@@ -255,13 +270,8 @@
     document.getElementById('ratingValue').textContent = rating;
     document.getElementById('ratingFill').style.width = rating + '%';
 
-    function toggleMenu() {
-        document.getElementById('mainNav').classList.toggle('open');
-    }
-
-
     // График
-        function drawPriceChart() {
+    function drawPriceChart() {
         const canvas = document.getElementById('priceChart');
         if (!canvas || !player.priceHistory) return;
 
@@ -272,6 +282,7 @@
         canvas.width = width;
         canvas.height = height;
 
+        const isDark = document.body.classList.contains('dark-theme');
         const padding = { top: 20, right: 20, bottom: 40, left: 50 };
         const chartWidth = width - padding.left - padding.right;
         const chartHeight = height - padding.top - padding.bottom;
@@ -280,7 +291,16 @@
         const maxPrice = Math.max(...prices, 10);
         const minPrice = Math.min(...prices, 0);
 
-        ctx.strokeStyle = '#ccc';
+        const gridColor = isDark ? '#555' : '#ccc';
+        const textColor = isDark ? '#ccc' : '#666';
+        const priceColor = isDark ? '#fff' : '#003B7A';
+
+        // Фон
+        ctx.fillStyle = isDark ? '#0f3460' : '#fff';
+        ctx.fillRect(0, 0, width, height);
+
+        // Оси
+        ctx.strokeStyle = gridColor;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(padding.left, padding.top);
@@ -288,6 +308,7 @@
         ctx.lineTo(width - padding.right, height - padding.bottom);
         ctx.stroke();
 
+        // Линия
         ctx.strokeStyle = '#00aaff';
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -300,27 +321,53 @@
         });
         ctx.stroke();
 
+        // Точки и подписи
         history.forEach((point, i) => {
             const x = padding.left + (i / (history.length - 1)) * chartWidth;
             const y = height - padding.bottom - ((point.price - minPrice) / (maxPrice - minPrice || 1)) * chartHeight;
 
-            ctx.fillStyle = '#003B7A';
+            ctx.fillStyle = priceColor;
             ctx.beginPath();
             ctx.arc(x, y, 5, 0, Math.PI * 2);
             ctx.fill();
 
-            ctx.fillStyle = '#666';
+            ctx.fillStyle = textColor;
             ctx.font = '11px Segoe UI';
             ctx.textAlign = 'center';
             ctx.fillText(point.date, x, height - padding.bottom + 15);
 
-            ctx.fillStyle = '#003B7A';
+            ctx.fillStyle = priceColor;
             ctx.font = 'bold 11px Segoe UI';
             ctx.fillText(point.price + '₽', x, y - 12);
         });
     }
 
-    drawPriceChart();
+    // Тема
+    function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+        const btn = document.querySelector('.theme-toggle');
+        if (document.body.classList.contains('dark-theme')) {
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        }
+        drawPriceChart();
+    }
+
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-theme');
+        const btn = document.querySelector('.theme-toggle');
+        if (btn) btn.textContent = '☀️';
+    }
+
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+
+// Рисуем график после проверки темы
+    setTimeout(drawPriceChart, 100);
     window.addEventListener('resize', drawPriceChart);
 </script>
 
