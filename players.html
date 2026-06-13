@@ -50,6 +50,10 @@
         body.dark-theme .placeholder h2 { color: #00aaff; }
         body.dark-theme .placeholder p { color: #aaa; }
         body.dark-theme footer { background: #16213e; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        body.dark-theme .back-link { color: #00aaff; }
+        .back-container { text-align: left; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -61,7 +65,7 @@
     <nav id="mainNav">
         <ul class="nav-menu">
             <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
-            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li><li><a href="market-by-position.html">По позициям</a></li></ul></li>
+            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
             <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
             <li><a href="teams.html">Команды</a></li>
             <li><a href="players.html">Игроки</a></li>
@@ -77,6 +81,9 @@
 </header>
 
 <div class="container">
+    <div class="back-container">
+    <a href="index.html" class="back-link">← Назад на главную</a>
+    </div>
     <div class="placeholder">
         <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
         <h2>👤 Игроки</h2>
