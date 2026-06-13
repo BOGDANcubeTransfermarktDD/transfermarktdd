@@ -29,14 +29,16 @@
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
 
         @media (max-width: 768px) {
-            .hamburger { display: block; }
-            #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-            #mainNav.open { display: block; }
-            .nav-menu { flex-direction: column; gap: 5px; }
-            .nav-menu a { padding: 12px 15px; }
-            .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
-            .dropdown-menu li a { color: white; }
-            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
+        header { flex-direction: column; align-items: center; padding: 15px; }
+        .logo { margin-bottom: 10px; }
+        .hamburger { display: block; }
+        #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        #mainNav.open { display: block; }
+        .nav-menu { flex-direction: column; gap: 5px; }
+        .nav-menu a { padding: 12px 15px; }
+        .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
+        .dropdown-menu li a { color: white; }
+        .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
         }
     </style>
 </head>
