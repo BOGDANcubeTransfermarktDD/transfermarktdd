@@ -4,6 +4,7 @@ const playersData = [
         name: "Богдан",
         age: 16,
         price: 112,
+        priceOverride: 112,
         position: "midfielder",
         positions: ["Полузащитник", "Нападающий", "Вратарь"],
         mainPosition: "Полузащитник",
@@ -25,7 +26,12 @@ const playersData = [
             cleanSheets: 0,
             yellowCards: 0,
             redCards: 0
-        }
+        },
+        priceHistory: [
+            { date: "01.06.2023", price: 0 },
+            { date: "10.06.2026", price: 65 },
+            { date: "12.06.2026", price: 112 }
+        ]
     },
     {
         id: "vlad",
@@ -47,7 +53,12 @@ const playersData = [
             yellowCards: 0,
             redCards: 0
         },
-        goalieStats: null
+        goalieStats: null,
+        priceHistory: [
+            { date: "01.06.2023", price: 0 },
+            { date: "10.06.2026", price: 65 },
+            { date: "12.06.2026", price: 112 }
+        ]
     },
     {
         id: "danila",
@@ -69,7 +80,12 @@ const playersData = [
             yellowCards: 0,
             redCards: 0
         },
-        goalieStats: null
+        goalieStats: null,
+        priceHistory: [
+            { date: "01.06.2023", price: 0 },
+            { date: "10.06.2026", price: 65 },
+            { date: "12.06.2026", price: 99 }
+        ]
     },
     {
         id: "boris",
@@ -91,6 +107,11 @@ const playersData = [
             yellowCards: 0,
             redCards: 0
         },
-        goalieStats: null
+        goalieStats: null,
+        priceHistory: [
+            { date: "01.06.2023", price: 0 },
+            { date: "10.06.2026", price: 55 },
+            { date: "12.06.2026", price: 41 }
+        ]
     }
 ];

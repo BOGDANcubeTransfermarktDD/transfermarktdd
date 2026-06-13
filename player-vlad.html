@@ -76,6 +76,19 @@
             header { flex-direction: column; gap: 10px; padding: 15px; }
             .nav-menu { gap: 15px; flex-wrap: wrap; justify-content: center; }
         }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            flex: 2;
+            min-width: 300px;
+        }
+        .chart-container canvas {
+            width: 100%;
+            height: 250px;
+        }
     </style>
 </head>
 <body>
@@ -143,8 +156,8 @@
             <div class="rating-bar"><div class="rating-fill" id="ratingFill" style="width: 0%;"></div></div>
             <p style="color: #999; font-size: 12px; margin-top: 8px;" id="ratingPosition"></p>
         </div>
-        <div class="chart-placeholder">
-            <div class="chart-text"><div class="icon">📈</div><p>График изменения стоимости</p><p style="font-size: 12px; margin-top: 5px;">Здесь будет график (в разработке)</p></div>
+        <div class="chart-container">
+            <canvas id="priceChart"></canvas>
         </div>
     </div>
 
@@ -241,12 +254,74 @@
     const rating = calcRating(player);
     document.getElementById('ratingValue').textContent = rating;
     document.getElementById('ratingFill').style.width = rating + '%';
-</script>
 
-<script>
     function toggleMenu() {
         document.getElementById('mainNav').classList.toggle('open');
     }
+    
+
+ // График
+        function drawPriceChart() {
+        const canvas = document.getElementById('priceChart');
+        if (!canvas || !player.priceHistory) return;
+
+        const ctx = canvas.getContext('2d');
+        const history = player.priceHistory;
+        const width = canvas.parentElement.clientWidth - 50;
+        const height = 200;
+        canvas.width = width;
+        canvas.height = height;
+
+        const padding = { top: 20, right: 20, bottom: 40, left: 50 };
+        const chartWidth = width - padding.left - padding.right;
+        const chartHeight = height - padding.top - padding.bottom;
+
+        const prices = history.map(h => h.price);
+        const maxPrice = Math.max(...prices, 10);
+        const minPrice = Math.min(...prices, 0);
+
+        ctx.strokeStyle = '#ccc';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding.left, padding.top);
+        ctx.lineTo(padding.left, height - padding.bottom);
+        ctx.lineTo(width - padding.right, height - padding.bottom);
+        ctx.stroke();
+
+        ctx.strokeStyle = '#00aaff';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+
+        history.forEach((point, i) => {
+            const x = padding.left + (i / (history.length - 1)) * chartWidth;
+            const y = height - padding.bottom - ((point.price - minPrice) / (maxPrice - minPrice || 1)) * chartHeight;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        history.forEach((point, i) => {
+            const x = padding.left + (i / (history.length - 1)) * chartWidth;
+            const y = height - padding.bottom - ((point.price - minPrice) / (maxPrice - minPrice || 1)) * chartHeight;
+
+            ctx.fillStyle = '#003B7A';
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#666';
+            ctx.font = '11px Segoe UI';
+            ctx.textAlign = 'center';
+            ctx.fillText(point.date, x, height - padding.bottom + 15);
+
+            ctx.fillStyle = '#003B7A';
+            ctx.font = 'bold 11px Segoe UI';
+            ctx.fillText(point.price + '₽', x, y - 12);
+        });
+    }
+
+    drawPriceChart();
+    window.addEventListener('resize', drawPriceChart);
 </script>
 
 </body>
