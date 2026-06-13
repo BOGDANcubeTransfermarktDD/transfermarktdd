@@ -113,6 +113,9 @@
             .news-content h3 { font-size: 18px; }
             .carousel-btn { width: 32px; height: 32px; font-size: 16px; }
         }
+
+            .team-cell {display: flex; align-items: center; gap: 10px; justify-content: center; }
+            .team-emoji {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; font-size: 20px; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -206,9 +209,36 @@
         <table>
             <thead><tr><th>Место</th><th>Команда</th><th>Очки</th></tr></thead>
             <tbody>
-                <tr><td><span class="pos-1">1</span></td><td><strong>ФК ПАЦАНЧИКИ</strong></td><td>24</td></tr>
-                <tr><td><span class="pos-2">2</span></td><td>ФК Гопники</td><td>20</td></tr>
-                <tr><td><span class="pos-3">3</span></td><td>ФК ЖК Ломоносов</td><td>17</td></tr>
+                <tr>
+                    <td><span class="pos-1">1</span></td>
+                    <td>
+                        <div class="team-cell">
+                            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8" alt="ФК ПАЦАНЧИКИ" class="team-emoji">
+                            <strong>ФК ПАЦАНЧИКИ</strong>
+                        </div>
+                    </td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td><span class="pos-2">2</span></td>
+                    <td>
+                        <div class="team-cell">
+                            <span class="team-emoji">🥷</span>
+                            ФК Гопники
+                        </div>
+                    </td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td><span class="pos-3">3</span></td>
+                    <td>
+                        <div class="team-cell">
+                            <span class="team-emoji">🏢</span>
+                            ФК ЖК Ломоносов
+                        </div>
+                    </td>
+                    <td>17</td>
+                </tr>
             </tbody>
         </table>
     </div>

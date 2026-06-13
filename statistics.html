@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
     <title>Статистика | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+    <script src="players-data.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
         header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
         .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
         .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
+        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; line-height: 1; transition: 0.2s; }
+        .theme-toggle:hover { transform: scale(1.1); }
+        .mobile-buttons { display: none; }
         #mainNav { display: block; }
         .nav-menu { display: flex; list-style: none; gap: 20px; }
         .nav-menu li { position: relative; }
@@ -22,42 +26,57 @@
         .dropdown-menu li a { color: #003B7A; padding: 10px 20px; border-radius: 0; }
         .dropdown-menu li a:hover { background: #e8f0fe; }
         .dropdown:hover .dropdown-menu { display: block; }
-        .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; text-align: center; }
-        .placeholder { background: white; border-radius: 12px; padding: 60px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-        .placeholder h2 { color: #003B7A; font-size: 32px; margin-bottom: 15px; }
-        .placeholder p { color: #666; font-size: 18px; }
-        footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
+        .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; }
+        .back-container { text-align: left; margin-bottom: 10px; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        .section-title { margin-bottom: 25px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; }
 
-        @media (max-width: 768px) {
-        header { flex-direction: column; align-items: center; padding: 15px; }
-        .logo { margin-bottom: 10px; }
-        .hamburger { display: block; }
-        #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        #mainNav.open { display: block; }
-        .nav-menu { flex-direction: column; gap: 5px; }
-        .nav-menu a { padding: 12px 15px; }
-        .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
-        .dropdown-menu li a { color: white; }
-        .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
-        }
-        .header-right { display: flex; align-items: center; gap: 10px; }
-        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; line-height: 1; transition: 0.2s; }
-        .theme-toggle:hover { transform: scale(1.1); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .stat-card h3 { color: #003B7A; margin-bottom: 15px; font-size: 20px; text-align: center; }
+        .stat-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-pos { width: 28px; height: 28px; border-radius: 50%; background: #003B7A; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0; }
+        .stat-pos.gold { background: #ffc402; color: #000; }
+        .stat-pos.silver { background: #757575; }
+        .stat-pos.bronze { background: #CE8946; }
+        .stat-row img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+        .stat-row a { color: #003B7A; text-decoration: none; font-weight: bold; flex: 1; }
+        .stat-row a:hover { text-decoration: underline; }
+        .stat-value { font-weight: bold; color: #2e7d32; font-size: 18px; }
+        .stat-sub { font-size: 12px; color: #999; }
+        footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
 
         body.dark-theme { background: #1a1a2e; }
         body.dark-theme header { background: #16213e; }
-        body.dark-theme .placeholder { background: #0f3460; }
-        body.dark-theme .placeholder h2 { color: #00aaff; }
-        body.dark-theme .placeholder p { color: #aaa; }
-        body.dark-theme footer { background: #16213e; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
-        .back-link:hover { text-decoration: underline; }
+        body.dark-theme .section-title { color: #00aaff; }
+        body.dark-theme .stat-card { background: #0f3460; }
+        body.dark-theme .stat-card h3 { color: #00aaff; }
+        body.dark-theme .stat-row { border-bottom: 1px solid #333; }
+        body.dark-theme .stat-row a { color: #00aaff; }
+        body.dark-theme .stat-sub { color: #777; }
         body.dark-theme .back-link { color: #00aaff; }
-        .back-container { text-align: left; margin-bottom: 10px; }
+        body.dark-theme footer { background: #16213e; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: center; padding: 15px; }
+            .logo { margin-bottom: 10px; }
+            .header-right { flex-direction: row; justify-content: center; gap: 10px; }
+            .mobile-buttons { display: flex; }
+            .hamburger { display: block; }
+            .theme-toggle { display: block; }
+            #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            #mainNav.open { display: block; }
+            .nav-menu { flex-direction: column; gap: 5px; }
+            .nav-menu a { padding: 12px 15px; }
+            .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
+            .dropdown-menu li a { color: white; }
+            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
+        }
     </style>
 </head>
 <body>
-
 <header>
     <div class="logo">
         <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
@@ -82,38 +101,70 @@
 
 <div class="container">
     <div class="back-container">
-    <a href="index.html" class="back-link">← Назад на главную</a>
+        <a href="index.html" class="back-link">← Назад на главную</a>
     </div>
-    <div class="placeholder">
-        <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
-        <h2>📊 Статистика</h2>
-        <!-- ПОМЕНЯЙ ОПИСАНИЕ -->
-        <p>Страница в разработке. Здесь будет статистика: бомбардиры, ассистенты, рейтинги.</p>
+    <h2 class="section-title">📊 Статистика</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card"><h3>⚽ Бомбардиры</h3><div id="topGoals"></div></div>
+        <div class="stat-card"><h3>🎯 Ассистенты</h3><div id="topAssists"></div></div>
+        <div class="stat-card"><h3>🛡️ Защитники</h3><div id="topDefenders"></div></div>
+        <div class="stat-card"><h3>🧤 Вратари</h3><div id="topGoalkeepers"></div></div>
     </div>
 </div>
 
 <footer>© 2026 TransfermarktDD</footer>
 
 <script>
-    function toggleMenu() {
-        document.getElementById('mainNav').classList.toggle('open');
-    }
-        function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-        const btn = document.querySelector('.theme-toggle');
-        if (document.body.classList.contains('dark-theme')) {
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        }
+    function posClass(i) { if (i === 0) return 'gold'; if (i === 1) return 'silver'; if (i === 2) return 'bronze'; return ''; }
+
+    function plural(n, one, two, five) {
+        if (n % 10 === 1 && n % 100 !== 11) return one;
+        if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) return two;
+        return five;
     }
 
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-theme');
-        document.querySelector('.theme-toggle').textContent = '☀️';
+    function renderList(containerId, players, valueFn, wordOne, wordTwo, wordFive, emptyText) {
+        const container = document.getElementById(containerId);
+        if (players.length === 0) { container.innerHTML = `<p style="text-align:center;color:#999;">${emptyText}</p>`; return; }
+        container.innerHTML = players.map((p, i) => {
+            const val = valueFn(p);
+            const word = plural(val, wordOne, wordTwo, wordFive);
+            return `
+            <div class="stat-row">
+                <span class="stat-pos ${posClass(i)}">${i + 1}</span>
+                <img src="${p.photo}" alt="${p.name}">
+                <a href="player-${p.id}.html">${p.name}</a>
+                <span class="stat-value">${val} <span class="stat-sub">${word}</span></span>
+            </div>`;
+        }).join('');
     }
+
+    // Бомбардиры
+    const byGoals = [...playersData].filter(p => p.stats.goals > 0).sort((a, b) => b.stats.goals - a.stats.goals);
+    renderList('topGoals', byGoals, p => p.stats.goals, 'гол', 'гола', 'голов', 'Нет забитых мячей');
+
+    // Ассистенты
+    const byAssists = [...playersData].filter(p => p.stats.assists > 0).sort((a, b) => b.stats.assists - a.stats.assists);
+    renderList('topAssists', byAssists, p => p.stats.assists, 'передача', 'передачи', 'передач', 'Нет голевых передач');
+
+    // Защитники (по матчам)
+    const defenders = [...playersData].filter(p => p.positions.includes('Защитник')).sort((a, b) => b.stats.matches - a.stats.matches);
+    renderList('topDefenders', defenders, p => p.stats.matches, 'матч', 'матча', 'матчей', 'Нет защитников');
+
+    // Вратари (по сухим матчам)
+    const goalkeepers = [...playersData].filter(p => p.goalieStats).sort((a, b) => (b.goalieStats.cleanSheets || 0) - (a.goalieStats.cleanSheets || 0));
+    renderList('topGoalkeepers', goalkeepers, p => p.goalieStats.cleanSheets || 0, 'сухой матч', 'сухих матча', 'сухих матчей', 'Нет вратарей');
+
+    function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+        const btn = document.querySelector('.theme-toggle');
+        if (document.body.classList.contains('dark-theme')) { btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); }
+        else { btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); }
+    }
+    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); document.querySelector('.theme-toggle').textContent = '☀️'; }
+
+    function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
 </script>
 </body>
 </html>
