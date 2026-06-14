@@ -113,5 +113,37 @@ const playersData = [
             { date: "10.06.2026", price: 55 },
             { date: "12.06.2026", price: 41 }
         ]
+    },
+
+        {
+        id: "zakhar",
+        name: "Захар",
+        age: 9,
+        price: 22,
+        priceOverride: 22,
+        position: "midfielder",
+        positions: ["Полузащитник"],
+        mainPosition: "Полузащитник",
+        number: 19,
+        club: "Без клуба",
+        nation: "Россия",
+        height: 145,
+        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotrQIeHS7W83VELqzbFRMj36i4PqKgM2Ek2hqD_lAdUA8",
+        stats: {
+            matches: 0,
+            goals: 0,
+            assists: 0,
+            yellowCards: 0,
+            redCards: 0
+        },
+        goalieStats: null,
+        priceHistory: [
+            { date: "14.06.2026", price: 0 }
+        ],
+        transferRumor: {
+            club: "ФК ПАЦАНЧИКИ",
+            clubLogo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8",
+            probability: 65
+        }
     }
 ];

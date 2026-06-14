@@ -35,7 +35,7 @@
         .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .team-card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); text-align: center; transition: transform 0.3s; }
         .team-card:hover { transform: translateY(-5px); }
-        .team-logo { width: 80px; height: 80px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 15px; overflow: hidden; }
+        .team-logo { height: auto; min-height: 80px; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 15px; overflow: visible; }
         .team-card h3 { color: #003B7A; font-size: 22px; margin-bottom: 10px; }
         .team-card p { color: #666; margin-bottom: 5px; }
         .team-card .players-count { font-weight: bold; color: #2e7d32; font-size: 18px; margin: 10px 0; }
@@ -83,6 +83,7 @@
             <li><a href="teams.html">Команды</a></li>
             <li><a href="players.html">Игроки</a></li>
             <li><a href="statistics.html">Статистика</a></li>
+            <li><a href="news.html">Новости</a></li>
         </ul>
     </nav>
     <div class="header-right">
@@ -118,8 +119,18 @@
             desc: "Главная команда лиги. Чемпионы и рекордсмены.", 
             founded: "2026" 
         },
-        { name: "ФК Гопники", logo: "🥷", desc: "Грозные соперники с характером.", founded: "2026" },
-        { name: "ФК ЖК Ломоносов", logo: "🏢", desc: "Команда из спального района.", founded: "2026" }
+        { 
+            name: "ФК Гопники", 
+            logoImg: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotPvrvrwyeFXMUoEbPc76sJqi4PqKgM2Ek2hqD_lAdUA8", 
+            desc: "Грозные соперники с характером.", 
+            founded: "2026" 
+        },
+        { 
+            name: "ФК ЖК Ломоносов", 
+            logoImg: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotYkpZkiVOnGV3qyyH20UrVai4PqKgM2Ek2hqD_lAdUA8", 
+            desc: "Команда из спального района.", 
+            founded: "2026" 
+        }
     ];
 
     const grid = document.getElementById('teamsGrid');
@@ -128,7 +139,7 @@
         const word = plural(count, 'игрок', 'игрока', 'игроков');
         grid.innerHTML += `
             <div class="team-card">
-                <div class="team-logo" style="background: none;">${team.logoImg ? '<img src="' + team.logoImg + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">' : team.logo}</div>
+                <div class="team-logo" style="background: none;">${team.logoImg ? '<img src="' + team.logoImg + '" style="height:90px;width:auto;border-radius:8px;object-fit:contain;">' : '<span style="font-size:50px;">' + team.logo + '</span>'}</div>
                 <h3>${team.name}</h3>
                 <p>${team.desc}</p>
                 <div class="players-count">👤 ${count} ${word}</div>

@@ -115,7 +115,7 @@
         }
 
             .team-cell {display: flex; align-items: center; gap: 10px; justify-content: center; }
-            .team-emoji {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+            .team-emoji {width: auto; height: 40px; border-radius: 6px; object-fit: contain; font-size: 20px; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -132,6 +132,7 @@
             <li><a href="teams.html">Команды</a></li>
             <li><a href="players.html">Игроки</a></li>
             <li><a href="statistics.html">Статистика</a></li>
+            <li><a href="news.html">Новости</a></li>
         </ul>
     </nav>
     <div class="header-right">
@@ -155,49 +156,56 @@
     <div class="news-carousel-container">
         <button class="news-arrow news-prev" onclick="prevNews()">&#10094;</button>
         <button class="news-arrow news-next" onclick="nextNews()">&#10095;</button>
-        <div class="news-slides" id="newsSlides">
-            <div class="news-slide">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Обновление">
+                <div class="news-slides" id="newsSlides">
+            <!-- Новость 1 -->
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
+                <img src="https://avatars.mds.yandex.net/i?id=0919183a77d893bed86a46f447f2b46c_l-9025626-images-thumbs&n=13" alt="Слух">
+                <div class="news-content">
+                    <span class="news-tag">Слухи</span>
+                    <h3>Захар может пополнить состав ФК ПАЦАНЧИКИ</h3>
+                    <p>9-летний полузащитник Захар, находящийся без клуба, близок к переходу в лидеры лиги. Вероятность трансфера оценивается в 65%. Ждём подтверждения!</p>
+                </div>
+            </div>
+            <!-- Новость 2 -->
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
+                <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotoLFGbaafCjZ1OIYyF2UWOKi4PqKgM2Ek2hqD_lAdUA8" alt="Тренировка">
+                <div class="news-content">
+                    <span class="news-tag">Клуб</span>
+                    <h3>Вчерашняя тренировка ФК ПАЦАНЧИКИ прошла продуктивно</h3>
+                    <p>Влад и Данила отрабатывали удары, Богдан снова попробовал себя в воротах - ноль пропущенных по серии пенальти. Команда готовится к предстоящему матчу!</p>
+                </div>
+            </div>
+            <!-- Новость 3 -->
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
+                <img src="https://avatars.mds.yandex.net/i?id=b7c852bbbfa6a830134f6f4ae5e73a55_l-9144721-images-thumbs&n=13" alt="Обновление">
                 <div class="news-content">
                     <span class="news-tag">Сайт</span>
                     <h3>Крупное обновление: рейтинги и трансферные цены!</h3>
                     <p>Теперь у каждого игрока автоматически рассчитывается рейтинг по статистике. А трансферные цены обновляются по гибридной системе — формула + ручная корректировка. Загляните в профили!</p>
                 </div>
             </div>
-            <div class="news-slide">
-                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2" alt="Влад">
+            <!-- Новость 4 -->
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
+                <img src="https://avatars.mds.yandex.net/i?id=861f3caec04a0454090888094af7400c_l-3519607-images-thumbs&n=13" alt="Влад">
                 <div class="news-content">
                     <span class="news-tag">Игроки</span>
                     <h3>Влад набирает six-seven очков рейтинга! 🔥</h3>
                     <p>Рейтинг 67 из 100 — и это только начало! Влад — лучший бомбардир с 8 голами. Six-seven, пацаны, six-seven! 🗣️🔥</p>
                 </div>
             </div>
-            <div class="news-slide">
-                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018" alt="Матч">
+            <!-- Новость 5 -->
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
+                <img src="https://s3.fnl.pro:9000/fnl/match/ucpiy5JPaOc.jpg_1732547523828" alt="Матч">
                 <div class="news-content">
                     <span class="news-tag">Анонс</span>
                     <h3>Скоро новый матч! ФК ПАЦАНЧИКИ готовятся к битве</h3>
-                    <p>Соперник уточняется. Но одно ясно точно: наши пацаны готовы рвать и метать. Следите за расписанием — дата и время появятся здесь!</p>
+                    <p>Соперник уточняется. Но одно ясно точно: наши пацаны готовы рвать и метать. Следите за расписанием!</p>
                 </div>
             </div>
-            <div class="news-slide">
-                <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d" alt="Богдан">
-                <div class="news-content">
-                    <span class="news-tag">Игроки</span>
-                    <h3>Богдан — человек-оркестр: три позиции в одном сезоне!</h3>
-                    <p>Нападающий, полузащитник и даже вратарь — Богдан единственный в лиге, кто закрывает три позиции. Универсальный солдат ФК ПАЦАНЧИКИ!</p>
-                </div>
-            </div>
-        </div>
-        <div class="news-dots" id="newsDots">
-            <span class="news-dot active" onclick="goToNews(0)"></span>
-            <span class="news-dot" onclick="goToNews(1)"></span>
-            <span class="news-dot" onclick="goToNews(2)"></span>
-            <span class="news-dot" onclick="goToNews(3)"></span>
         </div>
     </div>
 
-    <h2 class="section-title">⭐ Топ-игроки</h2>
+    <h2 class="section-title">⭐ Популярные игроки</h2>
     <div class="carousel-container">
         <button class="carousel-btn prev" onclick="scrollCarousel(-1)">&#10094;</button>
         <div class="carousel" id="carousel"></div>
@@ -213,7 +221,7 @@
                     <td><span class="pos-1">1</span></td>
                     <td>
                         <div class="team-cell">
-                            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8" alt="ФК ПАЦАНЧИКИ" class="team-emoji">
+                            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8" alt="ФК ПАЦАНЧИКИ" style="height:40px;width:auto;border-radius:6px;object-fit:contain;">
                             <strong>ФК ПАЦАНЧИКИ</strong>
                         </div>
                     </td>
@@ -223,7 +231,7 @@
                     <td><span class="pos-2">2</span></td>
                     <td>
                         <div class="team-cell">
-                            <span class="team-emoji">🥷</span>
+                        <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotPvrvrwyeFXMUoEbPc76sJqi4PqKgM2Ek2hqD_lAdUA8" alt="ФК Гопники" class="team-emoji">
                             ФК Гопники
                         </div>
                     </td>
@@ -233,7 +241,7 @@
                     <td><span class="pos-3">3</span></td>
                     <td>
                         <div class="team-cell">
-                            <span class="team-emoji">🏢</span>
+                            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotYkpZkiVOnGV3qyyH20UrVai4PqKgM2Ek2hqD_lAdUA8" alt="ФК ЖК Ломоносов" class="team-emoji">
                             ФК ЖК Ломоносов
                         </div>
                     </td>
@@ -312,7 +320,7 @@
     }
 
     let currentNews = 0;
-    const totalNews = 4;
+    const totalNews = 5;
     let newsInterval;
 
     function goToNews(index) {

@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
     <title>Слухи | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+    <script src="players-data.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
         header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
         .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
         .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
+        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; line-height: 1; transition: 0.2s; }
+        .theme-toggle:hover { transform: scale(1.1); }
+        .mobile-buttons { display: none; }
         #mainNav { display: block; }
         .nav-menu { display: flex; list-style: none; gap: 20px; }
         .nav-menu li { position: relative; }
@@ -22,42 +26,55 @@
         .dropdown-menu li a { color: #003B7A; padding: 10px 20px; border-radius: 0; }
         .dropdown-menu li a:hover { background: #e8f0fe; }
         .dropdown:hover .dropdown-menu { display: block; }
-        .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; text-align: center; }
-        .placeholder { background: white; border-radius: 12px; padding: 60px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-        .placeholder h2 { color: #003B7A; font-size: 32px; margin-bottom: 15px; }
-        .placeholder p { color: #666; font-size: 18px; }
-        footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
+        .container { max-width: 800px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; }
+        .back-container { text-align: left; margin-bottom: 10px; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        .section-title { margin-bottom: 25px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; }
 
-        @media (max-width: 768px) {
-        header { flex-direction: column; align-items: center; padding: 15px; }
-        .logo { margin-bottom: 10px; }
-        .hamburger { display: block; }
-        #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        #mainNav.open { display: block; }
-        .nav-menu { flex-direction: column; gap: 5px; }
-        .nav-menu a { padding: 12px 15px; }
-        .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
-        .dropdown-menu li a { color: white; }
-        .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
-        }
-        .header-right { display: flex; align-items: center; gap: 10px; }
-        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; line-height: 1; transition: 0.2s; }
-        .theme-toggle:hover { transform: scale(1.1); }
+        .rumor-card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 20px; display: flex; gap: 20px; align-items: center; }
+        .rumor-badge { background: #ff9800; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 13px; text-transform: uppercase; white-space: nowrap; }
+        .rumor-content { flex: 1; }
+        .rumor-content h3 { color: #003B7A; margin-bottom: 8px; }
+        .rumor-content p { color: #666; margin-bottom: 10px; }
+        .rumor-details { display: flex; gap: 15px; flex-wrap: wrap; font-size: 13px; color: #999; }
+        .rumor-details span { background: #f3f5f7; padding: 4px 10px; border-radius: 12px; }
+        .rumor-arrow { font-size: 40px; color: #ff9800; }
+        .rumor-teams { display: flex; align-items: center; gap: 10px; }
+        .rumor-teams img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
+
+        footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
 
         body.dark-theme { background: #1a1a2e; }
         body.dark-theme header { background: #16213e; }
-        body.dark-theme .placeholder { background: #0f3460; }
-        body.dark-theme .placeholder h2 { color: #00aaff; }
-        body.dark-theme .placeholder p { color: #aaa; }
-        body.dark-theme footer { background: #16213e; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
-        .back-link:hover { text-decoration: underline; }
+        body.dark-theme .section-title { color: #00aaff; }
+        body.dark-theme .rumor-card { background: #0f3460; }
+        body.dark-theme .rumor-content h3 { color: #00aaff; }
+        body.dark-theme .rumor-content p { color: #aaa; }
+        body.dark-theme .rumor-details span { background: #1a1a2e; color: #aaa; }
         body.dark-theme .back-link { color: #00aaff; }
-        .back-container { text-align: left; margin-bottom: 10px; }
+        body.dark-theme footer { background: #16213e; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: center; padding: 15px; }
+            .logo { margin-bottom: 10px; }
+            .header-right { flex-direction: row; justify-content: center; gap: 10px; }
+            .mobile-buttons { display: flex; }
+            .hamburger { display: block; }
+            .theme-toggle { display: block; }
+            #mainNav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #003B7A; padding: 15px; z-index: 300; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            #mainNav.open { display: block; }
+            .nav-menu { flex-direction: column; gap: 5px; }
+            .nav-menu a { padding: 12px 15px; }
+            .dropdown-menu { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; padding-left: 15px; }
+            .dropdown-menu li a { color: white; }
+            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
+            .rumor-card { flex-direction: column; text-align: center; }
+            .rumor-teams { justify-content: center; }
+        }
     </style>
 </head>
 <body>
-
 <header>
     <div class="logo">
         <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
@@ -70,6 +87,7 @@
             <li><a href="teams.html">Команды</a></li>
             <li><a href="players.html">Игроки</a></li>
             <li><a href="statistics.html">Статистика</a></li>
+            <li><a href="news.html">Новости</a></li>
         </ul>
     </nav>
     <div class="header-right">
@@ -82,38 +100,43 @@
 
 <div class="container">
     <div class="back-container">
-    <a href="index.html" class="back-link">← Назад на главную</a>
+        <a href="index.html" class="back-link">← Назад на главную</a>
     </div>
-    <div class="placeholder">
-        <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
-        <h2>🗣️ Слухи</h2>
-        <!-- ПОМЕНЯЙ ОПИСАНИЕ -->
-        <p>Страница в разработке. Здесь будут слухи о возможных трансферах.</p>
+    <h2 class="section-title">🗣️ Слухи</h2>
+
+    <!-- Слух №1: Захар → ФК ПАЦАНЧИКИ -->
+    <div class="rumor-card">
+        <div class="rumor-badge">Слух</div>
+        <div class="rumor-content">
+            <h3>Захар может присоединиться к ФК ПАЦАНЧИКИ</h3>
+            <p>9-летний полузащитник Захар, находящийся без клуба, может пополнить состав лидера лиги. Источники сообщают, что стороны близки к договорённости.</p>
+            <div class="rumor-details">
+                <span>📅 14.06.2026</span>
+                <span>👤 Захар</span>
+                <span>🆓 Свободный агент</span>
+            </div>
+        </div>
+        <div class="rumor-teams">
+            <span style="font-size:30px;">👤</span>
+            <span class="rumor-arrow">→</span>
+            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8" alt="ФК ПАЦАНЧИКИ">
+        </div>
     </div>
+
 </div>
 
 <footer>© 2026 TransfermarktDD</footer>
 
 <script>
-    function toggleMenu() {
-        document.getElementById('mainNav').classList.toggle('open');
-    }
-        function toggleTheme() {
+    function toggleTheme() {
         document.body.classList.toggle('dark-theme');
         const btn = document.querySelector('.theme-toggle');
-        if (document.body.classList.contains('dark-theme')) {
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        }
+        if (document.body.classList.contains('dark-theme')) { btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); }
+        else { btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); }
     }
+    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); document.querySelector('.theme-toggle').textContent = '☀️'; }
 
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-theme');
-        document.querySelector('.theme-toggle').textContent = '☀️';
-    }
+    function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
 </script>
 </body>
 </html>

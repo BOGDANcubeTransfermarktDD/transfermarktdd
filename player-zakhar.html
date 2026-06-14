@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Борис Лов Ельцин — Профиль игрока</title>
+    <title>Захар — Профиль игрока</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
     <style>
@@ -107,6 +107,19 @@
             .player-info .details { justify-content: center; }
             .positions-block { justify-content: center; }
         }
+        .transfer-probability { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 1; min-width: 200px; text-align: center; }
+        .transfer-probability .label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .prob-teams { display: flex; align-items: center; justify-content: center; gap: 10px;  margin-bottom: 15px; font-weight: bold; font-size: 16px; color: #003B7A; }
+        .prob-club-img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+        .prob-arrow { color: #ff9800; font-size: 24px; }
+        .prob-bar { width: 100%; height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; margin-bottom: 5px; }
+        .prob-fill { height: 100%; background: #ff9800; border-radius: 5px; transition: width 0.5s; }
+        .prob-text { font-weight: bold; color: #ff9800; font-size: 18px; }
+
+        body.dark-theme .transfer-probability { background: #0f3460; }
+        body.dark-theme .transfer-probability .label { color: #aaa; }
+        body.dark-theme .prob-teams { color: #00aaff; }
+        .value-left, .value-right { display: flex; flex-direction: column; gap: 20px; flex: 1; min-width: 250px; }
     </style>
 </head>
 <body>
@@ -147,19 +160,37 @@
     </div>
 
     <div class="value-section">
-        <div class="current-value">
-            <div class="label">Рыночная стоимость</div>
-            <div class="price" id="playerPrice"></div>
-            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 12.06.2026</p>
+        <div class="value-left">
+            <div class="current-value">
+                <div class="label">Рыночная стоимость</div>
+                <div class="price" id="playerPrice"></div>
+                <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 12.06.2026</p>
+            </div>
+            <div class="transfer-probability" id="transferProb" style="display:none;">
+                <div class="label">Вероятность перехода</div>
+                <div class="prob-teams">
+                    <span>👤</span>
+                    <span class="prob-arrow">→</span>
+                    <img id="probClubLogo" src="" alt="" class="prob-club-img">
+                    <span id="probClubName"></span>
+                </div>
+                <div class="prob-bar">
+                    <div class="prob-fill" id="probFill"></div>
+                </div>
+                <div class="prob-text" id="probText"></div>
+                <p style="color:#999;font-size:12px;margin-top:8px;">Статус: Свободный агент</p>
+            </div>
         </div>
-        <div class="rating-box">
-            <div class="label">Рейтинг (осн. позиция)</div>
-            <div class="rating-number" id="ratingValue">—</div>
-            <div class="rating-bar"><div class="rating-fill" id="ratingFill" style="width: 0%;"></div></div>
-            <p style="color: #999; font-size: 12px; margin-top: 8px;" id="ratingPosition"></p>
-        </div>
-        <div class="chart-container">
-            <canvas id="priceChart"></canvas>
+        <div class="value-right">
+            <div class="rating-box">
+                <div class="label">Рейтинг (осн. позиция)</div>
+                <div class="rating-number" id="ratingValue">—</div>
+                <div class="rating-bar"><div class="rating-fill" id="ratingFill" style="width: 0%;"></div></div>
+                <p style="color: #999; font-size: 12px; margin-top: 8px;" id="ratingPosition"></p>
+            </div>
+            <div class="chart-container">
+                <canvas id="priceChart"></canvas>
+            </div>
         </div>
     </div>
 
@@ -168,8 +199,7 @@
         <table>
             <thead><tr><th>Сезон</th><th>Дата</th><th>Откуда</th><th>Куда</th><th>Стоимость</th></tr></thead>
             <tbody>
-                <tr><td>25/26</td><td>01.09.2025</td><td>—</td><td>ФК ПАЦАНЧИКИ</td><td class="transfer-in">Свободный агент</td></tr>
-                <tr><td>23/24</td><td>01.06.2023</td><td>—</td><td>—</td><td class="transfer-none">—</td></tr>
+                <tr><td>25/26</td><td>—</td><td>—</td><td>—</td><td class="transfer-none">Свободный агент</td></tr>
             </tbody>
         </table>
     </div>
@@ -186,6 +216,7 @@
 
 <script>
     const playerId = window.location.pathname.includes('vlad') ? 'vlad' :
+                     window.location.pathname.includes('zakhar') ? 'zakhar' :
                      window.location.pathname.includes('danila') ? 'danila' :
                      window.location.pathname.includes('boris') ? 'boris' : 'bogdan';
     const player = playersData.find(p => p.id === playerId);
@@ -270,6 +301,16 @@
     const rating = calcRating(player);
     document.getElementById('ratingValue').textContent = rating;
     document.getElementById('ratingFill').style.width = rating + '%';
+
+    // Блок вероятности перехода
+    if (player.transferRumor) {
+        const probBlock = document.getElementById('transferProb');
+        probBlock.style.display = 'block';
+        document.getElementById('probClubName').textContent = player.transferRumor.club;
+        document.getElementById('probClubLogo').src = player.transferRumor.clubLogo;
+        document.getElementById('probFill').style.width = player.transferRumor.probability + '%';
+        document.getElementById('probText').textContent = player.transferRumor.probability + '%';
+    }
 
     // График
     function drawPriceChart() {
