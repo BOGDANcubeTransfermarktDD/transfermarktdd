@@ -116,6 +116,57 @@
 
             .team-cell {display: flex; align-items: center; gap: 10px; justify-content: center; }
             .team-emoji {width: auto; height: 40px; border-radius: 6px; object-fit: contain; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+                    .popup-overlay {
+            display: flex;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-box {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .popup-box h2 {
+            color: #003B7A;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        .popup-box p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .popup-close {
+            background: #003B7A;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .popup-close:hover {
+            background: #00aaff;
+        }
+
+        body.dark-theme .popup-box {
+            background: #0f3460;
+        }
+        body.dark-theme .popup-box h2 {
+            color: #00aaff;
+        }
+        body.dark-theme .popup-box p {
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
@@ -371,6 +422,23 @@
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-theme');
         document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+</script>
+
+<!-- Всплывающее окно -->
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-box">
+         <h2>😞 Проект временно закрыт</h2>
+         <p>Разработка сайта временно приостановлена.</p>
+         <p>Спасибо всем, кто заходил, смотрел и поддерживал!</p>
+         <p style="font-size: 14px; color: #999; margin-top: 10px;">Сайт остаётся доступным. Возможно, мы ещё вернёмся!</p>
+        <button class="popup-close" onclick="closePopup()">Понятно</button>
+    </div>
+</div>
+
+<script>
+    function closePopup() {
+        document.getElementById('popupOverlay').style.display = 'none';
     }
 </script>
 
