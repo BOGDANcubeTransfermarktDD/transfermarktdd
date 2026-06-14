@@ -169,7 +169,7 @@
             <div class="transfer-probability" id="transferProb" style="display:none;">
                 <div class="label">Вероятность перехода</div>
                 <div class="prob-teams">
-                    <span>👤</span>
+                    <img id="PlayerPhoto" src="" alt="Захар" class="player-photo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
                     <span class="prob-arrow">→</span>
                     <img id="probClubLogo" src="" alt="" class="prob-club-img">
                     <span id="probClubName"></span>
@@ -306,6 +306,7 @@
     if (player.transferRumor) {
         const probBlock = document.getElementById('transferProb');
         probBlock.style.display = 'block';
+        document.getElementById('PlayerPhoto').src = player.photo;
         document.getElementById('probClubName').textContent = player.transferRumor.club;
         document.getElementById('probClubLogo').src = player.transferRumor.clubLogo;
         document.getElementById('probFill').style.width = player.transferRumor.probability + '%';
