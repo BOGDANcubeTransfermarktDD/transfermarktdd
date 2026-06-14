@@ -276,7 +276,7 @@
         return Math.round(baseRating + seasonBonus);
     }
 
-    const rating = calcRating(player);
+    const rating = player.ratingOverride > 0 ? player.ratingOverride : calcRating(player);
     document.getElementById('ratingValue').textContent = rating;
     document.getElementById('ratingFill').style.width = rating + '%';
 

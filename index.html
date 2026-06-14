@@ -276,7 +276,7 @@
                             <strong>ФК ПАЦАНЧИКИ</strong>
                         </div>
                     </td>
-                    <td>24</td>
+                    <td>0</td>
                 </tr>
                 <tr>
                     <td><span class="pos-2">2</span></td>
@@ -286,7 +286,7 @@
                             ФК Гопники
                         </div>
                     </td>
-                    <td>20</td>
+                    <td>0</td>
                 </tr>
                 <tr>
                     <td><span class="pos-3">3</span></td>
@@ -296,7 +296,7 @@
                             ФК ЖК Ломоносов
                         </div>
                     </td>
-                    <td>17</td>
+                    <td>0</td>
                 </tr>
             </tbody>
         </table>
@@ -342,7 +342,7 @@
 
     const carousel = document.getElementById('carousel');
     playersData.forEach(p => {
-        const rating = calcRating(p);
+        const rating = p.ratingOverride > 0 ? p.ratingOverride : calcRating(p);
         const card = document.createElement('a');
         card.className = 'card-link';
         card.href = 'player-' + p.id + '.html';

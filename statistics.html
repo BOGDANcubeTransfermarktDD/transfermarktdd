@@ -31,7 +31,6 @@
         .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; }
         .back-link:hover { text-decoration: underline; }
         .section-title { margin-bottom: 25px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; }
-
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
         .stat-card h3 { color: #003B7A; margin-bottom: 15px; font-size: 20px; text-align: center; }
@@ -47,7 +46,6 @@
         .stat-value { font-weight: bold; color: #2e7d32; font-size: 18px; }
         .stat-sub { font-size: 12px; color: #999; }
         footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
-
         body.dark-theme { background: #1a1a2e; }
         body.dark-theme header { background: #16213e; }
         body.dark-theme .section-title { color: #00aaff; }
@@ -58,7 +56,6 @@
         body.dark-theme .stat-sub { color: #777; }
         body.dark-theme .back-link { color: #00aaff; }
         body.dark-theme footer { background: #16213e; }
-
         @media (max-width: 768px) {
             header { flex-direction: column; align-items: center; padding: 15px; }
             .logo { margin-bottom: 10px; }
@@ -78,34 +75,18 @@
 </head>
 <body>
 <header>
-    <div class="logo">
-        <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
-    </div>
-    <nav id="mainNav">
-        <ul class="nav-menu">
-            <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
-            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
-            <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
-            <li><a href="teams.html">Команды</a></li>
-            <li><a href="players.html">Игроки</a></li>
-            <li><a href="statistics.html">Статистика</a></li>
-            <li><a href="news.html">Новости</a></li>
-        </ul>
-    </nav>
-    <div class="header-right">
-        <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button>
-        <div class="mobile-buttons">
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-        </div>
-    </div>
+    <div class="logo"><a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a></div>
+    <nav id="mainNav"><ul class="nav-menu">
+        <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+        <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
+        <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
+        <li><a href="teams.html">Команды</a></li><li><a href="players.html">Игроки</a></li><li><a href="statistics.html">Статистика</a></li><li><a href="news.html">Новости</a></li>
+    </ul></nav>
+    <div class="header-right"><button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button><div class="mobile-buttons"><button class="hamburger" onclick="toggleMenu()">☰</button></div></div>
 </header>
-
 <div class="container">
-    <div class="back-container">
-        <a href="index.html" class="back-link">← Назад на главную</a>
-    </div>
+    <div class="back-container"><a href="index.html" class="back-link">← Назад на главную</a></div>
     <h2 class="section-title">📊 Статистика</h2>
-
     <div class="stats-grid">
         <div class="stat-card"><h3>⚽ Бомбардиры</h3><div id="topGoals"></div></div>
         <div class="stat-card"><h3>🎯 Ассистенты</h3><div id="topAssists"></div></div>
@@ -113,59 +94,29 @@
         <div class="stat-card"><h3>🧤 Вратари</h3><div id="topGoalkeepers"></div></div>
     </div>
 </div>
-
 <footer>© 2026 TransfermarktDD</footer>
-
 <script>
-    function posClass(i) { if (i === 0) return 'gold'; if (i === 1) return 'silver'; if (i === 2) return 'bronze'; return ''; }
-
-    function plural(n, one, two, five) {
-        if (n % 10 === 1 && n % 100 !== 11) return one;
-        if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) return two;
-        return five;
-    }
-
-    function renderList(containerId, players, valueFn, wordOne, wordTwo, wordFive, emptyText) {
-        const container = document.getElementById(containerId);
-        if (players.length === 0) { container.innerHTML = `<p style="text-align:center;color:#999;">${emptyText}</p>`; return; }
-        container.innerHTML = players.map((p, i) => {
-            const val = valueFn(p);
-            const word = plural(val, wordOne, wordTwo, wordFive);
-            return `
-            <div class="stat-row">
-                <span class="stat-pos ${posClass(i)}">${i + 1}</span>
-                <img src="${p.photo}" alt="${p.name}">
-                <a href="player-${p.id}.html">${p.name}</a>
-                <span class="stat-value">${val} <span class="stat-sub">${word}</span></span>
-            </div>`;
+    function posClass(i) { if (i===0) return 'gold'; if (i===1) return 'silver'; if (i===2) return 'bronze'; return ''; }
+    function plural(n, one, two, five) { if (n%10===1 && n%100!==11) return one; if (n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) return two; return five; }
+    function renderList(id, players, valFn, w1, w2, w5, empty) {
+        const c = document.getElementById(id);
+        if (players.length===0) { c.innerHTML=`<p style="text-align:center;color:#999;">${empty}</p>`; return; }
+        c.innerHTML = players.map((p,i) => {
+            const v = valFn(p);
+            return `<div class="stat-row"><span class="stat-pos ${posClass(i)}">${i+1}</span><img src="${p.photo}" alt="${p.name}"><a href="player-${p.id}.html">${p.name}</a><span class="stat-value">${v} <span class="stat-sub">${plural(v,w1,w2,w5)}</span></span></div>`;
         }).join('');
     }
-
-    // Бомбардиры
-    const byGoals = [...playersData].filter(p => p.stats.goals > 0).sort((a, b) => b.stats.goals - a.stats.goals);
+    const byGoals = [...playersData].filter(p => p.stats.goals > 0).sort((a,b) => b.stats.goals - a.stats.goals);
     renderList('topGoals', byGoals, p => p.stats.goals, 'гол', 'гола', 'голов', 'Нет забитых мячей');
-
-    // Ассистенты
-    const byAssists = [...playersData].filter(p => p.stats.assists > 0).sort((a, b) => b.stats.assists - a.stats.assists);
+    const byAssists = [...playersData].filter(p => p.stats.assists > 0).sort((a,b) => b.stats.assists - a.stats.assists);
     renderList('topAssists', byAssists, p => p.stats.assists, 'передача', 'передачи', 'передач', 'Нет голевых передач');
-
-    // Защитники (по матчам)
-    const defenders = [...playersData].filter(p => p.positions.includes('Защитник')).sort((a, b) => b.stats.matches - a.stats.matches);
+    const defenders = [...playersData].filter(p => p.positions.includes('Защитник')).sort((a,b) => b.stats.matches - a.stats.matches);
     renderList('topDefenders', defenders, p => p.stats.matches, 'матч', 'матча', 'матчей', 'Нет защитников');
-
-    // Вратари (по сухим матчам)
-    const goalkeepers = [...playersData].filter(p => p.goalieStats).sort((a, b) => (b.goalieStats.cleanSheets || 0) - (a.goalieStats.cleanSheets || 0));
-    renderList('topGoalkeepers', goalkeepers, p => p.goalieStats.cleanSheets || 0, 'сухой матч', 'сухих матча', 'сухих матчей', 'Нет вратарей');
-
-    function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-        const btn = document.querySelector('.theme-toggle');
-        if (document.body.classList.contains('dark-theme')) { btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); }
-        else { btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); }
-    }
-    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); document.querySelector('.theme-toggle').textContent = '☀️'; }
-
-    function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
+    const goalkeepers = [...playersData].filter(p => p.goalieStats).sort((a,b) => (b.goalieStats.cleanSheets||0) - (a.goalieStats.cleanSheets||0));
+    renderList('topGoalkeepers', goalkeepers, p => p.goalieStats.cleanSheets||0, 'сухой матч', 'сухих матча', 'сухих матчей', 'Нет вратарей');
+    function toggleTheme() { document.body.classList.toggle('dark-theme'); const b=document.querySelector('.theme-toggle'); if(document.body.classList.contains('dark-theme')){b.textContent='☀️';localStorage.setItem('theme','dark');}else{b.textContent='🌙';localStorage.setItem('theme','light');} }
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}
+    function toggleMenu(){document.getElementById('mainNav').classList.toggle('open');}
 </script>
 </body>
 </html>

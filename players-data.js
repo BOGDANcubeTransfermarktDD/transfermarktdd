@@ -5,6 +5,7 @@ const playersData = [
         age: 16,
         price: 112,
         priceOverride: 112,
+        ratingOverride: 63,
         position: "midfielder",
         positions: ["Полузащитник", "Нападающий", "Вратарь"],
         mainPosition: "Полузащитник",
@@ -14,15 +15,15 @@ const playersData = [
         height: 176,
         photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotuvU1F-EcpDkUCT7EvWbaTqi4PqKgM2Ek2hqD_lAdUA8",
         stats: {
-            matches: 2,
-            goals: 5,
-            assists: 4,
+            matches: 0,
+            goals: 0,
+            assists: 0,
             yellowCards: 0,
             redCards: 0
         },
         goalieStats: {
-            matches: 1,
-            conceded: 2,
+            matches: 0,
+            conceded: 0,
             cleanSheets: 0,
             yellowCards: 0,
             redCards: 0
@@ -38,6 +39,7 @@ const playersData = [
         name: "Влад",
         age: 15,
         price: 112,
+        ratingOverride: 67,
         position: "forward",
         positions: ["Нападающий", "Полузащитник"],
         mainPosition: "Нападающий",
@@ -47,9 +49,9 @@ const playersData = [
         height: 175,
         photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotMRmAJgu4rI1Sy6GhWyDp_ai4PqKgM2Ek2hqD_lAdUA8",
         stats: {
-            matches: 2,
-            goals: 8,
-            assists: 6,
+            matches: 0,
+            goals: 0,
+            assists: 0,
             yellowCards: 0,
             redCards: 0
         },
@@ -65,6 +67,7 @@ const playersData = [
         name: "Данила",
         age: 15,
         price: 99,
+        ratingOverride: 60,
         position: "forward",
         positions: ["Нападающий"],
         mainPosition: "Нападающий",
@@ -74,9 +77,9 @@ const playersData = [
         height: 186,
         photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotwWU8xPPEixe5q4cGZEllb6i4PqKgM2Ek2hqD_lAdUA8",
         stats: {
-            matches: 2,
-            goals: 7,
-            assists: 4,
+            matches: 0,
+            goals: 0,
+            assists: 0,
             yellowCards: 0,
             redCards: 0
         },
@@ -92,6 +95,7 @@ const playersData = [
         name: "Борис Лов Ельцин",
         age: 8,
         price: 41,
+        ratingOverride: 36,
         position: "midfielder",
         positions: ["Полузащитник", "Защитник"],
         mainPosition: "Полузащитник",
@@ -101,9 +105,9 @@ const playersData = [
         height: 140,
         photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotQSRBqBAQlyOG-Qap9IFDaKi4PqKgM2Ek2hqD_lAdUA8",
         stats: {
-            matches: 1,
-            goals: 1,
-            assists: 4,
+            matches: 0,
+            goals: 0,
+            assists: 0,
             yellowCards: 0,
             redCards: 0
         },
@@ -121,6 +125,7 @@ const playersData = [
         age: 9,
         price: 22,
         priceOverride: 22,
+        ratingOverride: 25,
         position: "midfielder",
         positions: ["Полузащитник"],
         mainPosition: "Полузащитник",
@@ -138,7 +143,8 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "14.06.2026", price: 0 }
+            { date: "14.06.2026", price: 0 },
+            { date: "14.06.2026", price: 22 }
         ],
         transferRumor: {
             club: "ФК ПАЦАНЧИКИ",

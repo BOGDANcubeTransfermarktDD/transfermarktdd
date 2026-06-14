@@ -107,16 +107,12 @@
 </header>
 
 <div class="container">
-    <div class="back-container">
-        <a href="index.html" class="back-link">← Назад на главную</a>
-    </div>
+    <div class="back-container"><a href="index.html" class="back-link">← Назад на главную</a></div>
     <h2 class="section-title">👤 Игроки</h2>
 
     <div class="filters-row">
         <label>Клуб:</label>
-        <select id="clubFilter" onchange="renderTable()">
-            <option value="all">Все клубы</option>
-        </select>
+        <select id="clubFilter" onchange="renderTable()"><option value="all">Все клубы</option></select>
         <label>Позиция:</label>
         <select id="positionFilter" onchange="renderTable()">
             <option value="all">Все позиции</option>
@@ -148,24 +144,20 @@
 <footer>© 2026 TransfermarktDD</footer>
 
 <script>
-    let currentSort = 'rating';
-    let sortDirection = -1;
+    let currentSort = 'rating', sortDirection = -1;
 
     function calcRating(p) {
-        const s = p.stats;
-        let ageCoef;
+        const s = p.stats; let ageCoef;
         if (p.age >= 8 && p.age <= 11) ageCoef = 0.6;
         else if (p.age >= 12 && p.age <= 13) ageCoef = 0.7;
         else if (p.age >= 14 && p.age <= 15) ageCoef = 0.8;
         else if (p.age >= 16 && p.age <= 18) ageCoef = 1.0;
-        else if (p.age >= 19 && p.age <= 21) ageCoef = 0.9;
-        else ageCoef = 0.8;
+        else if (p.age >= 19 && p.age <= 21) ageCoef = 0.9; else ageCoef = 0.8;
         let discipline;
         if (s.redCards >= 2) discipline = 0.3;
         else if (s.redCards >= 1) discipline = 0.5;
         else if (s.yellowCards >= 4) discipline = 0.7;
-        else if (s.yellowCards >= 2) discipline = 0.9;
-        else discipline = 1.0;
+        else if (s.yellowCards >= 2) discipline = 0.9; else discipline = 1.0;
         const priceNorm = p.price / 10;
         const baseRating = (priceNorm * 5 * 0.5) + (ageCoef * 30 * 0.5);
         let seasonBonus = 0;
@@ -176,68 +168,36 @@
         return Math.round(baseRating + seasonBonus);
     }
 
-    function updateArrows() {
-        document.querySelectorAll('.arrow').forEach(a => a.textContent = '▼');
-        const activeArrow = document.getElementById('arrow-' + currentSort);
-        if (activeArrow) activeArrow.textContent = sortDirection === 1 ? '▲' : '▼';
-    }
+    function updateArrows() { document.querySelectorAll('.arrow').forEach(a => a.textContent = '▼'); const a = document.getElementById('arrow-' + currentSort); if (a) a.textContent = sortDirection === 1 ? '▲' : '▼'; }
 
-    function sortTable(field) {
-        if (currentSort === field) sortDirection *= -1;
-        else { currentSort = field; sortDirection = -1; }
-        updateArrows();
-        renderTable();
-    }
+    function sortTable(field) { if (currentSort === field) sortDirection *= -1; else { currentSort = field; sortDirection = -1; } updateArrows(); renderTable(); }
 
     function renderTable() {
         let filtered = [...playersData];
-        const clubFilter = document.getElementById('clubFilter').value;
-        const positionFilter = document.getElementById('positionFilter').value;
-
-        if (clubFilter !== 'all') filtered = filtered.filter(p => p.club === clubFilter);
-        if (positionFilter !== 'all') filtered = filtered.filter(p => p.positions.includes(positionFilter));
-
+        const cf = document.getElementById('clubFilter').value, pf = document.getElementById('positionFilter').value;
+        if (cf !== 'all') filtered = filtered.filter(p => p.club === cf);
+        if (pf !== 'all') filtered = filtered.filter(p => p.positions.includes(pf));
         filtered.sort((a, b) => {
-            let valA, valB;
-            if (currentSort === 'name') { valA = a.name; valB = b.name; return valA.localeCompare(valB) * sortDirection; }
-            if (currentSort === 'age') { valA = a.age; valB = b.age; }
-            else if (currentSort === 'price') { valA = a.price; valB = b.price; }
-            else if (currentSort === 'rating') { valA = calcRating(a); valB = calcRating(b); }
-            return (valA - valB) * sortDirection;
+            let va, vb;
+            if (currentSort === 'name') return a.name.localeCompare(b.name) * sortDirection;
+            if (currentSort === 'age') { va = a.age; vb = b.age; }
+            else if (currentSort === 'price') { va = a.price; vb = b.price; }
+            else if (currentSort === 'rating') { va = a.ratingOverride > 0 ? a.ratingOverride : calcRating(a); vb = b.ratingOverride > 0 ? b.ratingOverride : calcRating(b); }
+            return (va - vb) * sortDirection;
         });
-
-        const tbody = document.getElementById('tableBody');
-        tbody.innerHTML = '';
+        const tbody = document.getElementById('tableBody'); tbody.innerHTML = '';
         filtered.forEach((p, i) => {
-            tbody.innerHTML += `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td><div class="player-cell"><img src="${p.photo}" alt="${p.name}"><a href="player-${p.id}.html">${p.name}</a></div></td>
-                    <td>${p.mainPosition}</td>
-                    <td>${p.age} лет</td>
-                    <td>${p.club}</td>
-                    <td>₽ ${p.price}</td>
-                    <td><span class="rating-badge">${calcRating(p)}</span></td>
-                </tr>
-            `;
+            const r = p.ratingOverride > 0 ? p.ratingOverride : calcRating(p);
+            tbody.innerHTML += `<tr><td>${i+1}</td><td><div class="player-cell"><img src="${p.photo}" alt="${p.name}"><a href="player-${p.id}.html">${p.name}</a></div></td><td>${p.mainPosition}</td><td>${p.age} лет</td><td>${p.club}</td><td>₽ ${p.price}</td><td><span class="rating-badge">${r}</span></td></tr>`;
         });
     }
 
-    // Заполняем фильтр клубов
     const clubs = [...new Set(playersData.map(p => p.club))];
-    const clubSelect = document.getElementById('clubFilter');
-    clubs.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; clubSelect.appendChild(opt); });
-
+    const cs = document.getElementById('clubFilter'); clubs.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; cs.appendChild(o); });
     renderTable();
 
-    function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-        const btn = document.querySelector('.theme-toggle');
-        if (document.body.classList.contains('dark-theme')) { btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); }
-        else { btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); }
-    }
+    function toggleTheme() { document.body.classList.toggle('dark-theme'); const b = document.querySelector('.theme-toggle'); if (document.body.classList.contains('dark-theme')) { b.textContent = '☀️'; localStorage.setItem('theme', 'dark'); } else { b.textContent = '🌙'; localStorage.setItem('theme', 'light'); } }
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); document.querySelector('.theme-toggle').textContent = '☀️'; }
-
     function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
 </script>
 </body>
