@@ -92,7 +92,7 @@ const playersData = [
     },
     {
         id: "boris",
-        name: "Борис Лов Ельцин",
+        name: "Борис",
         age: 8,
         price: 41,
         ratingOverride: 36,

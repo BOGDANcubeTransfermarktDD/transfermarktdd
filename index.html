@@ -2,6 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
@@ -217,6 +219,16 @@
         <button class="news-arrow news-prev" onclick="prevNews()">&#10094;</button>
         <button class="news-arrow news-next" onclick="nextNews()">&#10095;</button>
                 <div class="news-slides" id="newsSlides">
+
+            <!-- Новость 6 — Слух про Бориса -->
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
+                <img src="https://ss.sport-express.ru/files/images/gamecenter/eb9/b08/1200_630/eb9b089d148353b757cff4.png" alt="Слух">
+                <div class="news-content">
+                    <span class="news-tag">Слухи</span>
+                    <h3>Борис может покинуть ФК ПАЦАНЧИКИ</h3>
+                    <p>Полузащитник Борис привлёк внимание ФК ЖК Ломоносов. Клуб из спального района готов сделать предложение. Ждём развития событий!</p>
+                </div>
+            </div>
             <!-- Новость 1 -->
             <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;">
                 <img src="https://avatars.mds.yandex.net/i?id=0919183a77d893bed86a46f447f2b46c_l-9025626-images-thumbs&n=13" alt="Слух">
@@ -385,7 +397,7 @@
     }
 
     let currentNews = 0;
-    const totalNews = 5;
+    const totalNews = 6;
     let newsInterval;
 
     function goToNews(index) {
