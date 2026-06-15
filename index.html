@@ -167,6 +167,14 @@
         body.dark-theme .popup-box p {
             color: #aaa;
         }
+
+
+        footer a { color: #ffc402; text-decoration: underline; }
+
+
+        td a { color: #003B7A; text-decoration: none; font-weight: bold; }
+        td a:hover { text-decoration: underline; }
+        body.dark-theme td a { color: #00aaff; }
     </style>
 </head>
 <body>
@@ -184,6 +192,7 @@
             <li><a href="players.html">Игроки</a></li>
             <li><a href="statistics.html">Статистика</a></li>
             <li><a href="news.html">Новости</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
         </ul>
     </nav>
     <div class="header-right">
@@ -273,7 +282,7 @@
                     <td>
                         <div class="team-cell">
                             <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8" alt="ФК ПАЦАНЧИКИ" style="height:40px;width:auto;border-radius:6px;object-fit:contain;">
-                            <strong>ФК ПАЦАНЧИКИ</strong>
+                            <strong><a href="club-patsanchiki.html">ФК ПАЦАНЧИКИ</a></strong>
                         </div>
                     </td>
                     <td>0</td>
@@ -303,7 +312,12 @@
     </div>
 </div>
 
-<footer>© 2026 TransfermarktDD</footer>
+<footer>
+    <p>📧 <strong>Контакты:</strong> bogdancube2020@mail.ru</p>
+    <p>📱 <strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
+    <p style="font-size: 12px; color: #aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
+    <p style="margin-top: 10px;">© 2026 TransfermarktDD</p>
+</footer>
 
 <script>
     function calcRating(p) {
@@ -428,16 +442,21 @@
 <!-- Всплывающее окно -->
 <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box">
-         <h2>😞 Проект временно закрыт</h2>
-         <p>Разработка сайта временно приостановлена.</p>
-         <p>Спасибо всем, кто заходил, смотрел и поддерживал!</p>
-         <p style="font-size: 14px; color: #999; margin-top: 10px;">Сайт остаётся доступным. Возможно, мы ещё вернёмся!</p>
+        <h2>🚀 Проекту нужна поддержка!</h2>
+        <p>TransfermarktDD развивается и охватывает всё больше игроков и команд.</p>
+        <p>Если ты из Димитровграда и хочешь, чтобы твоя команда или игрок появились на сайте — <a href="contacts.html" style="color:#00aaff;font-weight:bold;">нажми сюда, чтобы ознакомиться с контактами</a>.</p>
         <button class="popup-close" onclick="closePopup()">Понятно</button>
     </div>
 </div>
 
 <script>
     function closePopup() {
+        document.getElementById('popupOverlay').style.display = 'none';
+        localStorage.setItem('popupShown', 'true');
+    }
+
+    // Проверяем, показывали ли уже окно
+    if (localStorage.getItem('popupShown') === 'true') {
         document.getElementById('popupOverlay').style.display = 'none';
     }
 </script>
