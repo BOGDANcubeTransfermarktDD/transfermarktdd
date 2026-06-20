@@ -154,7 +154,7 @@
                 <p>${team.desc}</p>
                 <div class="players-count">👤 ${count} ${word}</div>
                 <p style="font-size:13px;">Основан: ${team.founded}</p>
-                <a href="${team.name === 'ФК ПАЦАНЧИКИ' ? 'club-patsanchiki.html' : 'players.html'}">Состав →</a>
+                <a href="${team.name === 'ФК ПАЦАНЧИКИ' ? 'club-patsanchiki.html' : team.name === 'ФК ЖК Ломоносов' ? 'club-lomonosov.html' : 'players.html'}">Состав →</a>
             </div>
         `;
     });

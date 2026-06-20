@@ -233,7 +233,7 @@
                     </td>
                     <td>${p.mainPosition}</td>
                     <td>${p.age} лет</td>
-                    <td>${p.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">' + p.club + '</a>' : p.club}</td>
+                    <td>${p.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">' + p.club + '</a>' : p.club === 'ФК ЖК Ломоносов' ? '<a href="club-lomonosov.html">' + p.club + '</a>' : p.club}</td>
                     <td class="price-cell">₽ ${p.price}</td>
                     <td class="${changeClass}">${changeSign}${change}%</td>
                 </tr>

@@ -202,7 +202,7 @@
         const tbody = document.getElementById('tableBody'); tbody.innerHTML = '';
         filtered.forEach((p, i) => {
             const r = p.ratingOverride > 0 ? p.ratingOverride : calcRating(p);
-            tbody.innerHTML += `<tr><td>${i+1}</td><td><div class="player-cell"><img src="${p.photo}" alt="${p.name}"><a href="player-${p.id}.html">${p.name}</a></div></td><td>${p.mainPosition}</td><td>${p.age} лет</td><td>${p.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">' + p.club + '</a>' : p.club}</td><td>₽ ${p.price}</td><td><span class="rating-badge">${r}</span></td></tr>`;
+            tbody.innerHTML += `<tr><td>${i+1}</td><td><div class="player-cell"><img src="${p.photo}" alt="${p.name}"><a href="player-${p.id}.html">${p.name}</a></div></td><td>${p.mainPosition}</td><td>${p.age} лет</td><td>${p.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">' + p.club + '</a>' : p.club === 'ФК ЖК Ломоносов' ? '<a href="club-lomonosov.html">' + p.club + '</a>' : p.club}</td><td>₽ ${p.price}</td><td><span class="rating-badge">${r}</span></td></tr>`;
         });
     }
 
