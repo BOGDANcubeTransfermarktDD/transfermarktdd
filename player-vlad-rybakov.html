@@ -131,6 +131,23 @@
             .player-info .details { justify-content: center; }
             .positions-block { justify-content: center; }
         }
+
+                
+        /*Поиск игроков*/
+        .search-toggle { background: none; border: none; font-size: 22px; cursor: pointer; color: white; padding: 5px; }
+        .search-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); z-index: 9999; padding: 20px; flex-direction: column; align-items: center; }
+        .search-overlay.active { display: flex; }
+        .search-box { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 500px; }
+        .search-box input { flex: 1; padding: 12px 20px; border-radius: 25px; border: none; font-size: 16px; outline: none; }
+        .search-close { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
+        .search-results { width: 100%; max-width: 500px; max-height: 60vh; overflow-y: auto; margin-top: 10px; }
+        .search-item { display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; margin-bottom: 5px; cursor: pointer; }
+        .search-item:hover { background: #e8f0fe; }
+        .search-item img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
+        .search-item span { color: #003B7A; font-weight: bold; }
+        body.dark-theme .search-item { background: #0f3460; }
+        body.dark-theme .search-item:hover { background: #1a1a2e; }
+        body.dark-theme .search-item span { color: #00aaff; }
     </style>
 <body>
 <header>
@@ -149,6 +166,16 @@
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
     </nav>
+    
+    <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()">
+            <button class="search-close" onclick="toggleSearch()">✕</button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+    
     <div class="header-right">
         <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button>
         <div class="mobile-buttons">
@@ -391,6 +418,13 @@
         const btn = document.querySelector('.theme-toggle');
         if (btn) btn.textContent = '☀️';
     }
+    // Автоопределение темы системы
+    if (!localStorage.getItem('theme')) {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-theme');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+    }
 
     function toggleMenu() {
         document.getElementById('mainNav').classList.toggle('open');
@@ -399,6 +433,22 @@
 // Рисуем график после проверки темы
     setTimeout(drawPriceChart, 100);
     window.addEventListener('resize', drawPriceChart);
+
+    //Поиск игроков
+        function toggleSearch() {
+        document.getElementById('searchOverlay').classList.toggle('active');
+        if (document.getElementById('searchOverlay').classList.contains('active')) {
+            document.getElementById('searchInput').focus();
+        }
+    }
+
+    function searchPlayers() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const results = document.getElementById('searchResults');
+        if (q.length < 2) { results.innerHTML = ''; return; }
+        const found = playersData.filter(p => p.name.toLowerCase().includes(q));
+        results.innerHTML = found.map(p => `<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');
+    }
 </script>
 
 <!-- Кнопка наверх -->
