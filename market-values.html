@@ -10,9 +10,10 @@
     <script src="players-data.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: relative; z-index: 300; }
-        .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+        html { scroll-behavior: smooth; }
+        body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; opacity: 0; animation: fadeInBody 0.5s ease-in-out forwards; }
+        @keyframes fadeInBody { from { opacity: 0; } to { opacity: 1; } }
+        header { background: #003B7A; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.35); position: sticky; top: 0; z-index: 300; }        .logo a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
         .logo img { height: 40px; border-radius: 8px; }
         .header-right { display: flex; align-items: center; gap: 10px; }
         .hamburger { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 5px; line-height: 1; }
@@ -266,5 +267,24 @@
         document.getElementById('mainNav').classList.toggle('open');
     }
 </script>
+
+<!-- Кнопка наверх -->
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<style>
+    .scroll-top-btn { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: #003B7A; color: white; border: none; border-radius: 50%; font-size: 22px; cursor: pointer; z-index: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+    .scroll-top-btn.visible { opacity: 1; visibility: visible; }
+    .scroll-top-btn:hover { background: #00aaff; transform: translateY(-3px); }
+    body.dark-theme .scroll-top-btn { background: #00aaff; }
+</style>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) { btn.classList.add('visible'); }
+        else { btn.classList.remove('visible'); }
+    });
+</script>
+
 </body>
 </html>
