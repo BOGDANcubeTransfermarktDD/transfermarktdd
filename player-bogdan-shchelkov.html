@@ -8,153 +8,49 @@
     <title>Богдан Щелков — Профиль игрока</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
+    <link rel="stylesheet" href="style.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background: #f3f5f7; display: flex; flex-direction: column; min-height: 100vh; opacity: 0; animation: fadeInBody 0.5s ease-in-out forwards; }
-        @keyframes fadeInBody { from { opacity: 0; } to { opacity: 1; } }
-
-        header { background: #003B7A; color: white; padding: 0 20px; display: flex; align-items: center; height: 56px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 300; gap: 20px; }
-        .logo a { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: bold; font-size: 20px; white-space: nowrap; flex-shrink: 0; }
-        .logo img { height: 32px; border-radius: 6px; }
-        .header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
-
-        #mainNav { display: flex; align-items: center; }
-        .nav-menu { display: flex; list-style: none; gap: 2px; flex-wrap: nowrap; }
-        .nav-menu li { flex-shrink: 0; }
-        .nav-menu a { color: white; text-decoration: none; font-weight: 500; padding: 8px 10px; border-radius: 4px; transition: 0.2s; display: block; white-space: nowrap; font-size: 14px; }
-        .nav-menu a:hover { background: rgba(255,255,255,0.15); }
-
-        .dropdown { position: relative; }
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border-radius: 6px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); list-style: none; padding: 5px 0; min-width: 160px; z-index: 100; }
-        .dropdown-menu li a { color: #003B7A; padding: 10px 18px; border-radius: 0; font-size: 14px; }
-        .dropdown-menu li a:hover { background: #e8f0fe; }
-        .dropdown:hover .dropdown-menu { display: block; }
-        body.dark-theme .dropdown-menu { background: #0f3460; }
-        body.dark-theme .dropdown-menu li a { color: #e0e0e0; }
-        body.dark-theme .dropdown-menu li a:hover { background: #1a1a2e; }
-
-        .search-toggle, .theme-toggle, .hamburger { background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 6px; border-radius: 4px; transition: 0.2s; }
-        .search-toggle:hover, .theme-toggle:hover { background: rgba(255,255,255,0.15); }
-        .hamburger { display: none; }
-
-        .search-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 9999; padding: 20px; flex-direction: column; align-items: center; }
-        .search-overlay.active { display: flex; }
-        .search-box { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 500px; margin-top: 20px; }
-        .search-box input { flex: 1; padding: 12px 20px; border-radius: 25px; border: none; font-size: 16px; outline: none; }
-        .search-close { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
-        .search-results { width: 100%; max-width: 500px; max-height: 70vh; overflow-y: auto; margin-top: 10px; }
-        .search-item { display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; margin-bottom: 5px; cursor: pointer; }
-        .search-item:hover { background: #e8f0fe; }
-        .search-item img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
-        .search-item span { color: #003B7A; font-weight: bold; }
-        body.dark-theme .search-item { background: #0f3460; }
-        body.dark-theme .search-item:hover { background: #1a1a2e; }
-        body.dark-theme .search-item span { color: #00aaff; }
-
-        .container { max-width: 1200px; margin: auto; padding: 40px 20px; width: 100%; flex: 1; }
-        .player-header { display: flex; gap: 30px; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px; align-items: center; flex-wrap: wrap; transition: box-shadow 0.3s; }
-        .player-header:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-        .player-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 3px solid #003B7A; transition: 0.3s; }
-        .player-photo:hover { border-color: #00aaff; transform: scale(1.03); }
-        .player-photo img { width: 100%; height: 100%; object-fit: cover; }
-        .player-info h1 { font-size: 36px; color: #003B7A; margin-bottom: 5px; }
-        .player-info .number { font-size: 20px; color: #666; margin-bottom: 10px; }
-        .player-info .details { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; }
-        .detail-item { background: #f3f5f7; padding: 8px 15px; border-radius: 20px; font-size: 14px; transition: 0.2s; }
-        .detail-item:hover { background: #e8f0fe; }
-        .detail-item strong { color: #003B7A; }
-        .positions-block { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-        .positions-label { font-size: 14px; color: #666; font-weight: 500; }
-        .position-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; background: #e8e8e8; color: #555; transition: 0.2s; }
-        .position-tag:hover { transform: scale(1.05); }
-        .position-tag.main { background: #003B7A; color: white; }
-        .value-section { display: flex; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
-        .value-left, .value-right { display: flex; flex-direction: column; gap: 20px; flex: 1; min-width: 250px; }
-        .current-value, .rating-box { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 1; min-width: 200px; text-align: center; transition: 0.3s; }
-        .current-value:hover, .rating-box:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); transform: translateY(-3px); }
-        .current-value .label, .rating-box .label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-        .current-value .price { font-size: 48px; font-weight: bold; color: #2e7d32; }
-        .rating-number { font-size: 48px; font-weight: bold; color: #003B7A; }
-        .rating-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 10px; overflow: hidden; }
-        .rating-fill { height: 100%; background: #00aaff; border-radius: 4px; transition: width 0.5s; }
-        .chart-container { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 2; min-width: 300px; transition: box-shadow 0.3s; }
-        .chart-container:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-        .chart-container canvas { width: 100%; height: 250px; }
-        .section-title { margin-bottom: 20px; color: #003B7A; border-left: 5px solid #00aaff; padding-left: 15px; margin-top: 30px; }
-        .table-wrapper { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: box-shadow 0.3s; }
-        .table-wrapper:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th { background: #003B7A; color: white; padding: 15px; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; }
-        td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; transition: background 0.2s; }
-        tr:last-child td { border-bottom: none; }
-        tbody tr { transition: 0.2s; }
-        tbody tr:hover { background-color: #f0f7ff; transform: scale(1.005); }
-        .transfer-in { color: #2e7d32; font-weight: bold; }
-        .transfer-none { color: #666; font-weight: bold; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #003B7A; text-decoration: none; font-weight: 500; transition: 0.2s; }
-        .back-link:hover { text-decoration: underline; color: #00aaff; }
-        footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
-        footer a { color: #ffc402; text-decoration: underline; transition: 0.2s; }
-        footer a:hover { color: #fff; }
-
-        body.dark-theme { background: #1a1a2e; }
-        body.dark-theme header { background: #16213e; }
-        body.dark-theme .player-header, body.dark-theme .current-value, body.dark-theme .rating-box, body.dark-theme .chart-container, body.dark-theme .table-wrapper { background: #0f3460; color: #e0e0e0; }
-        body.dark-theme .player-info h1, body.dark-theme .section-title, body.dark-theme .rating-number { color: #00aaff; }
-        body.dark-theme .detail-item { background: #1a1a2e; color: #ccc; }
-        body.dark-theme .detail-item strong { color: #00aaff; }
-        body.dark-theme td { border-bottom: 1px solid #333; color: #e0e0e0; }
-        body.dark-theme th { background: #16213e; }
-        body.dark-theme tbody tr:hover { background-color: #1a1a2e; }
-        body.dark-theme .player-info .number, body.dark-theme .current-value .label, body.dark-theme .rating-box .label { color: #aaa; }
-        body.dark-theme .transfer-none { color: #999; }
-        body.dark-theme .transfer-in { color: #4caf50; }
-        body.dark-theme .current-value .price { color: #4caf50; }
-        body.dark-theme .chart-container canvas { background: #0f3460; }
-        body.dark-theme .back-link { color: #00aaff; }
-        body.dark-theme .position-tag { background: #1a1a2e; color: #ccc; }
-        body.dark-theme .position-tag.main { background: #00aaff; color: white; }
-        body.dark-theme footer { background: #16213e; }
-
-        .scroll-top-btn { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: #003B7A; color: white; border: none; border-radius: 50%; font-size: 22px; cursor: pointer; z-index: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-        .scroll-top-btn.visible { opacity: 1; visibility: visible; }
-        .scroll-top-btn:hover { background: #00aaff; transform: translateY(-3px); }
-        body.dark-theme .scroll-top-btn { background: #00aaff; }
-
-        @media (max-width: 768px) {
-            header { padding: 0 15px; gap: 10px; }
-            .logo a { font-size: 18px; }
-            .logo img { height: 28px; }
-            .hamburger { display: block; }
-            #mainNav { display: none; position: absolute; top: 56px; left: 0; right: 0; background: #003B7A; padding: 10px 15px; z-index: 300; }
-            #mainNav.open { display: block; }
-            .nav-menu { flex-direction: column; gap: 2px; }
-            .nav-menu a { padding: 10px 12px; font-size: 15px; }
-            .dropdown-menu { position: static; background: rgba(255,255,255,0.08); box-shadow: none; border-radius: 0; padding-left: 15px; }
-            .dropdown-menu li a { color: white; padding: 8px 12px; }
-            .dropdown-menu li a:hover { background: rgba(255,255,255,0.1); }
-            body.dark-theme .dropdown-menu { background: rgba(255,255,255,0.05); }
-            body.dark-theme .dropdown-menu li a { color: #e0e0e0; }
-            .header-actions { margin-left: auto; }
-            .player-header { flex-direction: column; text-align: center; }
-            .player-info .details { justify-content: center; }
-            .positions-block { justify-content: center; }
-        }
-
-        /* Стили для блока вероятности перехода (Захар) */
-        .transfer-probability { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 1; min-width: 200px; text-align: center; transition: 0.3s; }
-        .transfer-probability:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); transform: translateY(-3px); }
-        .transfer-probability .label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .prob-teams { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; font-weight: bold; font-size: 16px; color: #003B7A; }
-        .prob-club-img { width: 30px; height: 30px; border-radius: 8px; object-fit: contain; }
-        .prob-arrow { color: #ff9800; font-size: 24px; }
-        .prob-bar { width: 100%; height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; margin-bottom: 5px; }
-        .prob-fill { height: 100%; background: #ff9800; border-radius: 5px; transition: width 0.5s; }
-        .prob-text { font-weight: bold; color: #ff9800; font-size: 18px; }
-        body.dark-theme .transfer-probability { background: #0f3460; }
-        body.dark-theme .transfer-probability .label { color: #aaa; }
-        body.dark-theme .prob-teams { color: #00aaff; }
+    .player-header { display: flex; gap: 30px; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px; align-items: center; flex-wrap: wrap; transition: box-shadow 0.3s; }
+    .player-header:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+    .player-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 3px solid #003B7A; transition: 0.3s; }
+    .player-photo:hover { border-color: #00aaff; transform: scale(1.03); }
+    .player-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .player-info h1 { font-size: 36px; color: #003B7A; margin-bottom: 5px; }
+    .player-info .number { font-size: 20px; color: #666; margin-bottom: 10px; }
+    .player-info .details { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; }
+    .detail-item { background: #f3f5f7; padding: 8px 15px; border-radius: 20px; font-size: 14px; transition: 0.2s; }
+    .detail-item:hover { background: #e8f0fe; }
+    .detail-item strong { color: #003B7A; }
+    .positions-block { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .positions-label { font-size: 14px; color: #666; font-weight: 500; }
+    .position-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; background: #e8e8e8; color: #555; transition: 0.2s; }
+    .position-tag:hover { transform: scale(1.05); }
+    .position-tag.main { background: #003B7A; color: white; }
+    .value-section { display: flex; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
+    .value-left, .value-right { display: flex; flex-direction: column; gap: 20px; flex: 1; min-width: 250px; }
+    .current-value, .rating-box { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 1; min-width: 200px; text-align: center; transition: 0.3s; }
+    .current-value:hover, .rating-box:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); transform: translateY(-3px); }
+    .current-value .label, .rating-box .label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .current-value .price { font-size: 48px; font-weight: bold; color: #2e7d32; }
+    .rating-number { font-size: 48px; font-weight: bold; color: #003B7A; }
+    .rating-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+    .rating-fill { height: 100%; background: #00aaff; border-radius: 4px; transition: width 0.5s; }
+    .chart-container { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 2; min-width: 300px; transition: box-shadow 0.3s; }
+    .chart-container:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+    .chart-container canvas { width: 100%; height: 250px; }
+    .transfer-in { color: #2e7d32; font-weight: bold; }
+    .transfer-none { color: #666; font-weight: bold; }
+    body.dark-theme .player-header, body.dark-theme .current-value, body.dark-theme .rating-box, body.dark-theme .chart-container { background: #0f3460; color: #e0e0e0; }
+    body.dark-theme .player-info h1, body.dark-theme .rating-number { color: #00aaff; }
+    body.dark-theme .detail-item { background: #1a1a2e; color: #ccc; }
+    body.dark-theme .detail-item strong { color: #00aaff; }
+    body.dark-theme .player-info .number, body.dark-theme .current-value .label, body.dark-theme .rating-box .label { color: #aaa; }
+    body.dark-theme .transfer-none { color: #999; }
+    body.dark-theme .transfer-in { color: #4caf50; }
+    body.dark-theme .current-value .price { color: #4caf50; }
+    body.dark-theme .position-tag { background: #1a1a2e; color: #ccc; }
+    body.dark-theme .position-tag.main { background: #00aaff; color: white; }
+    @media (max-width: 768px) { .player-header { flex-direction: column; text-align: center; } .player-info .details { justify-content: center; } .positions-block { justify-content: center; } }
     </style>
 </head>
 <body>
