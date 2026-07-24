@@ -1,18 +1,16 @@
-async function fetchWorldNews() {
+async function fetchRussianNews() {
     const container = document.getElementById('worldNewsContainer');
     if (!container) return;
 
-    const cached = localStorage.getItem('worldNewsCache');
-    if (cached) {
-        displayNews(JSON.parse(cached));
-    }
+    const cached = localStorage.getItem('russianNewsCache');
+    if (cached) displayNews(JSON.parse(cached));
 
     const timeout = setTimeout(() => {
-        if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Новости временно недоступны</p>';
-    }, 12000);
+        if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Загрузка...</p>';
+    }, 5000);
 
     try {
-        const response = await fetch('https://www.fifa.com/en/news/rss.xml');
+        const response = await fetch('https://lenta.ru/rss/sport');
         const text = await response.text();
         clearTimeout(timeout);
 
@@ -21,43 +19,25 @@ async function fetchWorldNews() {
         const items = xml.querySelectorAll('item');
         const articles = [];
 
-        for (let i = 0; i < Math.min(items.length, 5); i++) {
-            const item = items[i];
-            const titleEn = item.querySelector('title')?.textContent || '';
-            const descEn = item.querySelector('description')?.textContent?.replace(/<[^>]*>/g, '').substring(0, 200) || '';
-
-            // Lingva translate
-            const titleRu = await translateLingva(titleEn);
-            const descRu = await translateLingva(descEn);
-
+        items.forEach((item, i) => {
+            if (i >= 6) return;
             articles.push({
-                title: titleRu || titleEn,
-                description: (descRu || descEn) + '...',
+                title: item.querySelector('title')?.textContent || '',
+                description: '',
                 url: item.querySelector('link')?.textContent || '#',
-                urlToImage: 'https://via.placeholder.com/300x150?text=FIFA',
-                source: { name: 'FIFA.com' },
-                publishedAt: item.querySelector('pubDate')?.textContent || new Date().toISOString()
+                urlToImage: 'https://via.placeholder.com/300x150?text=Lenta.ru',
+                source: { name: 'Lenta.ru' },
+                publishedAt: item.querySelector('pubDate')?.textContent || ''
             });
-        }
+        });
 
         if (articles.length > 0) {
-            localStorage.setItem('worldNewsCache', JSON.stringify(articles));
+            localStorage.setItem('russianNewsCache', JSON.stringify(articles));
             displayNews(articles);
         }
-    } catch (error) {
+    } catch (e) {
         clearTimeout(timeout);
         if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Новости временно недоступны</p>';
-    }
-}
-
-async function translateLingva(text) {
-    if (!text || text.length < 3) return '';
-    try {
-        const response = await fetch('https://lingva.ml/api/v1/en/ru/' + encodeURIComponent(text));
-        const data = await response.json();
-        return data.translation || '';
-    } catch (e) {
-        return '';
     }
 }
 
@@ -66,16 +46,15 @@ function displayNews(articles) {
     if (!container) return;
     container.innerHTML = articles.map(a => `
         <div class="world-news-card" onclick="window.open('${a.url}', '_blank')">
-            <img src="${a.urlToImage}" alt="News" onerror="this.src='https://via.placeholder.com/300x150?text=FIFA'">
+            <img src="${a.urlToImage}" alt="" onerror="this.src='https://via.placeholder.com/300x150?text=Lenta'">
             <div class="world-news-content">
-                <span class="world-news-tag">Мировой футбол</span>
+                <span class="world-news-tag">Новости спорта</span>
                 <h4>${a.title}</h4>
-                <p>${a.description}</p>
                 <span class="world-news-source">${a.source.name} · ${new Date(a.publishedAt).toLocaleDateString('ru-RU')}</span>
             </div>
         </div>
     `).join('');
 }
 
-fetchWorldNews();
-setInterval(fetchWorldNews, 60 * 60 * 1000);
+fetchRussianNews();
+setInterval(fetchRussianNews, 60 * 60 * 1000);

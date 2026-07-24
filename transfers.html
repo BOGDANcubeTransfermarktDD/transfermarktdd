@@ -7,153 +7,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Трансферы | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
-    <link rel="stylesheet" href="style.css">
     <script src="players-data.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <div class="logo">
-        <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
-    </div>
-    <nav id="mainNav">
-        <ul class="nav-menu">
-            <li class="dropdown"><a href="#">Трансферы ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="transfers.html">Трансферы</a></li>
-                    <li><a href="rumors.html">Слухи</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a href="#">Рыночные цены ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="market-values.html">Все игроки</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a href="#">Турниры ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="tournaments.html">Таблица</a></li>
-                    <li><a href="schedule.html">Расписание</a></li>
-                </ul>
-            </li>
-            <li><a href="teams.html">Команды</a></li>
-            <li><a href="players.html">Игроки</a></li>
-            <li><a href="statistics.html">Статистика</a></li>
-            <li><a href="news.html">Новости</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
-        </ul>
-    </nav>
+    <div class="logo"><a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a></div>
+    <nav id="mainNav"><ul class="nav-menu">
+        <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+        <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
+        <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
+        <li><a href="teams.html">Команды</a></li><li><a href="players.html">Игроки</a></li><li><a href="statistics.html">Статистика</a></li><li><a href="news.html">Новости</a></li><li><a href="contacts.html">Контакты</a></li>
+    </ul></nav>
     <div class="header-actions">
         <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
         <button class="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
         <button class="hamburger" onclick="toggleMenu()">☰</button>
     </div>
 </header>
+<div class="search-overlay" id="searchOverlay"><div class="search-box"><input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()"><button class="search-close" onclick="toggleSearch()">✕</button></div><div class="search-results" id="searchResults"></div></div>
 
-<!-- Оверлей поиска -->
-<div class="search-overlay" id="searchOverlay">
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()">
-        <button class="search-close" onclick="toggleSearch()">✕</button>
-    </div>
-    <div class="search-results" id="searchResults"></div>
-</div>
+<div class="container" style="max-width:800px;">
+    <div class="back-container"><a href="index.html" class="back-link">← Назад на главную</a></div>
+    <h2 class="section-title">🔄 Трансферы</h2>
 
-<div class="container">
-    <div class="back-container">
-    <a href="index.html" class="back-link">← Назад на главную</a>
-    </div>
-    <div class="placeholder">
-        <!-- ПОМЕНЯЙ ЗАГОЛОВОК -->
-        <h2>🔄 Трансферы</h2>
-        <!-- ПОМЕНЯЙ ОПИСАНИЕ -->
-        <p>Страница в разработке. Здесь будут отображаться все трансферы игроков.</p>
+    <!-- HERE WE GO: Матвей → ФК ПАЦАНЧИКИ -->
+    <div class="transfer-card">
+        <div class="transfer-badge">HERE WE GO</div>
+        <div class="transfer-content">
+            <h3>Матвей Зореев — новый игрок ФК ПАЦАНЧИКИ</h3>
+            <p>Официально: 16-летний полузащитник подписал контракт с лидерами лиги. Контракт рассчитан на три сезона.</p>
+            <div class="transfer-details">
+                <span>📅 19.06.2026</span>
+                <span>👤 Матвей Зореев</span>
+                <span>💰 90₽</span>
+                <span>🆓 Свободный агент</span>
+            </div>
+        </div>
+        <div class="transfer-teams">
+            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Notw_i9IQSJConinRyhrypXrai4PqKgM2Ek2hqD_lAdUA8" alt="Матвей" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+            <span class="transfer-arrow">→</span>
+            <img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotN_WE_hOnMyXYVEyTB9S0a6i4PqKgM2Ek2hqD_lAdUA8" alt="ФК ПАЦАНЧИКИ">
+        </div>
     </div>
 </div>
 
 <footer>
     <p><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
     <p><strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
-    <p style="font-size: 12px; color: #aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
-    <p style="margin-top: 10px;">© 2026 TransfermarktDD</p>
+    <p style="font-size:12px;color:#aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
+    <p style="margin-top:10px;">© 2026 TransfermarktDD</p>
 </footer>
 
-<script>
-    function toggleMenu() {
-        document.getElementById('mainNav').classList.toggle('open');
-    }
-        function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-        const btn = document.querySelector('.theme-toggle');
-        if (document.body.classList.contains('dark-theme')) {
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        }
-    }
-
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-theme');
-        document.querySelector('.theme-toggle').textContent = '☀️';
-    }
-    // Автоопределение темы системы
-    if (!localStorage.getItem('theme')) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.classList.add('dark-theme');
-            document.querySelector('.theme-toggle').textContent = '☀️';
-        }
-    }
-
-    //Поиск игроков
-        function toggleSearch() {
-        document.getElementById('searchOverlay').classList.toggle('active');
-        if (document.getElementById('searchOverlay').classList.contains('active')) {
-            document.getElementById('searchInput').focus();
-        }
-    }
-
-    function searchPlayers() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const results = document.getElementById('searchResults');
-        if (q.length < 2) { results.innerHTML = ''; return; }
-        const found = playersData.filter(p => p.name.toLowerCase().includes(q));
-        results.innerHTML = found.map(p => `<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');
-    }
-</script>
-
-<!-- Кнопка наверх -->
 <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<style>
-    .scroll-top-btn { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: #003B7A; color: white; border: none; border-radius: 50%; font-size: 22px; cursor: pointer; z-index: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-    .scroll-top-btn.visible { opacity: 1; visibility: visible; }
-    .scroll-top-btn:hover { background: #00aaff; transform: translateY(-3px); }
-    body.dark-theme .scroll-top-btn { background: #00aaff; }
-</style>
-
 <script>
-    window.addEventListener('scroll', function() {
-        const btn = document.getElementById('scrollTopBtn');
-        if (window.scrollY > 300) { btn.classList.add('visible'); }
-        else { btn.classList.remove('visible'); }
-    });
-    
-    //Поиск игроков
-    function toggleSearch() {
-        document.getElementById('searchOverlay').classList.toggle('active');
-        if (document.getElementById('searchOverlay').classList.contains('active')) {
-            document.getElementById('searchInput').focus();
-        }
-    }
-    function searchPlayers() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const results = document.getElementById('searchResults');
-        if (q.length < 2) { results.innerHTML = ''; return; }
-        const found = playersData.filter(p => p.name.toLowerCase().includes(q));
-        results.innerHTML = found.map(p => `<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');
-    }
+    function toggleTheme(){document.body.classList.toggle('dark-theme');const b=document.querySelector('.theme-toggle');if(document.body.classList.contains('dark-theme')){b.textContent='☀️';localStorage.setItem('theme','dark');}else{b.textContent='🌙';localStorage.setItem('theme','light');}}
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}
+    if(!localStorage.getItem('theme')){if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}}
+    function toggleMenu(){document.getElementById('mainNav').classList.toggle('open');}
+    function toggleSearch(){document.getElementById('searchOverlay').classList.toggle('active');if(document.getElementById('searchOverlay').classList.contains('active'))document.getElementById('searchInput').focus();}
+    function searchPlayers(){const q=document.getElementById('searchInput').value.toLowerCase();const results=document.getElementById('searchResults');if(q.length<2){results.innerHTML='';return;}const found=playersData.filter(p=>p.name.toLowerCase().includes(q));results.innerHTML=found.map(p=>`<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');}
+    window.addEventListener('scroll',function(){const btn=document.getElementById('scrollTopBtn');if(window.scrollY>300)btn.classList.add('visible');else btn.classList.remove('visible');});
 </script>
-
 </body>
 </html>

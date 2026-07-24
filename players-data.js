@@ -69,7 +69,7 @@ const playersData = [
         {
         id: "danila-pryanikov",
         name: "Данила Пряников",
-        age: 15,
+        age: 16,
         price: 99,
         priceOverride: 99,
         ratingOverride: 60,
@@ -100,8 +100,8 @@ const playersData = [
         id: "boris",
         name: "Борис",
         age: 8,
-        price: 60,
-        priceOverride: 60,
+        price: 50,
+        priceOverride: 50,
         ratingOverride: 53,
         position: "midfielder",
         positions: ["Полузащитник", "Защитник"],
@@ -195,8 +195,8 @@ const playersData = [
         id: "artem-ridun",
         name: "Артём Ридун",
         age: 10,
-        price: 85,
-        priceOverride: 85,
+        price: 70,
+        priceOverride: 70,
         position: "forward",
         positions: ["Нападающий", "Полузащитник"],
         mainPosition: "Нападающий",
@@ -224,8 +224,8 @@ const playersData = [
         id: "daniil-abdrakhmanov",
         name: "Даниил Абдрахманов",
         age: 12,
-        price: 85,
-        priceOverride: 85,
+        price: 80,
+        priceOverride: 80,
         position: "midfielder",
         positions: ["Полузащитник", "Защитник"],
         mainPosition: "Полузащитник",
@@ -282,12 +282,12 @@ const playersData = [
         id: "adel-safin",
         name: "Адель Сафин",
         age: 12,
-        price: 0,
-        priceOverride: 0,
+        price: 45,
+        priceOverride: 45,
         position: "midfielder",
         positions: ["Полузащитник", "Вратарь"],
         mainPosition: "Полузащитник",
-        number: 10,
+        number: 43,
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 168,
@@ -301,21 +301,22 @@ const playersData = [
             yellowCards: 0, redCards: 0
         },
         priceHistory: [
-            { date: "23.07.2026", price: 0 }
+            { date: "23.07.2026", price: 0 },
+            { date: "24.07.2026", price: 45 }
         ],
-        ratingOverride: 0
+        ratingOverride: 54
     },
 
         {
         id: "vyacheslav-balaev",
         name: "Вячеслав Балаев",
         age: 10,
-        price: 0,
-        priceOverride: 0,
+        price: 40,
+        priceOverride: 40,
         position: "midfielder",
         positions: ["Полузащитник", "Защитник"],
         mainPosition: "Полузащитник",
-        number: 9,
+        number: 4,
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 157,
@@ -326,8 +327,9 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "23.07.2026", price: 0 }
+            { date: "23.07.2026", price: 0 },
+            { date: "23.07.2026", price: 40 }
         ],
-        ratingOverride: 0
+        ratingOverride: 51
     }
 ];

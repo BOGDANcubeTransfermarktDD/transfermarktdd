@@ -8,7 +8,6 @@
     <title>Главная страница | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
-    <script src="news-api.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
@@ -55,14 +54,14 @@
         <button class="news-arrow news-prev" onclick="prevNews()">&#10094;</button>
         <button class="news-arrow news-next" onclick="nextNews()">&#10095;</button>
         <div class="news-slides" id="newsSlides">
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://5aside.com/wp-content/uploads/2021/12/102793686.jpg" alt="Перерыв"><div class="news-content"><span class="news-tag">Сайт</span><h3>⚽ Небольшой перерыв в обновлениях</h3><p>Нашей команде нужен перерыв. Обновления приостановлены, но проект жив.</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i0.wp.com/38ddt5.ru/wp-content/uploads/2026/02/maks.jpg?fit=1128%2C472&ssl=1" alt="Канал"><div class="news-content"><span class="news-tag">Медиа</span><h3>📱 У нас есть канал в MAX!</h3><p>Не все знают, но у TransfermarktDD есть свой канал. Подписывайтесь!</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NottseK3iW_-oZzJKmPktqWkKi4PqKgM2Ek2hqD_lAdUA8" alt="Трансфер"><div class="news-content"><span class="news-tag">Трансферы</span><h3>🚨 HERE WE GO! Мотя в деле!</h3><p>Официально: Матвей Зореев — новый игрок ФК ПАЦАНЧИКИ!</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotpAV1fy_7sDhU7Ozj4qR66qi4PqKgM2Ek2hqD_lAdUA8" alt="Травма"><div class="news-content"><span class="news-tag">Игроки</span><h3>🤕 Влад выбыл из строя!</h3><p>Лучший бомбардир получил повреждение, но скоро вернётся!</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotJv02aYr9KsJ5LXIQPkOwHqi4PqKgM2Ek2hqD_lAdUA8" alt="Клуб"><div class="news-content"><span class="news-tag">Клубы</span><h3>💪 ЖК Ломоносов усиливается!</h3><p>Три новичка в составе. Конкуренция нарастает!</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Not11kadRwz-PYRYvoYLp_Gf6i4PqKgM2Ek2hqD_lAdUA8" alt="Борис"><div class="news-content"><span class="news-tag">Игроки</span><h3>📈 Борис на подъёме!</h3><p>Рейтинг 53, цена 60₽. Универсал продолжает удивлять!</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Not_wrg1irdGdMCz0bEG-u5E6i4PqKgM2Ek2hqD_lAdUA8" alt="Захар"><div class="news-content"><span class="news-tag">Слухи</span><h3>🕒 Захар всё ещё свободен</h3><p>Цена выросла до 35₽, но предложений нет.</p></div></div>
-            <div class="news-slide" onclick="window.location.href='news.html'"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotQhoDZU-5NMe8ushD21RrVai4PqKgM2Ek2hqD_lAdUA8" alt="Матч"><div class="news-content"><span class="news-tag">Анонс</span><h3>🔥 ФК ПАЦАНЧИКИ — ФК ЖК Ломоносов!</h3><p>Скоро горячее противостояние!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://photobooth.cdn.sports.ru/preset/wysiwyg/5/41/9171250c24c91b7d0dc2803779730.jpeg?f=webp&q=90&s=2x&w=730" alt="Обновление"><div class="news-content"><span class="news-tag">Сайт</span><h3>📊 Цены и рейтинги обновлены!</h3><p>У многих игроков изменились рыночные стоимости и рейтинги. Загляните в профили!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.pinimg.com/736x/0b/03/b5/0b03b5a91570da47a61cc6f9791499ac.jpg" alt="Новички"><div class="news-content"><span class="news-tag">Клубы</span><h3>🆕 ЖК Ломоносов подписал ещё двух игроков</h3><p>Адель Сафин и Вячеслав Балаев пополнили состав команды из новостройки.</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i0.wp.com/38ddt5.ru/wp-content/uploads/2026/02/maks.jpg?fit=1128%2C472&ssl=1" alt="Канал"><div class="news-content"><span class="news-tag">Медиа</span><h3>📱 У нас есть канал в MAX!</h3><p>Не все знают, но у TransfermarktDD есть свой канал. Подписывайтесь!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NottseK3iW_-oZzJKmPktqWkKi4PqKgM2Ek2hqD_lAdUA8" alt="Трансфер"><div class="news-content"><span class="news-tag">Трансферы</span><h3>🚨 HERE WE GO! Мотя в деле!</h3><p>Официально: Матвей Зореев — новый игрок ФК ПАЦАНЧИКИ!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotpAV1fy_7sDhU7Ozj4qR66qi4PqKgM2Ek2hqD_lAdUA8" alt="Травма"><div class="news-content"><span class="news-tag">Игроки</span><h3>🤕 Влад выбыл из строя!</h3><p>Лучший бомбардир получил повреждение, но скоро вернётся!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotJv02aYr9KsJ5LXIQPkOwHqi4PqKgM2Ek2hqD_lAdUA8" alt="Клуб"><div class="news-content"><span class="news-tag">Клубы</span><h3>💪 ЖК Ломоносов усиливается!</h3><p>Три новичка в составе. Конкуренция нарастает!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Not_wrg1irdGdMCz0bEG-u5E6i4PqKgM2Ek2hqD_lAdUA8" alt="Захар"><div class="news-content"><span class="news-tag">Слухи</span><h3>🕒 Захар всё ещё свободен</h3><p>Цена выросла до 35₽, но предложений нет.</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotQhoDZU-5NMe8ushD21RrVai4PqKgM2Ek2hqD_lAdUA8" alt="Матч"><div class="news-content"><span class="news-tag">Анонс</span><h3>🔥 ФК ПАЦАНЧИКИ — ФК ЖК Ломоносов!</h3><p>Скоро горячее противостояние!</p></div></div>
         </div>
     </div>
 
@@ -180,8 +179,9 @@
     //Мировой футбол - новости
     function scrollWorldNews(direction) {
     const carousel = document.querySelector('.world-carousel');
-    const cardWidth = 240 + 12; // ширина + gap
-    carousel.scrollBy({ left: direction * cardWidth, behavior: 'smooth' }); }
+    carousel.scrollBy({ left: direction * 252, behavior: 'smooth' });
+}
 </script>
+<script src="news-api.js"></script>
 </body>
 </html>
