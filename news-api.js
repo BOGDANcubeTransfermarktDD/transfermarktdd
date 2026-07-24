@@ -1,7 +1,4 @@
-const GNEWS_API_KEY = '01bdb510dee44cfb919036260799c001'; // Твой ключ от NewsAPI не подойдёт, нужно зарегистрироваться на gnews.io
-
-// Если GNews не сработает — используем RSS-ленту FIFA (всегда работает, без ключа)
-const FALLBACK_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.fifa.com/en/news/rss.xml';
+const RSS_URL = 'https://api.allorigins.win/raw?url=https://www.uefa.com/news/rss.xml';
 
 async function fetchWorldNews() {
     const container = document.getElementById('worldNewsContainer');
@@ -13,24 +10,32 @@ async function fetchWorldNews() {
     }
 
     const timeout = setTimeout(() => {
-        if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Новости временно недоступны</p>';
-    }, 8000);
+        if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Новости временно недоступны<br><small>Попробуйте позже</small></p>';
+    }, 10000);
 
     try {
-        // Пробуем FIFA RSS — работает всегда и везде
-        const response = await fetch(FALLBACK_URL);
-        const data = await response.json();
+        const response = await fetch(RSS_URL);
+        const text = await response.text();
         clearTimeout(timeout);
 
-        if (data.items && data.items.length > 0) {
-            const articles = data.items.slice(0, 5).map(item => ({
-                title: item.title,
-                description: item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : '',
-                url: item.link,
-                urlToImage: item.thumbnail || 'https://via.placeholder.com/300x150?text=FIFA',
-                source: { name: 'FIFA.com' },
-                publishedAt: item.pubDate
-            }));
+        // Парсим XML вручную
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'text/xml');
+        const items = xml.querySelectorAll('item');
+
+        if (items.length > 0) {
+            const articles = [];
+            items.forEach((item, index) => {
+                if (index >= 5) return;
+                articles.push({
+                    title: item.querySelector('title')?.textContent || 'Без названия',
+                    description: item.querySelector('description')?.textContent?.substring(0, 150) + '...' || '',
+                    url: item.querySelector('link')?.textContent || '#',
+                    urlToImage: 'https://via.placeholder.com/300x150?text=UEFA',
+                    source: { name: 'UEFA.com' },
+                    publishedAt: item.querySelector('pubDate')?.textContent || new Date().toISOString()
+                });
+            });
             localStorage.setItem('worldNewsCache', JSON.stringify(articles));
             displayNews(articles);
         }
@@ -46,7 +51,7 @@ function displayNews(articles) {
 
     container.innerHTML = articles.map(article => `
         <div class="world-news-card" onclick="window.open('${article.url}', '_blank')">
-            <img src="${article.urlToImage}" alt="News" onerror="this.src='https://via.placeholder.com/300x150?text=FIFA'">
+            <img src="${article.urlToImage}" alt="News" onerror="this.src='https://via.placeholder.com/300x150?text=UEFA'">
             <div class="world-news-content">
                 <span class="world-news-tag">Мировой футбол</span>
                 <h4>${article.title}</h4>
