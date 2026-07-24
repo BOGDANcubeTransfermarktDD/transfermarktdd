@@ -34,7 +34,8 @@ const playersData = [
             { date: "12.06.2026", price: 112 }
         ]
     },
-    {
+
+        {
         id: "vlad-rybakov",
         name: "Влад Рыбаков",
         age: 15,
@@ -64,7 +65,8 @@ const playersData = [
             { date: "18.06.2026", price: 120}
         ]
     },
-    {
+
+        {
         id: "danila-pryanikov",
         name: "Данила Пряников",
         age: 15,
@@ -93,7 +95,8 @@ const playersData = [
             { date: "12.06.2026", price: 99 }
         ]
     },
-    {
+
+        {
         id: "boris",
         name: "Борис",
         age: 8,
@@ -273,5 +276,58 @@ const playersData = [
             { date: "20.06.2026", price: 95 }
         ],
         ratingOverride: 61
+    },
+
+        {
+        id: "adel-safin",
+        name: "Адель Сафин",
+        age: 12,
+        price: 0,
+        priceOverride: 0,
+        position: "midfielder",
+        positions: ["Полузащитник", "Вратарь"],
+        mainPosition: "Полузащитник",
+        number: 10,
+        club: "ФК ЖК Ломоносов",
+        nation: "Россия",
+        height: 168,
+        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotT0_7SfSdXuuRtaif9QIyIXSIQa1yNcs6zB5fdFScxum-lVzsyQysV3DaVqjHCp2E&expires=1784908576696",
+        stats: {
+            matches: 0, goals: 0, assists: 0,
+            yellowCards: 0, redCards: 0
+        },
+        goalieStats: {
+            matches: 0, conceded: 0, cleanSheets: 0,
+            yellowCards: 0, redCards: 0
+        },
+        priceHistory: [
+            { date: "23.07.2026", price: 0 }
+        ],
+        ratingOverride: 0
+    },
+
+        {
+        id: "vyacheslav-balaev",
+        name: "Вячеслав Балаев",
+        age: 10,
+        price: 0,
+        priceOverride: 0,
+        position: "midfielder",
+        positions: ["Полузащитник", "Защитник"],
+        mainPosition: "Полузащитник",
+        number: 9,
+        club: "ФК ЖК Ломоносов",
+        nation: "Россия",
+        height: 157,
+        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotgGdBAKG8uqk4-LOqko_8pFISQO1pKYGdeUzyrEEnn-e-lVzsyQysV3DaVqjHCp2E&expires=1784903927378",
+        stats: {
+            matches: 0, goals: 0, assists: 0,
+            yellowCards: 0, redCards: 0
+        },
+        goalieStats: null,
+        priceHistory: [
+            { date: "23.07.2026", price: 0 }
+        ],
+        ratingOverride: 0
     }
 ];

@@ -8,23 +8,7 @@
     <title>Турниры | TransfermarktDD</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <link rel="stylesheet" href="style.css">
-    <style>
-    .container { max-width: 1000px; }
-    .team-cell { display: flex; align-items: center; gap: 10px; justify-content: center; }
-    .team-emoji { height: 30px; width: auto; border-radius: 6px; object-fit: contain; }
-    .pos-1 { font-weight: bold; color: #ffc402; }
-    .pos-2 { font-weight: bold; color: #757575; }
-    .pos-3 { font-weight: bold; color: #CE8946; }
-    .matches-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .match-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); text-align: center; }
-    .match-card h3 { color: #003B7A; margin-bottom: 15px; }
-    .match-teams { display: flex; align-items: center; justify-content: center; gap: 15px; }
-    .match-teams img { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; }
-    .match-score { font-size: 28px; font-weight: bold; color: #003B7A; }
-    .match-date { color: #999; font-size: 13px; margin-top: 8px; }
-    body.dark-theme .match-card { background: #0f3460; }
-    body.dark-theme .match-card h3, body.dark-theme .match-score { color: #00aaff; }
-    </style>
+    <script src="players-data.js"></script>
 </head>
 <body>
 <header>
@@ -112,8 +96,8 @@
 </div>
 
 <footer>
-    <p>📧 <strong>Контакты:</strong> bogdancube2020@mail.ru</p>
-    <p>📱 <strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
+    <p><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
+    <p><strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
     <p style="font-size: 12px; color: #aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
     <p style="margin-top: 10px;">© 2026 TransfermarktDD</p>
 </footer>
@@ -137,13 +121,12 @@
     function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
 
     //Поиск игроков
-        function toggleSearch() {
+    function toggleSearch() {
         document.getElementById('searchOverlay').classList.toggle('active');
         if (document.getElementById('searchOverlay').classList.contains('active')) {
             document.getElementById('searchInput').focus();
         }
     }
-
     function searchPlayers() {
         const q = document.getElementById('searchInput').value.toLowerCase();
         const results = document.getElementById('searchResults');

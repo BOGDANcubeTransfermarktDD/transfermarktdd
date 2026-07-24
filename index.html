@@ -10,97 +10,7 @@
     <script src="players-data.js"></script>
     <script src="news-api.js" defer></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-    .hero { height: 400px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("https://images.footyroom.com/posts/8fb8b165148b6b6e1a04fb838397f955/image-2026-05-07t003939"); background-size: cover; background-position: center; background-attachment: fixed; display: flex; justify-content: center; align-items: center; color: white; text-align: center; }
-    .hero h1 { font-size: 56px; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 2px; animation: slideUp 0.8s ease; }
-    .hero p { font-size: 22px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); animation: slideUp 0.8s ease 0.2s both; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .news-carousel-container { position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 50px; background: white; transition: box-shadow 0.3s; }
-    .news-carousel-container:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-    .news-slides { display: flex; transition: transform 0.5s ease-in-out; }
-    .news-slide { min-width: 100%; position: relative; cursor: pointer; }
-    .news-slide img { width: 100%; height: 300px; object-fit: cover; display: block; transition: transform 0.5s; }
-    .news-slide:hover img { transform: scale(1.02); }
-    .news-content { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.85)); color: white; padding: 30px; }
-    .news-content .news-tag { display: inline-block; background: #00aaff; color: white; padding: 4px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; }
-    .news-content h3 { font-size: 24px; margin-bottom: 5px; }
-    .news-content p { font-size: 14px; opacity: 0.9; }
-    .news-arrow { position: absolute; top: 45%; transform: translateY(-50%); z-index: 20; background: rgba(255,255,255,0.8); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-    .news-arrow:hover { background: white; transform: translateY(-50%) scale(1.1); }
-    .news-prev { left: 15px; }
-    .news-next { right: 15px; }
-    .carousel-container { position: relative; display: flex; align-items: center; }
-    .carousel { display: flex; gap: 20px; overflow-x: hidden; scroll-behavior: smooth; padding: 10px 0; width: 100%; }
-    .carousel .card { min-width: 280px; max-width: 280px; flex-shrink: 0; }
-    .card-link { text-decoration: none; color: inherit; display: block; pointer-events: auto; }
-    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-    .card-content { padding: 20px; }
-    .card-top-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .player-photo-small { width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: 2px solid #003B7A; flex-shrink: 0; transition: 0.3s; }
-    .card:hover .player-photo-small { border-color: #00aaff; transform: scale(1.05); }
-    .player-photo-small img { width: 100%; height: 100%; object-fit: cover; }
-    .mini-rating { font-size: 14px; font-weight: bold; color: #003B7A; background: #e8f0fe; padding: 6px 12px; border-radius: 15px; white-space: nowrap; transition: 0.3s; }
-    .card:hover .mini-rating { background: #00aaff; color: white; }
-    .player-name { font-size: 22px; font-weight: bold; margin-bottom: 12px; color: #003B7A; }
-    .card p { margin-bottom: 5px; font-size: 15px; }
-    .market-value { font-size: 24px; color: #2e7d32; font-weight: bold; margin-top: 15px; background: #e8f5e9; padding: 5px 10px; border-radius: 15px; display: inline-block; transition: 0.3s; }
-    .card:hover .market-value { background: #2e7d32; color: white; }
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 100; pointer-events: auto; background: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.2); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-    .carousel-btn:hover { background: #003B7A; color: white; transform: translateY(-50%) scale(1.1); }
-    .prev { left: 5px; }
-    .next { right: 5px; }
-    .team-cell { display: flex; align-items: center; gap: 10px; justify-content: center; }
-    .team-emoji { width: auto; height: 40px; border-radius: 6px; object-fit: contain; font-size: 20px; display: flex; align-items: center; justify-content: center; }
-    td a { color: #003B7A; text-decoration: none; font-weight: bold; transition: 0.2s; }
-    td a:hover { text-decoration: underline; color: #00aaff; }
-    body.dark-theme .card, body.dark-theme .news-carousel-container, body.dark-theme .carousel-btn { background: #0f3460; color: #e0e0e0; }
-    body.dark-theme .player-name { color: #00aaff; }
-    body.dark-theme .card p { color: #ccc; }
-    body.dark-theme .market-value { background: #1a3a1a; }
-    body.dark-theme .mini-rating { background: #1a2a3a; color: #00aaff; }
-    body.dark-theme .news-arrow { background: rgba(0,0,0,0.5); color: white; }
-    body.dark-theme .news-arrow:hover { background: rgba(0,0,0,0.8); }
-    body.dark-theme td a { color: #00aaff; }
-    @media (max-width: 768px) { .hero h1 { font-size: 36px; } .news-slide img { height: 200px; } .news-content h3 { font-size: 18px; } .carousel-btn { width: 32px; height: 32px; font-size: 16px; } }
-
-    .world-news-section { margin-top: 40px; }
-    .world-news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-    .world-news-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; }
-    .world-news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-    .world-news-card img { width: 100%; height: 150px; object-fit: cover; }
-    .world-news-content { padding: 15px; }
-    .world-news-tag { display: inline-block; background: #ff9800; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; }
-    .world-news-content h4 { font-size: 16px; color: #003B7A; margin-bottom: 6px; }
-    .world-news-content p { font-size: 13px; color: #666; margin-bottom: 8px; }
-    .world-news-source { font-size: 11px; color: #999; }
-    body.dark-theme .world-news-card { background: #0f3460; }
-    body.dark-theme .world-news-content h4 { color: #00aaff; }
-    body.dark-theme .world-news-content p { color: #aaa; }
-        .world-news-section { margin-top: 40px; }
-    .world-carousel-container { position: relative; display: flex; align-items: center; }
-    .world-carousel { display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 0; scrollbar-width: none; }
-    .world-carousel::-webkit-scrollbar { display: none; }
-    .world-news-card { min-width: 240px; max-width: 240px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.06); cursor: pointer; transition: 0.2s; flex-shrink: 0; }
-    .world-news-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-    .world-news-card img { width: 100%; height: 120px; object-fit: cover; }
-    .world-news-content { padding: 12px; }
-    .world-news-tag { display: inline-block; background: #ff9800; color: white; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
-    .world-news-content h4 { font-size: 14px; color: #003B7A; margin-bottom: 4px; line-height: 1.3; }
-    .world-news-content p { font-size: 12px; color: #666; margin-bottom: 6px; line-height: 1.4; }
-    .world-news-source { font-size: 10px; color: #999; }
-    .world-carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: white; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: 0.2s; display: flex; align-items: center; justify-content: center; }
-    .world-carousel-btn:hover { background: #003B7A; color: white; }
-    .world-prev { left: -10px; }
-    .world-next { right: -10px; }
-    body.dark-theme .world-news-card { background: #0f3460; }
-    body.dark-theme .world-news-content h4 { color: #00aaff; }
-    body.dark-theme .world-news-content p { color: #aaa; }
-    body.dark-theme .world-carousel-btn { background: #0f3460; color: #e0e0e0; }
-    body.dark-theme .world-carousel-btn:hover { background: #00aaff; color: white; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -133,7 +43,10 @@
 </div>
 
 <section class="hero">
-    <div><h1>TransfermarktDD</h1><p>Персональная футбольная база игроков и команд</p></div>
+    <div>
+        <h1>Transfermarkt<span>DD</span></h1>
+        <p>Дворовый футбол Димитровграда</p>
+    </div>
 </section>
 
 <div class="container fade-in">
@@ -185,8 +98,8 @@
 </div>
 
 <footer>
-    <p>📧 <strong>Контакты:</strong> bogdancube2020@mail.ru</p>
-    <p>📱 <strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
+    <p><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
+    <p><strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
     <p style="font-size:12px;color:#aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
     <p style="margin-top:10px;">© 2026 TransfermarktDD</p>
 </footer>
@@ -268,8 +181,7 @@
     function scrollWorldNews(direction) {
     const carousel = document.querySelector('.world-carousel');
     const cardWidth = 240 + 12; // ширина + gap
-    carousel.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
-    }
+    carousel.scrollBy({ left: direction * cardWidth, behavior: 'smooth' }); }
 </script>
 </body>
 </html>

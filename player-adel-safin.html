@@ -5,7 +5,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Борис — Профиль игрока</title>
+    <title>Адель Сафин — Профиль игрока</title>
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -100,9 +100,18 @@
 
     <h2 class="section-title">📊 Карьера (<span id="fieldPositionTitle"></span>)</h2>
     <div class="table-wrapper">
-        <table><thead><tr><th>Сезон</th><th>Клуб</th><th>Турнир</th><th>Матчи</th><th>Голы</th><th>Передачи</th><th>ЖК</th><th>КК</th></tr></thead>
+        <table id="fieldStats"><thead><tr><th>Сезон</th><th>Клуб</th><th>Турнир</th><th>Матчи</th><th>Голы</th><th>Передачи</th><th>ЖК</th><th>КК</th></tr></thead>
             <tbody id="fieldStatsBody"></tbody>
         </table>
+    </div>
+
+    <div id="goalieSection" style="display:none;">
+        <h2 class="section-title">🥅 Карьера (Вратарь)</h2>
+        <div class="table-wrapper">
+            <table><thead><tr><th>Сезон</th><th>Клуб</th><th>Турнир</th><th>Матчи</th><th>Пропущено</th><th>Сухие матчи</th><th>ЖК</th><th>КК</th></tr></thead>
+                <tbody id="goalieStatsBody"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -116,7 +125,7 @@
 <script>
     const playerId = window.location.pathname.includes('vlad-rybakov') ? 'vlad-rybakov' :
                      window.location.pathname.includes('danila-pryanikov') ? 'danila-pryanikov' :
-                     window.location.pathname.includes('boris') ? 'boris' : 'bogdan-shchelkov';
+                     window.location.pathname.includes('boris') ? 'boris' : 'adel-safin';
     const player = playersData.find(p => p.id === playerId);
 
     document.getElementById('playerPhoto').innerHTML = `<img src="${player.photo}" alt="${player.name}">`;
@@ -303,7 +312,7 @@
         document.getElementById('mainNav').classList.toggle('open');
     }
 
-// Рисуем график после проверки темы
+    // Рисуем график после проверки темы
     setTimeout(drawPriceChart, 100);
     window.addEventListener('resize', drawPriceChart);
 

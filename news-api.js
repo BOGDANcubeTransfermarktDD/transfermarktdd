@@ -1,5 +1,3 @@
-const RSS_URL = 'https://api.allorigins.win/raw?url=https://www.uefa.com/news/rss.xml';
-
 async function fetchWorldNews() {
     const container = document.getElementById('worldNewsContainer');
     if (!container) return;
@@ -10,32 +8,39 @@ async function fetchWorldNews() {
     }
 
     const timeout = setTimeout(() => {
-        if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Новости временно недоступны<br><small>Попробуйте позже</small></p>';
-    }, 10000);
+        if (!cached) container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Новости временно недоступны</p>';
+    }, 12000);
 
     try {
-        const response = await fetch(RSS_URL);
+        const response = await fetch('https://www.fifa.com/en/news/rss.xml');
         const text = await response.text();
         clearTimeout(timeout);
 
-        // Парсим XML вручную
         const parser = new DOMParser();
         const xml = parser.parseFromString(text, 'text/xml');
         const items = xml.querySelectorAll('item');
+        const articles = [];
 
-        if (items.length > 0) {
-            const articles = [];
-            items.forEach((item, index) => {
-                if (index >= 5) return;
-                articles.push({
-                    title: item.querySelector('title')?.textContent || 'Без названия',
-                    description: item.querySelector('description')?.textContent?.substring(0, 150) + '...' || '',
-                    url: item.querySelector('link')?.textContent || '#',
-                    urlToImage: 'https://via.placeholder.com/300x150?text=UEFA',
-                    source: { name: 'UEFA.com' },
-                    publishedAt: item.querySelector('pubDate')?.textContent || new Date().toISOString()
-                });
+        for (let i = 0; i < Math.min(items.length, 5); i++) {
+            const item = items[i];
+            const titleEn = item.querySelector('title')?.textContent || '';
+            const descEn = item.querySelector('description')?.textContent?.replace(/<[^>]*>/g, '').substring(0, 200) || '';
+
+            // Lingva translate
+            const titleRu = await translateLingva(titleEn);
+            const descRu = await translateLingva(descEn);
+
+            articles.push({
+                title: titleRu || titleEn,
+                description: (descRu || descEn) + '...',
+                url: item.querySelector('link')?.textContent || '#',
+                urlToImage: 'https://via.placeholder.com/300x150?text=FIFA',
+                source: { name: 'FIFA.com' },
+                publishedAt: item.querySelector('pubDate')?.textContent || new Date().toISOString()
             });
+        }
+
+        if (articles.length > 0) {
             localStorage.setItem('worldNewsCache', JSON.stringify(articles));
             displayNews(articles);
         }
@@ -45,18 +50,28 @@ async function fetchWorldNews() {
     }
 }
 
+async function translateLingva(text) {
+    if (!text || text.length < 3) return '';
+    try {
+        const response = await fetch('https://lingva.ml/api/v1/en/ru/' + encodeURIComponent(text));
+        const data = await response.json();
+        return data.translation || '';
+    } catch (e) {
+        return '';
+    }
+}
+
 function displayNews(articles) {
     const container = document.getElementById('worldNewsContainer');
     if (!container) return;
-
-    container.innerHTML = articles.map(article => `
-        <div class="world-news-card" onclick="window.open('${article.url}', '_blank')">
-            <img src="${article.urlToImage}" alt="News" onerror="this.src='https://via.placeholder.com/300x150?text=UEFA'">
+    container.innerHTML = articles.map(a => `
+        <div class="world-news-card" onclick="window.open('${a.url}', '_blank')">
+            <img src="${a.urlToImage}" alt="News" onerror="this.src='https://via.placeholder.com/300x150?text=FIFA'">
             <div class="world-news-content">
                 <span class="world-news-tag">Мировой футбол</span>
-                <h4>${article.title}</h4>
-                <p>${article.description || 'Read more...'}</p>
-                <span class="world-news-source">${article.source.name} · ${new Date(article.publishedAt).toLocaleDateString('en-US')}</span>
+                <h4>${a.title}</h4>
+                <p>${a.description}</p>
+                <span class="world-news-source">${a.source.name} · ${new Date(a.publishedAt).toLocaleDateString('ru-RU')}</span>
             </div>
         </div>
     `).join('');

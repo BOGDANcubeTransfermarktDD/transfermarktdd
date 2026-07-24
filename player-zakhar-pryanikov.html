@@ -9,49 +9,6 @@
     <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
     <script src="players-data.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-    .player-header { display: flex; gap: 30px; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px; align-items: center; flex-wrap: wrap; transition: box-shadow 0.3s; }
-    .player-header:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-    .player-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 3px solid #003B7A; transition: 0.3s; }
-    .player-photo:hover { border-color: #00aaff; transform: scale(1.03); }
-    .player-photo img { width: 100%; height: 100%; object-fit: cover; }
-    .player-info h1 { font-size: 36px; color: #003B7A; margin-bottom: 5px; }
-    .player-info .number { font-size: 20px; color: #666; margin-bottom: 10px; }
-    .player-info .details { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; }
-    .detail-item { background: #f3f5f7; padding: 8px 15px; border-radius: 20px; font-size: 14px; transition: 0.2s; }
-    .detail-item:hover { background: #e8f0fe; }
-    .detail-item strong { color: #003B7A; }
-    .positions-block { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .positions-label { font-size: 14px; color: #666; font-weight: 500; }
-    .position-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; background: #e8e8e8; color: #555; transition: 0.2s; }
-    .position-tag:hover { transform: scale(1.05); }
-    .position-tag.main { background: #003B7A; color: white; }
-    .value-section { display: flex; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
-    .value-left, .value-right { display: flex; flex-direction: column; gap: 20px; flex: 1; min-width: 250px; }
-    .current-value, .rating-box { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 1; min-width: 200px; text-align: center; transition: 0.3s; }
-    .current-value:hover, .rating-box:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); transform: translateY(-3px); }
-    .current-value .label, .rating-box .label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-    .current-value .price { font-size: 48px; font-weight: bold; color: #2e7d32; }
-    .rating-number { font-size: 48px; font-weight: bold; color: #003B7A; }
-    .rating-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 10px; overflow: hidden; }
-    .rating-fill { height: 100%; background: #00aaff; border-radius: 4px; transition: width 0.5s; }
-    .chart-container { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex: 2; min-width: 300px; transition: box-shadow 0.3s; }
-    .chart-container:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-    .chart-container canvas { width: 100%; height: 250px; }
-    .transfer-in { color: #2e7d32; font-weight: bold; }
-    .transfer-none { color: #666; font-weight: bold; }
-    body.dark-theme .player-header, body.dark-theme .current-value, body.dark-theme .rating-box, body.dark-theme .chart-container { background: #0f3460; color: #e0e0e0; }
-    body.dark-theme .player-info h1, body.dark-theme .rating-number { color: #00aaff; }
-    body.dark-theme .detail-item { background: #1a1a2e; color: #ccc; }
-    body.dark-theme .detail-item strong { color: #00aaff; }
-    body.dark-theme .player-info .number, body.dark-theme .current-value .label, body.dark-theme .rating-box .label { color: #aaa; }
-    body.dark-theme .transfer-none { color: #999; }
-    body.dark-theme .transfer-in { color: #4caf50; }
-    body.dark-theme .current-value .price { color: #4caf50; }
-    body.dark-theme .position-tag { background: #1a1a2e; color: #ccc; }
-    body.dark-theme .position-tag.main { background: #00aaff; color: white; }
-    @media (max-width: 768px) { .player-header { flex-direction: column; text-align: center; } .player-info .details { justify-content: center; } .positions-block { justify-content: center; } }
-    </style>
 </head>
 <body>
 <header>
@@ -70,325 +27,90 @@
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
     </nav>
-    
-    <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
-    <div class="search-overlay" id="searchOverlay">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()">
-            <button class="search-close" onclick="toggleSearch()">✕</button>
-        </div>
-        <div class="search-results" id="searchResults"></div>
-    </div>
-    
-    <div class="header-right">
-        <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">🌙</button>
-        <div class="mobile-buttons">
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-        </div>
+    <div class="header-actions">
+        <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
     </div>
 </header>
 
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-box"><input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()"><button class="search-close" onclick="toggleSearch()">✕</button></div>
+    <div class="search-results" id="searchResults"></div>
+</div>
+
 <div class="container">
     <a href="index.html" class="back-link">← Назад на главную</a>
-
     <div class="player-header">
         <div class="player-photo" id="playerPhoto"></div>
         <div class="player-info">
             <h1 id="playerName"></h1>
             <p class="number" id="playerNumber"></p>
             <div class="positions-block" id="positionsBlock"><span class="positions-label">Позиции:</span></div>
-            <div class="details" style="margin-top: 15px;" id="playerDetails"></div>
+            <div class="details" style="margin-top:15px;" id="playerDetails"></div>
         </div>
     </div>
-
     <div class="value-section">
-        <div class="current-value">
-            <div class="label">Рыночная стоимость</div>
-            <div class="price" id="playerPrice"></div>
-            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 12.06.2026</p>
-        </div>
+        <div class="current-value"><div class="label">Рыночная стоимость</div><div class="price" id="playerPrice"></div><p style="color:#999;font-size:12px;margin-top:10px;">Последнее обновление: 12.06.2026</p></div>
         <div class="transfer-probability" id="transferProb" style="display:none;">
             <div class="label">Вероятность перехода</div>
-            <div class="prob-teams">
-                <img id="PlayerPhoto" src="" alt="Захар" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
-                <span class="prob-arrow">→</span>
-                <img id="probClubLogo" src="" alt="" class="prob-club-img">
-                <span id="probClubName"></span>
-            </div>
+            <div class="prob-teams"><img id="PlayerPhoto" src="" alt="Захар" style="width:40px;height:40px;border-radius:50%;object-fit:cover;"><span class="prob-arrow">→</span><img id="probClubLogo" src="" alt="" class="prob-club-img"><span id="probClubName"></span></div>
             <div class="prob-bar"><div class="prob-fill" id="probFill"></div></div>
             <div class="prob-text" id="probText"></div>
             <p style="color:#999;font-size:12px;margin-top:8px;">Статус: Свободный агент</p>
         </div>
-        <div class="rating-box">
-            <div class="label">Рейтинг (осн. позиция)</div>
-            <div class="rating-number" id="ratingValue">—</div>
-            <div class="rating-bar"><div class="rating-fill" id="ratingFill" style="width: 0%;"></div></div>
-            <p style="color: #999; font-size: 12px; margin-top: 8px;" id="ratingPosition"></p>
-        </div>
-        <div class="chart-container">
-            <canvas id="priceChart"></canvas>
-        </div>
+        <div class="rating-box"><div class="label">Рейтинг (осн. позиция)</div><div class="rating-number" id="ratingValue">—</div><div class="rating-bar"><div class="rating-fill" id="ratingFill" style="width:0;"></div></div><p style="color:#999;font-size:12px;margin-top:8px;" id="ratingPosition"></p></div>
+        <div class="chart-container"><canvas id="priceChart"></canvas></div>
     </div>
-
     <h2 class="section-title">🔄 Трансферная история</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Сезон</th><th>Дата</th><th>Откуда</th><th>Куда</th><th>Стоимость</th></tr></thead>
-            <tbody>
-                <tr><td>25/26</td><td>—</td><td>—</td><td>—</td><td class="transfer-none">Свободный агент</td></tr>
-            </tbody>
-        </table>
-    </div>
-
+    <div class="table-wrapper"><table><thead><tr><th>Сезон</th><th>Дата</th><th>Откуда</th><th>Куда</th><th>Стоимость</th></tr></thead><tbody><tr><td>25/26</td><td>—</td><td>—</td><td>—</td><td class="transfer-none">Свободный агент</td></tr></tbody></table></div>
     <h2 class="section-title">📊 Карьера (<span id="fieldPositionTitle"></span>)</h2>
-    <div class="table-wrapper">
-        <table><thead><tr><th>Сезон</th><th>Клуб</th><th>Турнир</th><th>Матчи</th><th>Голы</th><th>Передачи</th><th>ЖК</th><th>КК</th></tr></thead>
-            <tbody id="fieldStatsBody"></tbody>
-        </table>
-    </div>
+    <div class="table-wrapper"><table><thead><tr><th>Сезон</th><th>Клуб</th><th>Турнир</th><th>Матчи</th><th>Голы</th><th>Передачи</th><th>ЖК</th><th>КК</th></tr></thead><tbody id="fieldStatsBody"></tbody></table></div>
 </div>
 
 <footer>
-    <p>📧 <strong>Контакты:</strong> bogdancube2020@mail.ru</p>
-    <p>📱 <strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
-    <p style="font-size: 12px; color: #aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
-    <p style="margin-top: 10px;">© 2026 TransfermarktDD</p>
+    <p><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
+    <p><strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
+    <p style="font-size:12px;color:#aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
+    <p style="margin-top:10px;">© 2026 TransfermarktDD</p>
 </footer>
 
-<script>
-    const playerId = window.location.pathname.includes('vlad-rybakov') ? 'vlad-rybakov' :
-                     window.location.pathname.includes('zakhar-pryanikov') ? 'zakhar-pryanikov' :
-                     window.location.pathname.includes('danila-pryanikov') ? 'danila-pryanikov' :
-                     window.location.pathname.includes('boris') ? 'boris' : 'bogdan-shchelkov';
-    const player = playersData.find(p => p.id === playerId);
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<script>
+    const playerId = window.location.pathname.includes('zakhar-pryanikov') ? 'zakhar-pryanikov' : 'bogdan-shchelkov';
+    const player = playersData.find(p => p.id === playerId);
     document.getElementById('playerPhoto').innerHTML = `<img src="${player.photo}" alt="${player.name}">`;
     document.getElementById('playerName').textContent = player.name;
     document.getElementById('playerNumber').textContent = '№' + player.number;
-
     const posBlock = document.getElementById('positionsBlock');
-    player.positions.forEach((pos, i) => {
-        const tag = document.createElement('span');
-        tag.className = 'position-tag' + (i === 0 ? ' main' : '');
-        tag.textContent = pos;
-        posBlock.appendChild(tag);
-    });
-
-    document.getElementById('playerDetails').innerHTML = `
-        <span class="detail-item"><strong>Возраст:</strong> ${player.age} лет</span>
-        <span class="detail-item"><strong>Клуб:</strong> ${player.club}</span>
-        <span class="detail-item"><strong>Гражданство:</strong> ${player.nation}</span>
-        <span class="detail-item"><strong>Рост:</strong> ${player.height} см</span>
-    `;
-
+    player.positions.forEach((pos, i) => { const tag = document.createElement('span'); tag.className = 'position-tag' + (i === 0 ? ' main' : ''); tag.textContent = pos; posBlock.appendChild(tag); });
+    document.getElementById('playerDetails').innerHTML = `<span class="detail-item"><strong>Возраст:</strong> ${player.age} лет</span><span class="detail-item"><strong>Клуб:</strong> ${player.club}</span><span class="detail-item"><strong>Гражданство:</strong> ${player.nation}</span><span class="detail-item"><strong>Рост:</strong> ${player.height} см</span>`;
     document.getElementById('playerPrice').textContent = '₽ ' + player.price;
     document.getElementById('ratingPosition').textContent = player.mainPosition;
-
-    document.getElementById('fieldStatsBody').innerHTML = `
-        <tr>
-            <td>25/26</td><td>${player.club}</td><td>Высшая лига</td>
-            <td>${player.stats.matches}</td><td>${player.stats.goals}</td><td>${player.stats.assists}</td>
-            <td>${player.stats.yellowCards}</td><td>${player.stats.redCards}</td>
-        </tr>
-    `;
+    document.getElementById('fieldStatsBody').innerHTML = `<tr><td>25/26</td><td>${player.club}</td><td>Высшая лига</td><td>${player.stats.matches}</td><td>${player.stats.goals}</td><td>${player.stats.assists}</td><td>${player.stats.yellowCards}</td><td>${player.stats.redCards}</td></tr>`;
     document.getElementById('fieldPositionTitle').textContent = player.mainPosition;
 
-    if (player.goalieStats) {
-        document.getElementById('goalieSection').style.display = 'block';
-        const g = player.goalieStats;
-        document.getElementById('goalieStatsBody').innerHTML = `
-            <tr>
-                <td>25/26</td><td>${player.club}</td><td>Высшая лига</td>
-                <td>${g.matches}</td><td>${g.conceded}</td><td>${g.cleanSheets}</td>
-                <td>${g.yellowCards}</td><td>${g.redCards}</td>
-            </tr>
-        `;
-    }
-
-    function calcRating(p) {
-        const s = p.stats;
-        let ageCoef;
-        if (p.age >= 8 && p.age <= 11) ageCoef = 0.6;
-        else if (p.age >= 12 && p.age <= 13) ageCoef = 0.7;
-        else if (p.age >= 14 && p.age <= 15) ageCoef = 0.8;
-        else if (p.age >= 16 && p.age <= 18) ageCoef = 1.0;
-        else if (p.age >= 19 && p.age <= 21) ageCoef = 0.9;
-        else ageCoef = 0.8;
-
-        let discipline;
-        if (s.redCards >= 2) discipline = 0.3;
-        else if (s.redCards >= 1) discipline = 0.5;
-        else if (s.yellowCards >= 4) discipline = 0.7;
-        else if (s.yellowCards >= 2) discipline = 0.9;
-        else discipline = 1.0;
-
-        const priceNorm = p.price / 10;
-        const baseRating = (priceNorm * 5 * 0.5) + (ageCoef * 30 * 0.5);
-        let seasonBonus = 0;
-
-        if (p.position === 'forward') {
-            seasonBonus = (s.goals * 5 * 0.4) + (s.assists * 3 * 0.3) + (s.matches * 1 * 0.2) + (discipline * 50 * 0.1);
-        } else if (p.position === 'midfielder') {
-            seasonBonus = (s.assists * 4 * 0.35) + (s.goals * 3 * 0.25) + (s.matches * 2 * 0.2) + (discipline * 50 * 0.2);
-        } else if (p.position === 'defender') {
-            seasonBonus = (s.matches * 2 * 0.3) + (s.assists * 3 * 0.2) + (s.goals * 4 * 0.15) + (discipline * 50 * 0.35);
-        } else if (p.position === 'goalkeeper') {
-            const gs = p.goalieStats || { cleanSheets: 0 };
-            seasonBonus = (gs.cleanSheets * 6 * 0.4) + (s.matches * 2 * 0.2) + (discipline * 50 * 0.4);
-        }
-        return Math.round(baseRating + seasonBonus);
-    }
-
+    function calcRating(p) { const s = p.stats; let ageCoef; if(p.age>=8&&p.age<=11)ageCoef=0.6; else if(p.age>=12&&p.age<=13)ageCoef=0.7; else if(p.age>=14&&p.age<=15)ageCoef=0.8; else if(p.age>=16&&p.age<=18)ageCoef=1.0; else if(p.age>=19&&p.age<=21)ageCoef=0.9; else ageCoef=0.8; let discipline; if(s.redCards>=2)discipline=0.3; else if(s.redCards>=1)discipline=0.5; else if(s.yellowCards>=4)discipline=0.7; else if(s.yellowCards>=2)discipline=0.9; else discipline=1.0; const priceNorm = p.price/10; const baseRating = (priceNorm*5*0.5)+(ageCoef*30*0.5); let seasonBonus=0; if(p.position==='forward')seasonBonus=(s.goals*5*0.4)+(s.assists*3*0.3)+(s.matches*1*0.2)+(discipline*50*0.1); else if(p.position==='midfielder')seasonBonus=(s.assists*4*0.35)+(s.goals*3*0.25)+(s.matches*2*0.2)+(discipline*50*0.2); else if(p.position==='defender')seasonBonus=(s.matches*2*0.3)+(s.assists*3*0.2)+(s.goals*4*0.15)+(discipline*50*0.35); else if(p.position==='goalkeeper'){const gs=p.goalieStats||{cleanSheets:0};seasonBonus=(gs.cleanSheets*6*0.4)+(s.matches*2*0.2)+(discipline*50*0.4);} return Math.round(baseRating+seasonBonus); }
     const rating = player.ratingOverride > 0 ? player.ratingOverride : calcRating(player);
     document.getElementById('ratingValue').textContent = rating;
     document.getElementById('ratingFill').style.width = rating + '%';
 
-    // Блок вероятности перехода
-    if (player.transferRumor) {
-        const probBlock = document.getElementById('transferProb');
-        probBlock.style.display = 'block';
-        document.getElementById('PlayerPhoto').src = player.photo;
-        document.getElementById('probClubName').textContent = player.transferRumor.club;
-        document.getElementById('probClubLogo').src = player.transferRumor.clubLogo;
-        document.getElementById('probFill').style.width = player.transferRumor.probability + '%';
-        document.getElementById('probText').textContent = player.transferRumor.probability + '%';
-    }
+    if (player.transferRumor) { const probBlock = document.getElementById('transferProb'); probBlock.style.display = 'block'; document.getElementById('PlayerPhoto').src = player.photo; document.getElementById('probClubName').textContent = player.transferRumor.club; document.getElementById('probClubLogo').src = player.transferRumor.clubLogo; document.getElementById('probFill').style.width = player.transferRumor.probability + '%'; document.getElementById('probText').textContent = player.transferRumor.probability + '%'; }
 
-    // График
-    function drawPriceChart() {
-        const canvas = document.getElementById('priceChart');
-        if (!canvas || !player.priceHistory) return;
+    function drawPriceChart() { const canvas = document.getElementById('priceChart'); if(!canvas||!player.priceHistory)return; const ctx=canvas.getContext('2d'); const history=player.priceHistory; const width=canvas.parentElement.clientWidth-50; const height=200; canvas.width=width; canvas.height=height; const isDark=document.body.classList.contains('dark-theme'); const padding={top:20,right:20,bottom:40,left:50}; const chartWidth=width-padding.left-padding.right; const chartHeight=height-padding.top-padding.bottom; const prices=history.map(h=>h.price); const maxPrice=Math.max(...prices,10); const minPrice=Math.min(...prices,0); const gridColor=isDark?'#555':'#ccc'; const textColor=isDark?'#ccc':'#666'; const priceColor=isDark?'#fff':'#003B7A'; ctx.fillStyle=isDark?'#0f3460':'#fff'; ctx.fillRect(0,0,width,height); ctx.strokeStyle=gridColor; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(padding.left,padding.top); ctx.lineTo(padding.left,height-padding.bottom); ctx.lineTo(width-padding.right,height-padding.bottom); ctx.stroke(); ctx.strokeStyle='#00aaff'; ctx.lineWidth=3; ctx.beginPath(); history.forEach((point,i)=>{const x=padding.left+(i/(history.length-1))*chartWidth; const y=height-padding.bottom-((point.price-minPrice)/(maxPrice-minPrice||1))*chartHeight; if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y);}); ctx.stroke(); history.forEach((point,i)=>{const x=padding.left+(i/(history.length-1))*chartWidth; const y=height-padding.bottom-((point.price-minPrice)/(maxPrice-minPrice||1))*chartHeight; ctx.fillStyle=priceColor; ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2); ctx.fill(); ctx.fillStyle=textColor; ctx.font='11px Segoe UI'; ctx.textAlign='center'; ctx.fillText(point.date,x,height-padding.bottom+15); ctx.fillStyle=priceColor; ctx.font='bold 11px Segoe UI'; ctx.fillText(point.price+'₽',x,y-12);}); }
 
-        const ctx = canvas.getContext('2d');
-        const history = player.priceHistory;
-        const width = canvas.parentElement.clientWidth - 50;
-        const height = 200;
-        canvas.width = width;
-        canvas.height = height;
+    function toggleTheme() { document.body.classList.toggle('dark-theme'); const b=document.querySelector('.theme-toggle'); if(document.body.classList.contains('dark-theme')){b.textContent='☀️';localStorage.setItem('theme','dark');}else{b.textContent='🌙';localStorage.setItem('theme','light');} drawPriceChart(); }
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-theme');const b=document.querySelector('.theme-toggle');if(b)b.textContent='☀️';}
+    if(!localStorage.getItem('theme')){if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}}
+    function toggleMenu(){document.getElementById('mainNav').classList.toggle('open');}
+    setTimeout(drawPriceChart,100);
+    window.addEventListener('resize',drawPriceChart);
 
-        const isDark = document.body.classList.contains('dark-theme');
-        const padding = { top: 20, right: 20, bottom: 40, left: 50 };
-        const chartWidth = width - padding.left - padding.right;
-        const chartHeight = height - padding.top - padding.bottom;
+    function toggleSearch(){document.getElementById('searchOverlay').classList.toggle('active');if(document.getElementById('searchOverlay').classList.contains('active'))document.getElementById('searchInput').focus();}
+    function searchPlayers(){const q=document.getElementById('searchInput').value.toLowerCase();const results=document.getElementById('searchResults');if(q.length<2){results.innerHTML='';return;}const found=playersData.filter(p=>p.name.toLowerCase().includes(q));results.innerHTML=found.map(p=>`<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');}
 
-        const prices = history.map(h => h.price);
-        const maxPrice = Math.max(...prices, 10);
-        const minPrice = Math.min(...prices, 0);
-
-        const gridColor = isDark ? '#555' : '#ccc';
-        const textColor = isDark ? '#ccc' : '#666';
-        const priceColor = isDark ? '#fff' : '#003B7A';
-
-        // Фон
-        ctx.fillStyle = isDark ? '#0f3460' : '#fff';
-        ctx.fillRect(0, 0, width, height);
-
-        // Оси
-        ctx.strokeStyle = gridColor;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(padding.left, padding.top);
-        ctx.lineTo(padding.left, height - padding.bottom);
-        ctx.lineTo(width - padding.right, height - padding.bottom);
-        ctx.stroke();
-
-        // Линия
-        ctx.strokeStyle = '#00aaff';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-
-        history.forEach((point, i) => {
-            const x = padding.left + (i / (history.length - 1)) * chartWidth;
-            const y = height - padding.bottom - ((point.price - minPrice) / (maxPrice - minPrice || 1)) * chartHeight;
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        });
-        ctx.stroke();
-
-        // Точки и подписи
-        history.forEach((point, i) => {
-            const x = padding.left + (i / (history.length - 1)) * chartWidth;
-            const y = height - padding.bottom - ((point.price - minPrice) / (maxPrice - minPrice || 1)) * chartHeight;
-
-            ctx.fillStyle = priceColor;
-            ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = textColor;
-            ctx.font = '11px Segoe UI';
-            ctx.textAlign = 'center';
-            ctx.fillText(point.date, x, height - padding.bottom + 15);
-
-            ctx.fillStyle = priceColor;
-            ctx.font = 'bold 11px Segoe UI';
-            ctx.fillText(point.price + '₽', x, y - 12);
-        });
-    }
-
-    // Тема
-    function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-        const btn = document.querySelector('.theme-toggle');
-        if (document.body.classList.contains('dark-theme')) {
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        }
-        drawPriceChart();
-    }
-
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-theme');
-        const btn = document.querySelector('.theme-toggle');
-        if (btn) btn.textContent = '☀️';
-    }
-    // Автоопределение темы системы
-    if (!localStorage.getItem('theme')) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.classList.add('dark-theme');
-            document.querySelector('.theme-toggle').textContent = '☀️';
-        }
-    }
-
-    function toggleMenu() {
-        document.getElementById('mainNav').classList.toggle('open');
-    }
-
-// Рисуем график после проверки темы
-    setTimeout(drawPriceChart, 100);
-    window.addEventListener('resize', drawPriceChart);
-
-    //Поиск игроков
-        function toggleSearch() {
-        document.getElementById('searchOverlay').classList.toggle('active');
-        if (document.getElementById('searchOverlay').classList.contains('active')) {
-            document.getElementById('searchInput').focus();
-        }
-    }
-
-    function searchPlayers() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const results = document.getElementById('searchResults');
-        if (q.length < 2) { results.innerHTML = ''; return; }
-        const found = playersData.filter(p => p.name.toLowerCase().includes(q));
-        results.innerHTML = found.map(p => `<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');
-    }
+    window.addEventListener('scroll',function(){const btn=document.getElementById('scrollTopBtn');if(window.scrollY>300)btn.classList.add('visible');else btn.classList.remove('visible');});
 </script>
-
-<!-- Кнопка наверх -->
-<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<script>
-    // Кнопка наверх
-    window.addEventListener('scroll', function() {
-        const btn = document.getElementById('scrollTopBtn');
-        if (window.scrollY > 300) { btn.classList.add('visible'); }
-        else { btn.classList.remove('visible'); }
-    });
-</script>
-
 </body>
 </html>
