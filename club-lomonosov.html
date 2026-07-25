@@ -80,7 +80,7 @@
     <p style="margin-bottom:8px;"><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
     <p style="margin-bottom:8px;">Канал в MAX: <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
     <p style="font-size:12px;color:#aaa;">Хочешь добавить игрока или команду? Напиши нам!</p>
-    <p style="margin-top:10px;">© 2026 TransfermarktDD</p>
+    <p style="margin-top:10px;">&copy; 2026 TransfermarktDD</p>
 </footer>
 
 <script>
@@ -94,12 +94,12 @@
     const grid = document.getElementById('playersGrid');
     clubPlayers.forEach(p => {
         grid.innerHTML += `
-            <div class="player-card">
-                <img src="${p.photo}" alt="${p.name}">
-                <a href="player-${p.id}.html">${p.name}</a>
-                <p class="pos">${p.mainPosition} · №${p.number}</p>
-                <p class="val">₽ ${p.price}</p>
-            </div>
+    <a href="player-${p.id}.html" class="player-card" style="display:block;text-decoration:none;color:inherit;">
+        <img src="${p.photo}" alt="${p.name}">
+        <div style="font-weight:bold;font-size:16px;margin-top:8px;">${p.name}</div>
+        <p class="pos">${p.mainPosition} · №${p.number}</p>
+        <p class="val">₽ ${p.price}</p>
+    </a>
         `;
     });
 

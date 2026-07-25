@@ -211,6 +211,8 @@ body.dark-theme .news-arrow:hover { background: rgba(0,0,0,0.8); }
 .chart-container canvas { width: 100%; height: 250px; }
 .transfer-in { color: #2e7d32; font-weight: bold; }
 .transfer-none { color: #666; font-weight: bold; }
+.player-card { opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s; }
+.player-card.visible { opacity: 1; transform: translateY(0); }
 
 /* Тёмная тема — игроки */
 body.dark-theme .player-header, body.dark-theme .current-value, body.dark-theme .rating-box, body.dark-theme .chart-container { background: #0f3460; color: #e0e0e0; }
@@ -247,13 +249,15 @@ body.dark-theme .prob-teams { color: #00aaff; }
 .club-stat { background: #f3f5f7; padding: 8px 15px; border-radius: 20px; font-size: 14px; }
 .club-stat strong { color: #003B7A; }
 .players-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-.player-card { background: white; border-radius: 12px; padding: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); text-align: center; transition: transform 0.2s; }
-.player-card:hover { transform: translateY(-3px); }
+.player-card { background: white; border-radius: 12px; padding: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); text-align: center; opacity: 0; animation: fadeInClubCard 0.4s ease forwards; }
+.player-card:hover { transform: translateY(-1px) !important; box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important; transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+@keyframes fadeInClubCard { to { opacity: 1; } }
 .player-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 8px; }
 .player-card a { display: block; color: #003B7A; text-decoration: none; font-weight: bold; font-size: 16px; }
 .player-card a:hover { text-decoration: underline; }
 .player-card .pos { color: #666; font-size: 13px; }
 .player-card .val { color: #2e7d32; font-weight: bold; margin-top: 5px; }
+body.dark-theme .player-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.5) !important; }
 body.dark-theme .club-header, body.dark-theme .player-card { background: #0f3460; }
 body.dark-theme .club-info h1, body.dark-theme .player-card a { color: #00aaff; }
 body.dark-theme .club-info p, body.dark-theme .player-card .pos { color: #aaa; }
