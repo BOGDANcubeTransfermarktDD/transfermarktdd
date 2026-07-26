@@ -454,3 +454,34 @@ body.dark-theme .world-carousel-btn:hover { background: #00aaff; color: white; }
     .rumor-card, .transfer-card { flex-direction: column; text-align: center; }
     .rumor-teams, .transfer-teams { justify-content: center; }
 }
+
+
+/* === ЗАСТАВКА === */
+.preloader {
+    position: fixed; inset: 0; background: #003B7A; z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.preloader.hidden { opacity: 0; visibility: hidden; }
+.preloader-inner {
+    position: relative; width: 380px; height: 50px;
+    display: flex; align-items: center;
+}
+.preloader-ball {
+    width: 40px; height: 40px; background: white; border-radius: 50%;
+    position: absolute; top: 5px; left: 0; z-index: 2;
+    animation: roll 2.5s ease-in-out forwards;
+}
+@keyframes roll {
+    0% { left: 0; transform: rotate(0deg); }
+    100% { left: 280px; transform: rotate(360deg); }
+}
+.preloader-text {
+    position: absolute; top: 8px; left: 0; z-index: 1;
+    color: white; font-size: 30px; font-weight: 900; letter-spacing: 1px;
+    white-space: nowrap; overflow: hidden; width: 0;
+    animation: reveal 2.5s ease-in-out 0.1s forwards;
+}
+@keyframes reveal {
+    to { width: 280px; }
+}

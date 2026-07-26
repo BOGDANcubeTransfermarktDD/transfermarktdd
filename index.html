@@ -13,6 +13,13 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-ball"></div>
+        <div class="preloader-text">TransfermarktDD</div>
+    </div>
+</div>
+
 <header>
     <div class="logo">
         <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
@@ -180,7 +187,16 @@
     function scrollWorldNews(direction) {
     const carousel = document.querySelector('.world-carousel');
     carousel.scrollBy({ left: direction * 252, behavior: 'smooth' });
-}
+    }
+
+    //Заствка
+    window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 2800);
+});
+
+
 </script>
 <script src="news-api.js"></script>
 </body>
