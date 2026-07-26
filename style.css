@@ -71,6 +71,7 @@ tbody tr { transition: 0.2s; }
 tbody tr:hover { background-color: #f0f7ff; transform: scale(1.005); }
 td a { color: #003B7A; text-decoration: none; font-weight: bold; transition: 0.2s; }
 td a:hover { text-decoration: underline; color: #00aaff; }
+body.dark-theme td a { color: #00aaff; }
 
 /* Футер */
 footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
@@ -181,6 +182,7 @@ body.dark-theme .news-arrow { background: rgba(0,0,0,0.5); color: white; }
 body.dark-theme .news-arrow:hover { background: rgba(0,0,0,0.8); }
 
 /* === СТРАНИЦЫ ИГРОКОВ === */
+body.dark-theme .detail-item a { color: #00aaff; }
 .player-header { display: flex; gap: 30px; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px; align-items: center; flex-wrap: wrap; transition: box-shadow 0.3s; }
 .player-header:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
 .player-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 3px solid #003B7A; transition: 0.3s; }
@@ -189,9 +191,13 @@ body.dark-theme .news-arrow:hover { background: rgba(0,0,0,0.8); }
 .player-info h1 { font-size: 36px; color: #003B7A; margin-bottom: 5px; }
 .player-info .number { font-size: 20px; color: #666; margin-bottom: 10px; }
 .player-info .details { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; }
+.player-card { opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s; }
+.player-card.visible { opacity: 1; transform: translateY(0); }
 .detail-item { background: #f3f5f7; padding: 8px 15px; border-radius: 20px; font-size: 14px; transition: 0.2s; }
 .detail-item:hover { background: #e8f0fe; }
 .detail-item strong { color: #003B7A; }
+.detail-item a { color: #003B7A; text-decoration: none; font-weight: bold; }
+.detail-item a:hover { text-decoration: underline; }
 .positions-block { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .positions-label { font-size: 14px; color: #666; font-weight: 500; }
 .position-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; background: #e8e8e8; color: #555; transition: 0.2s; }
@@ -211,8 +217,6 @@ body.dark-theme .news-arrow:hover { background: rgba(0,0,0,0.8); }
 .chart-container canvas { width: 100%; height: 250px; }
 .transfer-in { color: #2e7d32; font-weight: bold; }
 .transfer-none { color: #666; font-weight: bold; }
-.player-card { opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s; }
-.player-card.visible { opacity: 1; transform: translateY(0); }
 
 /* Тёмная тема — игроки */
 body.dark-theme .player-header, body.dark-theme .current-value, body.dark-theme .rating-box, body.dark-theme .chart-container { background: #0f3460; color: #e0e0e0; }

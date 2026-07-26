@@ -3,8 +3,8 @@ const playersData = [
         id: "bogdan-shchelkov",
         name: "Богдан Щелков",
         age: 16,
-        price: 112,
-        priceOverride: 112,
+        price: 105,
+        priceOverride: 105,
         ratingOverride: 63,
         position: "midfielder",
         positions: ["Полузащитник", "Нападающий", "Вратарь"],
@@ -29,9 +29,9 @@ const playersData = [
             redCards: 0
         },
         priceHistory: [
-            { date: "01.06.2023", price: 0 },
             { date: "10.06.2026", price: 65 },
-            { date: "12.06.2026", price: 112 }
+            { date: "12.06.2026", price: 112 },
+            { date: "26.07.2026", price: 105 }
         ]
     },
 
@@ -39,8 +39,8 @@ const playersData = [
         id: "vlad-rybakov",
         name: "Влад Рыбаков",
         age: 15,
-        price: 120,
-        priceOverride: 120,
+        price: 110,
+        priceOverride: 110,
         ratingOverride: 67,
         position: "forward",
         positions: ["Нападающий", "Полузащитник"],
@@ -59,10 +59,10 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "01.06.2023", price: 0 },
             { date: "10.06.2026", price: 65 },
             { date: "12.06.2026", price: 112 },
-            { date: "18.06.2026", price: 120}
+            { date: "18.06.2026", price: 120 },
+            { date: "26.07.2026", price: 110 }
         ]
     },
 
@@ -70,8 +70,8 @@ const playersData = [
         id: "danila-pryanikov",
         name: "Данила Пряников",
         age: 16,
-        price: 99,
-        priceOverride: 99,
+        price: 90,
+        priceOverride: 90,
         ratingOverride: 60,
         position: "forward",
         positions: ["Нападающий"],
@@ -90,9 +90,9 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "01.06.2023", price: 0 },
             { date: "10.06.2026", price: 65 },
-            { date: "12.06.2026", price: 99 }
+            { date: "12.06.2026", price: 99 },
+            { date: "26.07.2026", price: 90}
         ]
     },
 
@@ -100,8 +100,8 @@ const playersData = [
         id: "boris",
         name: "Борис",
         age: 8,
-        price: 50,
-        priceOverride: 50,
+        price: 45,
+        priceOverride: 45,
         ratingOverride: 53,
         position: "midfielder",
         positions: ["Полузащитник", "Защитник"],
@@ -120,10 +120,9 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "01.06.2023", price: 0 },
             { date: "10.06.2026", price: 55 },
             { date: "12.06.2026", price: 41 },
-            { date: "20.06.2026", price: 60 }
+            { date: "24.07.2026", price: 45 }
         ]
     },
 
@@ -151,7 +150,6 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "14.06.2026", price: 0 },
             { date: "14.06.2026", price: 22 },
             { date: "20.06.2026", price: 35 }
         ],
@@ -166,8 +164,8 @@ const playersData = [
         id: "matvey-zoreev",
         name: "Матвей Зореев",
         age: 16,
-        price: 90,
-        priceOverride: 90,
+        price: 80,
+        priceOverride: 80,
         position: "midfielder",
         positions: ["Полузащитник", "Нападающий"],
         mainPosition: "Полузащитник",
@@ -185,8 +183,8 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "14.06.2026", price: 0 },
-            { date: "19.06.2026", price: 90 }
+            { date: "19.06.2026", price: 90 },
+            { date: "24.07.2026", price: 80 }
         ],
         ratingOverride: 60
     },
@@ -214,8 +212,8 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "18.06.2026", price: 0 },
-            { date: "20.06.2026", price: 85 }
+            { date: "20.06.2026", price: 85 },
+            { date: "24.07.2026", price: 70 }
         ],
         ratingOverride: 58
     },
@@ -243,8 +241,8 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "18.06.2026", price: 0 },
-            { date: "20.06.2026", price: 85 }
+            { date: "20.06.2026", price: 85 },
+            { date: "24.07.2026", price: 80 }
         ],
         ratingOverride: 58
     },
@@ -253,8 +251,8 @@ const playersData = [
         id: "vladimir-serov",
         name: "Владимир Серов",
         age: 11,
-        price: 95,
-        priceOverride: 95,
+        price: 90,
+        priceOverride: 90,
         position: "forward",
         positions: ["Нападающий"],
         mainPosition: "Нападающий",
@@ -272,8 +270,8 @@ const playersData = [
         },
         goalieStats: null,
         priceHistory: [
-            { date: "18.06.2026", price: 0 },
-            { date: "20.06.2026", price: 95 }
+            { date: "20.06.2026", price: 95 },
+            { date: "24.07.2026", price: 90 }
         ],
         ratingOverride: 61
     },
@@ -282,8 +280,8 @@ const playersData = [
         id: "adel-safin",
         name: "Адель Сафин",
         age: 12,
-        price: 45,
-        priceOverride: 45,
+        price: 55,
+        priceOverride: 55,
         position: "midfielder",
         positions: ["Полузащитник", "Вратарь"],
         mainPosition: "Полузащитник",
@@ -291,7 +289,7 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 168,
-        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotT0_7SfSdXuuRtaif9QIyIXSIQa1yNcs6zB5fdFScxum-lVzsyQysV3DaVqjHCp2E&expires=1784908576696",
+        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotT0_7SfSdXuuRtaif9QIyIUgKthOrB5gQ-qTSz2eEZme-lVzsyQysV3DaVqjHCp2E&expires=1785145213197",
         stats: {
             matches: 0, goals: 0, assists: 0,
             yellowCards: 0, redCards: 0
@@ -301,8 +299,8 @@ const playersData = [
             yellowCards: 0, redCards: 0
         },
         priceHistory: [
-            { date: "23.07.2026", price: 0 },
-            { date: "24.07.2026", price: 45 }
+            { date: "24.07.2026", price: 0 },
+            { date: "24.07.2026", price: 55 }
         ],
         ratingOverride: 54
     },
@@ -320,15 +318,15 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 157,
-        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotgGdBAKG8uqk4-LOqko_8pFISQO1pKYGdeUzyrEEnn-e-lVzsyQysV3DaVqjHCp2E&expires=1784903927378",
+        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotgGdBAKG8uqk4-LOqko_8pG61RzN7FYja9IlbbBm8C8O-lVzsyQysV3DaVqjHCp2E&expires=1785140563879",
         stats: {
             matches: 0, goals: 0, assists: 0,
             yellowCards: 0, redCards: 0
         },
         goalieStats: null,
         priceHistory: [
-            { date: "23.07.2026", price: 0 },
-            { date: "23.07.2026", price: 40 }
+            { date: "24.07.2026", price: 0 },
+            { date: "24.07.2026", price: 40 }
         ],
         ratingOverride: 51
     }

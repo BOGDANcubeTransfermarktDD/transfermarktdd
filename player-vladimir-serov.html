@@ -74,7 +74,7 @@
         <div class="current-value">
             <div class="label">Рыночная стоимость</div>
             <div class="price" id="playerPrice"></div>
-            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 12.06.2026</p>
+            <p style="color: #999; font-size: 12px; margin-top: 10px;">Последнее обновление: 24.07.2026</p>
         </div>
         <div class="rating-box">
             <div class="label">Рейтинг (осн. позиция)</div>
@@ -92,7 +92,7 @@
         <table>
             <thead><tr><th>Сезон</th><th>Дата</th><th>Откуда</th><th>Куда</th><th>Стоимость</th></tr></thead>
             <tbody>
-                <tr><td>25/26</td><td>01.09.2025</td><td>—</td><td>ФК ПАЦАНЧИКИ</td><td class="transfer-in">Свободный агент</td></tr>
+                <tr><td>25/26</td><td>01.09.2025</td><td>—</td><a href="club-lomonosov.html">ФК ЖК ЛОМОНОСОВ</a></td><td class="transfer-in">Свободный агент</td></tr>
                 <tr><td>23/24</td><td>01.06.2023</td><td>—</td><td>—</td><td class="transfer-none">—</td></tr>
             </tbody>
         </table>
@@ -134,7 +134,7 @@
 
     document.getElementById('playerDetails').innerHTML = `
         <span class="detail-item"><strong>Возраст:</strong> ${player.age} лет</span>
-        <span class="detail-item"><strong>Клуб:</strong> ${player.club}</span>
+        <span class="detail-item"><strong>Клуб:</strong> ${player.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">ФК ПАЦАНЧИКИ</a>' : player.club === 'ФК ЖК Ломоносов' ? '<a href="club-lomonosov.html">ФК ЖК Ломоносов</a>' : player.club === 'ФК Гопники' ? '<a href="club-gopniki.html">ФК Гопники</a>' : player.club}</span>
         <span class="detail-item"><strong>Гражданство:</strong> ${player.nation}</span>
         <span class="detail-item"><strong>Рост:</strong> ${player.height} см</span>
     `;
@@ -144,7 +144,7 @@
 
     document.getElementById('fieldStatsBody').innerHTML = `
         <tr>
-            <td>25/26</td><td>${player.club}</td><td>Высшая лига</td>
+            <td>26/27</td><td>${player.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">ФК ПАЦАНЧИКИ</a>' : player.club === 'ФК ЖК Ломоносов' ? '<a href="club-lomonosov.html">ФК ЖК Ломоносов</a>' : player.club === 'ФК Гопники' ? '<a href="club-gopniki.html">ФК Гопники</a>' : player.club}</td><td>Высшая лига</td>
             <td>${player.stats.matches}</td><td>${player.stats.goals}</td><td>${player.stats.assists}</td>
             <td>${player.stats.yellowCards}</td><td>${player.stats.redCards}</td>
         </tr>
@@ -156,7 +156,7 @@
         const g = player.goalieStats;
         document.getElementById('goalieStatsBody').innerHTML = `
             <tr>
-                <td>25/26</td><td>${player.club}</td><td>Высшая лига</td>
+                <td>26/27</td><td>${player.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">ФК ПАЦАНЧИКИ</a>' : player.club === 'ФК ЖК Ломоносов' ? '<a href="club-lomonosov.html">ФК ЖК Ломоносов</a>' : player.club === 'ФК Гопники' ? '<a href="club-gopniki.html">ФК Гопники</a>' : player.club}</td><td>Высшая лига</td>
                 <td>${g.matches}</td><td>${g.conceded}</td><td>${g.cleanSheets}</td>
                 <td>${g.yellowCards}</td><td>${g.redCards}</td>
             </tr>
