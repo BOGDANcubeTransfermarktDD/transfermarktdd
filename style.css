@@ -475,14 +475,9 @@ body.dark-theme .world-carousel-btn:hover { background: #00aaff; color: white; }
 }
 @keyframes roll {
     0% { left: 0; transform: translateY(-50%) rotate(0deg); }
-    100% { left: calc(100% - 10vw); transform: translateY(-50%) rotate(360deg); }
+    100% { left: calc(100% - 40px); transform: translateY(-50%) rotate(360deg); }
 }
-@media (min-width: 381px) {
-    @keyframes roll {
-        0% { left: 0; transform: translateY(-50%) rotate(0deg); }
-        100% { left: calc(380px - 40px); transform: translateY(-50%) rotate(360deg); }
-    }
-}
+
 .preloader-text {
     position: absolute; top: 50%; transform: translateY(-50%); left: 0; z-index: 1;
     color: white; font-size: 7vw; font-weight: 900; letter-spacing: 1px;
