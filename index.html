@@ -213,15 +213,17 @@
 
 
 //BD Clean
-function closeAd() { document.getElementById('adPopup').classList.add('hidden'); }
-// Показывать раз в сутки
-if (!localStorage.getItem('adShown')) {
-    document.getElementById('adPopup').classList.remove('hidden');
+function closeAd() { 
+    document.getElementById('adPopup').classList.add('hidden'); 
     localStorage.setItem('adShown', Date.now());
 }
-// Сброс через 24 часа
-if (Date.now() - localStorage.getItem('adShown') > 86400000) {
-    localStorage.removeItem('adShown');
+
+               // Проверяем, прошло ли 24 часа с последнего показа
+const lastShown = localStorage.getItem('adShown');
+if (!lastShown || Date.now() - lastShown > 86400000) {
+    document.getElementById('adPopup').classList.remove('hidden');
+} else {
+    document.getElementById('adPopup').classList.add('hidden');
 }
 
 
