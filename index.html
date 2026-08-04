@@ -82,6 +82,18 @@
         <button class="carousel-btn next" onclick="scrollCarousel(1)">&#10095;</button>
     </div>
 
+    <div class="partner-section fade-in">
+        <h2 class="section-title">🤝 Наш партнёр</h2>
+        <a href="https://max.ru/join/gCmJ8fdP-EzATm8tGzp0c3UR39wUxhhlFOgGDS8mvKk" target="_blank" class="partner-card">
+            <img src="https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotJooCc2lvozDHDZGP5L1jpvTQ629lj_3Kh3toIthbQ-S-lVzsyQysV3DaVqjHCp2E&expires=1785938878427" alt="BD Clean" class="partner-logo">
+            <div class="partner-info">
+                <h3>BD Clean</h3>
+                <p>Хотите вернуть мебели свежесть и чистоту без лишних затрат? BD Clean поможет избавиться от пятен, неприятных запахов, пыли и загрязнений быстро, качественно и безопасно!</p>
+                <span class="partner-phone">+7 953 984 66 99</span>
+            </div>
+        </a>
+    </div>
+
     <h2 class="section-title fade-in" style="margin-top:50px;">🏆 Турнирная таблица</h2>
     <div class="table-wrapper fade-in">
         <table>
@@ -200,7 +212,32 @@
 });
 
 
+//BD Clean
+function closeAd() { document.getElementById('adPopup').classList.add('hidden'); }
+// Показывать раз в сутки
+if (!localStorage.getItem('adShown')) {
+    document.getElementById('adPopup').classList.remove('hidden');
+    localStorage.setItem('adShown', Date.now());
+}
+// Сброс через 24 часа
+if (Date.now() - localStorage.getItem('adShown') > 86400000) {
+    localStorage.removeItem('adShown');
+}
+
+
 </script>
 <script src="news-api.js"></script>
+
+<!-- Реклама BD Clean-->
+<div class="ad-popup" id="adPopup">
+    <div class="ad-popup-box">
+        <button class="ad-popup-close" onclick="closeAd()">✕</button>
+        <img src="https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotJooCc2lvozDHDZGP5L1jpvTQ629lj_3Kh3toIthbQ-S-lVzsyQysV3DaVqjHCp2E&expires=1785938878427" alt="BD Clean" style="width:80px;height:80px;border-radius:12px;object-fit:contain;margin-bottom:10px;">
+        <h3>BD Clean</h3>
+        <p>Чистота мебели — быстро, качественно, безопасно!</p>
+        <p style="font-weight:bold;">+7 953 984 66 99</p>
+        <a href="https://max.ru/join/gCmJ8fdP-EzATm8tGzp0c3UR39wUxhhlFOgGDS8mvKk" target="_blank" class="ad-btn">Перейти в канал</a>
+    </div>
+</div>
 </body>
 </html>

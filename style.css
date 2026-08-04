@@ -498,3 +498,52 @@ body.dark-theme .world-carousel-btn:hover { background: #00aaff; color: white; }
         to { width: 230px; }
     }
 }
+
+/* Реклама === BD Clean === */
+.partner-section { margin-top: 40px; }
+.partner-card {
+    display: flex; align-items: center; gap: 20px;
+    background: white; border-radius: 12px; padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08); text-decoration: none; color: inherit;
+    transition: 0.3s;
+}
+.partner-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+.partner-logo { width: 80px; height: 80px; border-radius: 12px; object-fit: contain; flex-shrink: 0; }
+.partner-info h3 { color: #003B7A; margin-bottom: 6px; font-size: 18px; }
+.partner-info p { color: #666; font-size: 14px; margin-bottom: 8px; }
+.partner-phone { color: #2e7d32; font-weight: bold; font-size: 15px; }
+body.dark-theme .partner-card { background: #0f3460; }
+body.dark-theme .partner-info h3 { color: #00aaff; }
+body.dark-theme .partner-info p { color: #aaa; }
+body.dark-theme .partner-phone { color: #4caf50; }
+@media (max-width: 768px) {
+    .partner-card { flex-direction: column; text-align: center; }
+}
+
+/* === Вспл. окно рекламы === */
+.ad-popup {
+    display: flex; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 9998;
+    justify-content: center; align-items: center;
+}
+.ad-popup.hidden { display: none; }
+.ad-popup-box {
+    background: white; border-radius: 16px; padding: 25px;
+    max-width: 350px; text-align: center; position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.ad-popup-close {
+    position: absolute; top: 8px; right: 12px;
+    background: none; border: none; font-size: 20px; cursor: pointer; color: #999;
+}
+.ad-popup-box h3 { color: #003B7A; margin-bottom: 8px; }
+.ad-popup-box p { color: #666; font-size: 14px; margin-bottom: 8px; }
+.ad-btn {
+    display: inline-block; padding: 10px 24px;
+    background: #003B7A; color: white; text-decoration: none;
+    border-radius: 25px; font-weight: bold; margin-top: 10px; transition: 0.2s;
+}
+.ad-btn:hover { background: #00aaff; }
+body.dark-theme .ad-popup-box { background: #0f3460; }
+body.dark-theme .ad-popup-box h3 { color: #00aaff; }
+body.dark-theme .ad-popup-box p { color: #aaa; }
