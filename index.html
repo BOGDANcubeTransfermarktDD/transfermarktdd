@@ -215,17 +215,12 @@
 //BD Clean
 function closeAd() { 
     document.getElementById('adPopup').classList.add('hidden'); 
-    localStorage.setItem('adShown', Date.now());
+    localStorage.setItem('adHidden', 'true');
 }
 
-               // Проверяем, прошло ли 24 часа с последнего показа
-const lastShown = localStorage.getItem('adShown');
-if (!lastShown || Date.now() - lastShown > 86400000) {
-    document.getElementById('adPopup').classList.remove('hidden');
-} else {
+if (localStorage.getItem('adHidden') === 'true') {
     document.getElementById('adPopup').classList.add('hidden');
 }
-
 
 </script>
 <script src="news-api.js"></script>
