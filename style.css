@@ -543,3 +543,19 @@ body.dark-theme .partner-phone { color: #4caf50; }
 body.dark-theme .ad-popup-box { background: #0f3460; }
 body.dark-theme .ad-popup-box h3 { color: #00aaff; }
 body.dark-theme .ad-popup-box p { color: #aaa; }
+
+/* === ФОРМА ЗАЯВКИ === */
+.form-container { max-width: 500px; margin: 0 auto; }
+.form-box { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+.form-box h3 { color: #003B7A; margin-bottom: 15px; text-align: center; }
+.form-box label { display: block; font-weight: bold; color: #003B7A; margin-bottom: 4px; font-size: 14px; }
+.form-box input, .form-box select { width: 100%; padding: 10px; margin-bottom: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; }
+.form-box input:focus, .form-box select:focus { border-color: #00aaff; }
+.form-box button { width: 100%; padding: 12px; background: #003B7A; color: white; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; }
+.form-box button:hover { background: #00aaff; }
+.form-box button:disabled { background: #999; cursor: not-allowed; }
+.form-success { display: none; text-align: center; padding: 30px; color: #2e7d32; font-weight: bold; font-size: 18px; }
+.error-msg { color: #c62828; font-size: 12px; margin-top: -8px; margin-bottom: 8px; display: none; }
+body.dark-theme .form-box { background: #0f3460; }
+body.dark-theme .form-box h3, body.dark-theme .form-box label { color: #00aaff; }
+body.dark-theme .form-box input, body.dark-theme .form-box select { background: #1a1a2e; color: #e0e0e0; border-color: #333; }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка игрока | TransfermarktDD</title>
+    <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a></div>
+    <nav id="mainNav"><ul class="nav-menu">
+        <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+        <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
+        <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
+        <li><a href="teams.html">Команды</a></li>
+        <li><a href="players.html">Игроки</a></li>
+        <li><a href="statistics.html">Статистика</a></li>
+        <li><a href="news.html">Новости</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+    </ul></nav>
+    <div class="header-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+</header>
+
+<div class="container">
+    <div class="back-container"><a href="index.html" class="back-link">← Назад на главную</a></div>
+    <h2 class="section-title">📝 Заявка игрока</h2>
+    <div class="form-container">
+        <div class="form-box" id="formBox">
+            <h3>Хочешь попасть на сайт? Заполни форму!</h3>
+            <form id="playerForm" onsubmit="return submitForm(event)">
+                <label>Имя и фамилия</label>
+                <input type="text" name="name" placeholder="Иван Иванов" required>
+                <label>Возраст (от 6 до 18 лет)</label>
+                <input type="number" name="age" id="ageInput" placeholder="12" min="6" max="18" required oninput="checkAge()">
+                <p class="error-msg" id="ageError">Возраст должен быть от 6 до 18 лет</p>
+                <label>Позиция</label>
+                <select name="position" required>
+                    <option value="">Выбери позицию</option>
+                    <option>Нападающий</option>
+                    <option>Полузащитник</option>
+                    <option>Защитник</option>
+                    <option>Вратарь</option>
+                </select>
+                <label>Клуб (если есть)</label>
+                <input type="text" name="club" placeholder="Название клуба или оставь пустым">
+                <label>Контакт (телефон или почта)</label>
+                <input type="text" name="contact" placeholder="@nickname или +7 999 123-45-67" required>
+                <button type="submit" id="submitBtn">Отправить заявку</button>
+            </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+            ✅ Заявка отправлена! Мы свяжемся с тобой в ближайшее время.
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
+    <p><strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
+    <p style="margin-top:10px;">&copy; 2026 TransfermarktDD</p>
+</footer>
+
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+    function toggleTheme(){document.body.classList.toggle('dark-theme');const b=document.querySelector('.theme-toggle');if(document.body.classList.contains('dark-theme')){b.textContent='☀️';localStorage.setItem('theme','dark');}else{b.textContent='🌙';localStorage.setItem('theme','light');}}
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}
+    if(!localStorage.getItem('theme')){if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}}
+    function toggleMenu(){document.getElementById('mainNav').classList.toggle('open');}
+
+    function checkAge() {
+        const age = parseInt(document.getElementById('ageInput').value);
+        const error = document.getElementById('ageError');
+        const btn = document.getElementById('submitBtn');
+        if (age < 6 || age > 18) {
+            error.style.display = 'block';
+            btn.disabled = true;
+        } else {
+            error.style.display = 'none';
+            btn.disabled = false;
+        }
+    }
+
+    async function submitForm(e) {
+        e.preventDefault();
+        const form = document.getElementById('playerForm');
+        const formData = new FormData(form);
+
+        try {
+            await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: JSON.stringify({
+                    access_key: 'Тb8110a99-6c1f-464f-a5f8-809f9ce20de0',
+                    name: formData.get('name'),
+                    age: formData.get('age'),
+                    position: formData.get('position'),
+                    club: formData.get('club'),
+                    contact: formData.get('contact')
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+        } catch (err) {
+            alert('Ошибка отправки. Попробуй ещё раз.');
+        }
+        return false;
+    }
+
+    window.addEventListener('scroll',function(){const btn=document.getElementById('scrollTopBtn');if(window.scrollY>300)btn.classList.add('visible');else btn.classList.remove('visible');});
+</script>
+</body>
+</html>
