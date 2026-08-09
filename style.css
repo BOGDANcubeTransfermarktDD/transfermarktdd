@@ -559,3 +559,10 @@ body.dark-theme .ad-popup-box p { color: #aaa; }
 body.dark-theme .form-box { background: #0f3460; }
 body.dark-theme .form-box h3, body.dark-theme .form-box label { color: #00aaff; }
 body.dark-theme .form-box input, body.dark-theme .form-box select { background: #1a1a2e; color: #e0e0e0; border-color: #333; }
+
+
+.apply-banner {background: linear-gradient(135deg, #003B7A, #00aaff);color: white; text-align: center; padding: 16px 20px;border-radius: 12px; margin-bottom: 30px;display: flex; align-items: center; justify-content: center;gap: 20px; flex-wrap: wrap;}
+.apply-banner p { margin: 0; font-size: 16px; font-weight: 500; }
+.apply-banner a {background: white; color: #003B7A; padding: 8px 20px;border-radius: 25px; text-decoration: none; font-weight: bold;transition: 0.2s;}
+.apply-banner a:hover { transform: scale(1.05); }
+body.dark-theme .apply-banner { background: linear-gradient(135deg, #0f3460, #00aaff); }
