@@ -13,7 +13,7 @@ const playersData = [
         club: "ФК ПАЦАНЧИКИ",
         nation: "Россия",
         height: 176,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotuvU1F-EcpDkUCT7EvWbaTqi4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Богдан Щелков.jpg",
         stats: {
             matches: 0,
             goals: 0,
@@ -49,7 +49,7 @@ const playersData = [
         club: "ФК ПАЦАНЧИКИ",
         nation: "Россия",
         height: 175,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotMRmAJgu4rI1Sy6GhWyDp_ai4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Влад Рыбаков.jpg",
         stats: {
             matches: 0,
             goals: 0,
@@ -80,7 +80,7 @@ const playersData = [
         club: "ФК ПАЦАНЧИКИ",
         nation: "Россия",
         height: 186,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotwWU8xPPEixe5q4cGZEllb6i4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Данила Пряников.jpg",
         stats: {
             matches: 0,
             goals: 0,
@@ -110,7 +110,7 @@ const playersData = [
         club: "ФК ПАЦАНЧИКИ",
         nation: "Россия",
         height: 140,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotQSRBqBAQlyOG-Qap9IFDaKi4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Борис.jpg",
         stats: {
             matches: 0,
             goals: 0,
@@ -140,7 +140,7 @@ const playersData = [
         club: "Без клуба",
         nation: "Россия",
         height: 145,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotrQIeHS7W83VELqzbFRMj36i4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Захар Пряников.jpg",
         stats: {
             matches: 0,
             goals: 0,
@@ -173,7 +173,7 @@ const playersData = [
         club: "ФК ПАЦАНЧИКИ",
         nation: "Россия",
         height: 180,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Notw_i9IQSJConinRyhrypXrai4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Матвей Зореев.jpg",
         stats: {
             matches: 0,
             goals: 0,
@@ -202,7 +202,7 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 138,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Not1cPK23sRiTisz8TVOKzYU6i4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Артём Ридун.jfif",
         stats: {
             matches: 0,
             goals: 0,
@@ -231,7 +231,7 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 160,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Not2epMWNbZ3U8S-qhRtbjUcqi4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Даниил Абдрахманов.jfif",
         stats: {
             matches: 0,
             goals: 0,
@@ -260,7 +260,7 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 155,
-        photo: "https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotiTFlTwAar_4shZWdRp6RJqi4PqKgM2Ek2hqD_lAdUA8",
+        photo: "Фото игроков для профиля/Владимир Серов.jfif",
         stats: {
             matches: 0,
             goals: 0,
@@ -289,7 +289,7 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 168,
-        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotT0_7SfSdXuuRtaif9QIyIUgKthOrB5gQ-qTSz2eEZme-lVzsyQysV3DaVqjHCp2E&expires=1785145213197",
+        photo: "Фото игроков для профиля/Адель Сафин.jfif",
         stats: {
             matches: 0, goals: 0, assists: 0,
             yellowCards: 0, redCards: 0
@@ -318,7 +318,7 @@ const playersData = [
         club: "ФК ЖК Ломоносов",
         nation: "Россия",
         height: 157,
-        photo: "https://i.oneme.ru/i?r=BUE2sh_eZW7g8kugOdIm2NotgGdBAKG8uqk4-LOqko_8pG61RzN7FYja9IlbbBm8C8O-lVzsyQysV3DaVqjHCp2E&expires=1785140563879",
+        photo: "Фото игроков для профиля/Вячеслав Балаев.jfif",
         stats: {
             matches: 0, goals: 0, assists: 0,
             yellowCards: 0, redCards: 0
@@ -329,5 +329,6 @@ const playersData = [
             { date: "24.07.2026", price: 40 }
         ],
         ratingOverride: 51
-    }
+    },
+
 ];

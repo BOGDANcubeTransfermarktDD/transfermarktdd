@@ -20,23 +20,9 @@
     </div>
     <nav id="mainNav">
         <ul class="nav-menu">
-            <li class="dropdown"><a href="#">Трансферы ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="transfers.html">Трансферы</a></li>
-                    <li><a href="rumors.html">Слухи</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a href="#">Рыночные цены ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="market-values.html">Все игроки</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a href="#">Турниры ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="tournaments.html">Таблица</a></li>
-                    <li><a href="schedule.html">Расписание</a></li>
-                </ul>
-            </li>
+            <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
+            <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
             <li><a href="teams.html">Команды</a></li>
             <li><a href="players.html">Игроки</a></li>
             <li><a href="statistics.html">Статистика</a></li>
@@ -44,6 +30,9 @@
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
     </nav>
+    <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" title="Наш канал в MAX">
+        <img src="Фото/max_messenger_logo.png" alt="MAX" class="messenger-logo">
+    </a>
     <div class="header-actions">
         <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
         <button class="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -73,10 +62,30 @@
 </div>
 
 <footer>
-    <p><strong>Контакты:</strong> bogdancube2020@mail.ru</p>
-    <p><strong>Канал в MAX:</strong> <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU">TransfermarktDD | Футбол Димитровграда</a></p>
-    <p style="margin-bottom:10px;"><a href="apply.html" style="color:#ffc402;font-weight:bold;text-decoration:none;">📝 Хочешь добавить игрока или команду? Заполни эту форму или напиши нам:</a></p>
-    <p style="margin-top:10px;">&copy; 2026 TransfermarktDD</p>
+    <div class="footer-grid">
+        <div class="footer-col footer-brand">
+            <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип" style="width:70px;height:40px;border-radius:6px;margin-bottom:8px;"></a>
+            <h4>TransfermarktDD</h4>
+            <p>Дворовый футбол Димитровграда</p>
+        </div>
+        <div class="footer-col footer-nav">
+            <h4>Навигация</h4>
+            <a href="news.html">Новости</a>
+            <a href="transfers.html">Трансферы</a>
+            <a href="teams.html">Команды</a>
+            <a href="players.html">Игроки</a>
+        </div>
+        <div class="footer-col footer-contacts">
+            <h4>Контакты</h4>
+            <a href="mailto:bogdancube2020@mail.ru">bogdancube2020@mail.ru</a>
+            <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" class="footer-max-link">
+                <img src="Фото/max_messenger_logo.png" alt="MAX" style="margin-right:6px; width: 40px; height: 40px; border-radius: 8px; object-fit: contain; flex-shrink: 0; transition: 0.2s; display: block;">
+                Канал в MAX
+            </a>
+            <a href="apply.html">Стать игроком</a>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 TransfermarktDD</div>
 </footer>
 
 
@@ -143,6 +152,15 @@
         if (window.scrollY > 300) { btn.classList.add('visible'); }
         else { btn.classList.remove('visible'); }
     });
+
+    //Блок реклам и переходов (Приглашение игроков, Макс)
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, {threshold: 0.1});
+        fadeEls.forEach(el => observer.observe(el));
 </script>
 
 </body>

@@ -73,10 +73,24 @@ td a { color: #003B7A; text-decoration: none; font-weight: bold; transition: 0.2
 td a:hover { text-decoration: underline; color: #00aaff; }
 body.dark-theme td a { color: #00aaff; }
 
-/* Футер */
-footer { margin-top: auto; background: #003B7A; color: white; padding: 25px; text-align: center; font-size: 14px; }
-footer a { color: #ffc402; text-decoration: underline; transition: 0.2s; }
-footer a:hover { color: #fff; }
+/* === НОВЫЙ ФУТЕР === */
+footer { background: #003B7A; color: white; padding: 30px 40px 15px; text-align: left; }
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 20px; }
+.footer-col h4 { margin-bottom: 10px; font-size: 14px; color: #fff; }
+.footer-col a { display: block; color: #ccc; text-decoration: none; font-size: 13px; margin-bottom: 6px; transition: 0.2s; }
+.footer-col a:hover { color: #00aaff; }
+.footer-col p { font-size: 13px; color: #ccc; }
+.footer-max-link { display: flex !important; align-items: center; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; text-align: center; font-size: 12px; color: #aaa; }
+body.dark-theme footer { background: #16213e; }
+
+@media (max-width: 768px) {
+    footer { padding: 20px 15px 10px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+    .footer-nav { display: none; }
+    .footer-brand p { font-size: 11px; }
+    .footer-col a { font-size: 12px; }
+}
 
 /* Кнопка наверх */
 .scroll-top-btn { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: #003B7A; color: white; border: none; border-radius: 50%; font-size: 22px; cursor: pointer; z-index: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
@@ -563,6 +577,27 @@ body.dark-theme .form-box input, body.dark-theme .form-box select { background: 
 
 .apply-banner {background: linear-gradient(135deg, #003B7A, #00aaff);color: white; text-align: center; padding: 16px 20px;border-radius: 12px; margin-bottom: 30px;display: flex; align-items: center; justify-content: center;gap: 20px; flex-wrap: wrap;}
 .apply-banner p { margin: 0; font-size: 16px; font-weight: 500; }
-.apply-banner a {background: white; color: #003B7A; padding: 8px 20px;border-radius: 25px; text-decoration: none; font-weight: bold;transition: 0.2s;}
+.apply-banner a { background: white; color: #003B7A; padding: 8px 20px;border-radius: 25px; text-decoration: none; font-weight: bold;transition: 0.2s; }
 .apply-banner a:hover { transform: scale(1.05); }
 body.dark-theme .apply-banner { background: linear-gradient(135deg, #0f3460, #00aaff); }
+
+
+/*=== MAX иконка ===*/
+.messenger-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; flex-shrink: 0; transition: 0.2s; display: block; }
+.messenger-logo:hover { transform: scale(1.1); }
+.footer-max-btn { display: inline-flex; align-items: center; gap: 8px; background: #00aaff; color: white; padding: 10px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 15px; margin-bottom: 12px; transition: 0.2s; }
+.footer-max-btn:hover { background: #0088cc; transform: scale(1.05); }
+body.dark-theme .footer-max-btn { background: #00aaff; }
+body.dark-theme .footer-max-btn:hover { background: #0088cc; }
+
+/*=== MAX блок-реклама ===*/
+.max-promo { display: flex; align-items: center; gap: 20px; background: white; border-radius: 12px; padding: 20px; margin-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); flex-wrap: wrap;  margin-bottom: 30px;}
+.max-promo-text { flex: 1; }
+.max-promo-text h3 { color: #003B7A; margin-bottom: 4px; }
+.max-promo-text p { color: #666; font-size: 14px; }
+.max-promo-btn { background: #00aaff; color: white; padding: 10px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: 0.2s; white-space: nowrap; }
+.max-promo-btn:hover { background: #0088cc; transform: scale(1.05); }
+body.dark-theme .max-promo { background: #0f3460; }
+body.dark-theme .max-promo-text h3 { color: #00aaff; }
+body.dark-theme .max-promo-text p { color: #aaa; }
+@media (max-width: 768px) { .max-promo { flex-direction: column; text-align: center; margin-bottom: 20px;}}
