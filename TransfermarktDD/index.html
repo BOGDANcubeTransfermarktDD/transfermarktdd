@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница | TransfermarktDD</title>
+    <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+    <script src="players-data.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">(function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }} k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a) })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111265607', 'ym'); ym(111265607, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});</script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111265607" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</head>
+<body>
+
+<div class="preloader" id="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-ball"></div>
+        <div class="preloader-text">TransfermarktDD</div>
+    </div>
+</div>
+
+<header>
+    <div class="logo">
+        <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
+    </div>
+    <nav id="mainNav">
+        <ul class="nav-menu">
+            <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
+            <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
+            <li><a href="teams.html">Команды</a></li>
+            <li><a href="players.html">Игроки</a></li>
+            <li><a href="statistics.html">Статистика</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+    <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" title="Наш канал в MAX">
+        <img src="Фото/max_messenger_logo.png" alt="MAX" class="messenger-logo">
+    </a>
+    <div class="header-actions">
+        <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-box"><input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()"><button class="search-close" onclick="toggleSearch()">✕</button></div>
+    <div class="search-results" id="searchResults"></div>
+</div>
+
+<section class="hero">
+    <div>
+        <h1>Transfermarkt<span>DD</span></h1>
+        <p>Дворовый футбол Димитровграда</p>
+    </div>
+</section>
+
+<div class="container fade-in">
+    <h2 class="section-title">📰 Главные новости</h2>
+    <div class="news-carousel-container">
+        <button class="news-arrow news-prev" onclick="prevNews()">&#10094;</button>
+        <button class="news-arrow news-next" onclick="nextNews()">&#10095;</button>
+        <div class="news-slides" id="newsSlides">
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://photobooth.cdn.sports.ru/preset/wysiwyg/5/41/9171250c24c91b7d0dc2803779730.jpeg?f=webp&q=90&s=2x&w=730" alt="Обновление"><div class="news-content"><span class="news-tag">Сайт</span><h3>📊 Цены и рейтинги обновлены!</h3><p>У многих игроков изменились рыночные стоимости и рейтинги. Загляните в профили!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.pinimg.com/736x/0b/03/b5/0b03b5a91570da47a61cc6f9791499ac.jpg" alt="Новички"><div class="news-content"><span class="news-tag">Клубы</span><h3>🆕 ЖК Ломоносов подписал ещё двух игроков</h3><p>Адель Сафин и Вячеслав Балаев пополнили состав команды из новостройки.</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i0.wp.com/38ddt5.ru/wp-content/uploads/2026/02/maks.jpg?fit=1128%2C472&ssl=1" alt="Канал"><div class="news-content"><span class="news-tag">Медиа</span><h3>📱 У нас есть канал в MAX!</h3><p>Не все знают, но у TransfermarktDD есть свой канал. Подписывайтесь!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NottseK3iW_-oZzJKmPktqWkKi4PqKgM2Ek2hqD_lAdUA8" alt="Трансфер"><div class="news-content"><span class="news-tag">Трансферы</span><h3>🚨 HERE WE GO! Мотя в деле!</h3><p>Официально: Матвей Зореев — новый игрок ФК ПАЦАНЧИКИ!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotpAV1fy_7sDhU7Ozj4qR66qi4PqKgM2Ek2hqD_lAdUA8" alt="Травма"><div class="news-content"><span class="news-tag">Игроки</span><h3>🤕 Влад выбыл из строя!</h3><p>Лучший бомбардир получил повреждение, но скоро вернётся!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotJv02aYr9KsJ5LXIQPkOwHqi4PqKgM2Ek2hqD_lAdUA8" alt="Клуб"><div class="news-content"><span class="news-tag">Клубы</span><h3>💪 ЖК Ломоносов усиливается!</h3><p>Три новичка в составе. Конкуренция нарастает!</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2Not_wrg1irdGdMCz0bEG-u5E6i4PqKgM2Ek2hqD_lAdUA8" alt="Захар"><div class="news-content"><span class="news-tag">Слухи</span><h3>🕒 Захар всё ещё свободен</h3><p>Цена выросла до 35₽, но предложений нет.</p></div></div>
+            <div class="news-slide" onclick="window.location.href='news.html'" style="cursor:pointer;"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotQhoDZU-5NMe8ushD21RrVai4PqKgM2Ek2hqD_lAdUA8" alt="Матч"><div class="news-content"><span class="news-tag">Анонс</span><h3>🔥 ФК ПАЦАНЧИКИ — ФК ЖК Ломоносов!</h3><p>Скоро горячее противостояние!</p></div></div>
+        </div>
+    </div>
+
+    <div class="apply-banner fade-in">
+        <p>⚽ Хочешь попасть на сайт? Заполни заявку и стань частью нашей лиги!</p>
+        <a href="apply.html">Заполнить заявку</a>
+    </div>
+
+    <h2 class="section-title fade-in">⭐ Популярные игроки</h2>
+    <div class="carousel-container fade-in">
+        <button class="carousel-btn prev" onclick="scrollCarousel(-1)">&#10094;</button>
+        <div class="carousel" id="carousel"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel(1)">&#10095;</button>
+    </div>
+
+
+    <div class="partner-section fade-in">
+        <h2 class="section-title">🤝 Наш партнёр</h2>
+        <a href="https://max.ru/join/gCmJ8fdP-EzATm8tGzp0c3UR39wUxhhlFOgGDS8mvKk" target="_blank" class="partner-card">
+            <img src="Фото/BD_Clean.jfif" alt="BD Clean" class="partner-logo">
+            <div class="partner-info">
+                <h3>BD Clean</h3>
+                <p>Хотите вернуть мебели свежесть и чистоту без лишних затрат? BD Clean поможет избавиться от пятен, неприятных запахов, пыли и загрязнений быстро, качественно и безопасно!</p>
+                <span class="partner-phone">+7 953 984 66 99</span>
+            </div>
+        </a>
+    </div>
+
+    <h2 class="section-title fade-in" style="margin-top:50px;">🏆 Турнирная таблица</h2>
+    <div class="table-wrapper fade-in">
+        <table>
+            <thead><tr><th>Место</th><th>Команда</th><th>Очки</th></tr></thead>
+            <tbody>
+                <tr><td><span class="pos-1">1</span></td><td><div class="team-cell"><img src="ФК ПАЦАНЧИКИ/Эмблема.png" alt="ФК ПАЦАНЧИКИ" style="height:40px;width:auto;border-radius:6px;object-fit:contain;"><strong><a href="club-patsanchiki.html">ФК ПАЦАНЧИКИ</a></strong></div></td><td>0</td></tr>
+                <tr><td><span class="pos-2">2</span></td><td><div class="team-cell"><img src="ФК ЖК ЛОМОНОСОВ/ПНГ.png" alt="ФК ЖК Ломоносов" class="team-emoji"><a href="club-lomonosov.html">ФК ЖК Ломоносов</a></div></td><td>0</td></tr>
+                <tr><td><span class="pos-3">3</span></td><td><div class="team-cell"><img src="ФК ГОПНИКИ/ПНГ.png" alt="ФК Гопники" class="team-emoji">ФК Гопники</div></td><td>0</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="max-promo fade-in">
+        <img src="Фото/max_messenger_logo.png" alt="MAX" style="width:60px;height:60px;border-radius:12px;object-fit:contain;">
+        <div class="max-promo-text">
+            <h3>Подпишись на наш канал в MAX</h3>
+            <p>Новости, мемы, трансферы и жизнь лиги — всё там. Будь в теме!</p>
+        </div>
+        <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" class="max-promo-btn">Подписаться</a>
+    </div>
+
+
+
+    <div class="world-news-section fade-in">
+        <h2 class="section-title">🌍 Мировой футбол</h2>
+        <div class="world-carousel-container">
+            <button class="world-carousel-btn world-prev" onclick="scrollWorldNews(-1)">&#10094;</button>
+            <div class="world-carousel" id="worldNewsContainer">
+                <p style="color:#999;text-align:center;padding:20px;">Загрузка новостей...</p>
+            </div>
+            <button class="world-carousel-btn world-next" onclick="scrollWorldNews(1)">&#10095;</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col footer-brand">
+            <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип" style="width:70px;height:40px;border-radius:6px;margin-bottom:8px;"></a>
+            <h4>TransfermarktDD</h4>
+            <p>Дворовый футбол Димитровграда</p>
+        </div>
+        <div class="footer-col footer-nav">
+            <h4>Навигация</h4>
+            <a href="news.html">Новости</a>
+            <a href="transfers.html">Трансферы</a>
+            <a href="teams.html">Команды</a>
+            <a href="players.html">Игроки</a>
+        </div>
+        <div class="footer-col footer-contacts">
+            <h4>Контакты</h4>
+            <a href="mailto:bogdancube2020@mail.ru">bogdancube2020@mail.ru</a>
+            <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" class="footer-max-link">
+                <img src="Фото/max_messenger_logo.png" alt="MAX" style="margin-right:6px; width: 40px; height: 40px; border-radius: 8px; object-fit: contain; flex-shrink: 0; transition: 0.2s; display: block;">
+                Канал в MAX
+            </a>
+            <a href="apply.html">Стать игроком</a>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 TransfermarktDD</div>
+</footer>
+
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-box">
+        <h2>⚽ Небольшой перерыв</h2>
+        <p>Всем нужен отдых, поэтому обновления сайта временно приостановлены.</p>
+        <p>Но скоро мы вернёмся! Следите за новостями в нашем канале.</p>
+        <p style="margin-top:10px;">📱 <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" style="color:#00aaff;font-weight:bold;">Канал в MAX</a></p>
+        <button class="popup-close" onclick="closePopup()">Понятно</button>
+    </div>
+</div>
+
+<script>
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, {threshold:0.1});
+    fadeEls.forEach(el => observer.observe(el));
+
+    window.addEventListener('scroll', function() {
+        const btn = document.getElementById('scrollTopBtn');
+        if(window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+    });
+
+    function calcRating(p) {
+        const s = p.stats; let ageCoef;
+        if(p.age>=8&&p.age<=11)ageCoef=0.6; else if(p.age>=12&&p.age<=13)ageCoef=0.7; else if(p.age>=14&&p.age<=15)ageCoef=0.8; else if(p.age>=16&&p.age<=18)ageCoef=1.0; else if(p.age>=19&&p.age<=21)ageCoef=0.9; else ageCoef=0.8;
+        let discipline;
+        if(s.redCards>=2)discipline=0.3; else if(s.redCards>=1)discipline=0.5; else if(s.yellowCards>=4)discipline=0.7; else if(s.yellowCards>=2)discipline=0.9; else discipline=1.0;
+        const priceNorm = p.price/10;
+        const baseRating = (priceNorm*5*0.5)+(ageCoef*30*0.5);
+        let seasonBonus=0;
+        if(p.position==='forward')seasonBonus=(s.goals*5*0.4)+(s.assists*3*0.3)+(s.matches*1*0.2)+(discipline*50*0.1);
+        else if(p.position==='midfielder')seasonBonus=(s.assists*4*0.35)+(s.goals*3*0.25)+(s.matches*2*0.2)+(discipline*50*0.2);
+        else if(p.position==='defender')seasonBonus=(s.matches*2*0.3)+(s.assists*3*0.2)+(s.goals*4*0.15)+(discipline*50*0.35);
+        else if(p.position==='goalkeeper'){const gs=p.goalieStats||{cleanSheets:0};seasonBonus=(gs.cleanSheets*6*0.4)+(s.matches*2*0.2)+(discipline*50*0.4);}
+        return Math.round(baseRating+seasonBonus);
+    }
+
+    const carousel = document.getElementById('carousel');
+    playersData.forEach(p => {
+        const rating = p.ratingOverride > 0 ? p.ratingOverride : calcRating(p);
+        const card = document.createElement('a'); card.className='card-link'; card.href='player-'+p.id+'.html';
+        card.innerHTML = `<div class="card"><div class="card-content"><div class="card-top-row"><div class="player-photo-small"><img src="${p.photo}" alt="${p.name}"></div><div class="mini-rating">Рейтинг: ${rating}</div></div><div class="player-name">${p.name}</div><p><strong>Возраст:</strong> ${p.age} лет</p><p><strong>Номер:</strong> ${p.number}</p><p><strong>Позиция:</strong> ${p.mainPosition}</p><p><strong>Клуб:</strong> ${p.club}</p><div class="market-value">₽ ${p.price}</div></div></div>`;
+        carousel.appendChild(card);
+    });
+
+    function scrollCarousel(direction) { const w = 280+20; carousel.scrollBy({left:direction*w,behavior:'smooth'}); }
+
+    let currentNews=0; const totalNews=8; let newsInterval;
+    function goToNews(index){currentNews=index;document.getElementById('newsSlides').style.transform=`translateX(-${currentNews*100}%)`;resetNewsTimer();}
+    function nextNews(){currentNews=(currentNews+1)%totalNews;goToNews(currentNews);}
+    function prevNews(){currentNews=(currentNews-1+totalNews)%totalNews;goToNews(currentNews);}
+    function resetNewsTimer(){clearInterval(newsInterval);newsInterval=setInterval(nextNews,7000);}
+    resetNewsTimer();
+
+    function toggleMenu(){document.getElementById('mainNav').classList.toggle('open');}
+
+    function toggleTheme(){document.body.classList.toggle('dark-theme');const b=document.querySelector('.theme-toggle');if(document.body.classList.contains('dark-theme')){b.textContent='☀️';localStorage.setItem('theme','dark');}else{b.textContent='🌙';localStorage.setItem('theme','light');}}
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}
+    if(!localStorage.getItem('theme')){if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.body.classList.add('dark-theme');document.querySelector('.theme-toggle').textContent='☀️';}}
+
+    function closePopup() {document.getElementById('popupOverlay').style.display = 'none';}
+
+    let touchStartX=0,touchEndX=0;
+    const carouselEl=document.getElementById('carousel');
+    carouselEl.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].screenX;},{passive:true});
+    carouselEl.addEventListener('touchend',function(e){touchEndX=e.changedTouches[0].screenX;const diff=touchStartX-touchEndX;if(Math.abs(diff)>50)scrollCarousel(diff>0?1:-1);},{passive:true});
+    const newsSlidesEl=document.getElementById('newsSlides');
+    newsSlidesEl.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].screenX;},{passive:true});
+    newsSlidesEl.addEventListener('touchend',function(e){touchEndX=e.changedTouches[0].screenX;const diff=touchStartX-touchEndX;if(Math.abs(diff)>50){if(diff>0)nextNews();else prevNews();}},{passive:true});
+
+    function toggleSearch(){document.getElementById('searchOverlay').classList.toggle('active');if(document.getElementById('searchOverlay').classList.contains('active'))document.getElementById('searchInput').focus();}
+    function searchPlayers(){const q=document.getElementById('searchInput').value.toLowerCase();const results=document.getElementById('searchResults');if(q.length<2){results.innerHTML='';return;}const found=playersData.filter(p=>p.name.toLowerCase().includes(q));results.innerHTML=found.map(p=>`<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');}
+
+    //Мировой футбол - новости
+    function scrollWorldNews(direction) {
+    const carousel = document.querySelector('.world-carousel');
+    carousel.scrollBy({ left: direction * 252, behavior: 'smooth' });
+    }
+
+    //Заствка
+    window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 2800);
+});
+
+
+// Рекламный попап
+    function closeAd() { 
+        document.getElementById('adPopup').style.display = 'none'; 
+        localStorage.setItem('adHidden', 'true');
+    }
+
+    if (localStorage.getItem('adHidden') === 'true') {
+        document.getElementById('adPopup').style.display = 'none';
+    }
+
+</script>
+<script src="news-api.js"></script>
+
+<!-- Реклама BD Clean-->
+<div class="ad-popup" id="adPopup">
+    <div class="ad-popup-box">
+        <button class="ad-popup-close" onclick="closeAd()">✕</button>
+        <img src="Фото/BD_Clean.jfif" alt="BD Clean" style="width:80px;height:80px;border-radius:12px;object-fit:contain;margin-bottom:10px;">
+        <h3>BD Clean</h3>
+        <p>Чистота мебели — быстро, качественно, безопасно!</p>
+        <p style="font-weight:bold;">+7 953 984 66 99</p>
+        <a href="https://max.ru/join/gCmJ8fdP-EzATm8tGzp0c3UR39wUxhhlFOgGDS8mvKk" target="_blank" class="ad-btn">Перейти в канал</a>
+    </div>
+</div>
+</body>
+</html>

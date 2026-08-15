@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игроки | TransfermarktDD</title>
+    <link rel="icon" type="image/png" href="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8">
+    <script src="players-data.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">(function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }} k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a) })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111265607', 'ym'); ym(111265607, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});</script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111265607" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип"> TransfermarktDD</a>
+    </div>
+    <nav id="mainNav">
+        <ul class="nav-menu">
+            <li class="dropdown"><a href="#">Трансферы ▾</a><ul class="dropdown-menu"><li><a href="transfers.html">Трансферы</a></li><li><a href="rumors.html">Слухи</a></li></ul></li>
+            <li class="dropdown"><a href="#">Рыночные цены ▾</a><ul class="dropdown-menu"><li><a href="market-values.html">Все игроки</a></li></ul></li>
+            <li class="dropdown"><a href="#">Турниры ▾</a><ul class="dropdown-menu"><li><a href="tournaments.html">Таблица</a></li><li><a href="schedule.html">Расписание</a></li></ul></li>
+            <li><a href="teams.html">Команды</a></li>
+            <li><a href="players.html">Игроки</a></li>
+            <li><a href="statistics.html">Статистика</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+    <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" title="Наш канал в MAX">
+        <img src="Фото/max_messenger_logo.png" alt="MAX" class="messenger-logo">
+    </a>
+    <div class="header-actions">
+        <button class="search-toggle" onclick="toggleSearch()" title="Поиск">🔍</button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+</header>
+
+<!-- Оверлей поиска -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Поиск игроков..." oninput="searchPlayers()">
+        <button class="search-close" onclick="toggleSearch()">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+</div>
+
+<div class="container">
+    <div class="back-container"><a href="index.html" class="back-link">← Назад на главную</a></div>
+    <h2 class="section-title">👤 Игроки</h2>
+
+    <div class="filters-row">
+        <label>Клуб:</label>
+        <select id="clubFilter" onchange="renderTable()"><option value="all">Все клубы</option></select>
+        <label>Позиция:</label>
+        <select id="positionFilter" onchange="renderTable()">
+            <option value="all">Все позиции</option>
+            <option value="Нападающий">Нападающий</option>
+            <option value="Полузащитник">Полузащитник</option>
+            <option value="Защитник">Защитник</option>
+            <option value="Вратарь">Вратарь</option>
+        </select>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th onclick="sortTable('name')">Игрок <span class="arrow" id="arrow-name">▼</span></th>
+                    <th>Позиция</th>
+                    <th onclick="sortTable('age')">Возраст <span class="arrow" id="arrow-age">▼</span></th>
+                    <th>Клуб</th>
+                    <th onclick="sortTable('price')">Цена <span class="arrow" id="arrow-price">▼</span></th>
+                    <th onclick="sortTable('rating')">Рейтинг <span class="arrow" id="arrow-rating">▼</span></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col footer-brand">
+            <a href="index.html"><img src="https://i.oneme.ru/i?r=BTE2sh_eZW7g8kugOdIm2NotmYZnooSAekas7yjfTkf_0qi4PqKgM2Ek2hqD_lAdUA8" alt="Логотип" style="width:70px;height:40px;border-radius:6px;margin-bottom:8px;"></a>
+            <h4>TransfermarktDD</h4>
+            <p>Дворовый футбол Димитровграда</p>
+        </div>
+        <div class="footer-col footer-nav">
+            <h4>Навигация</h4>
+            <a href="news.html">Новости</a>
+            <a href="transfers.html">Трансферы</a>
+            <a href="teams.html">Команды</a>
+            <a href="players.html">Игроки</a>
+        </div>
+        <div class="footer-col footer-contacts">
+            <h4>Контакты</h4>
+            <a href="mailto:bogdancube2020@mail.ru">bogdancube2020@mail.ru</a>
+            <a href="https://max.ru/join/Qq7zUi_P5VIXZL_pzIIV8wQ5iJX2IP7Icess5AmT2XU" target="_blank" class="footer-max-link">
+                <img src="Фото/max_messenger_logo.png" alt="MAX" style="margin-right:6px; width: 40px; height: 40px; border-radius: 8px; object-fit: contain; flex-shrink: 0; transition: 0.2s; display: block;">
+                Канал в MAX
+            </a>
+            <a href="apply.html">Стать игроком</a>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 TransfermarktDD</div>
+</footer>
+
+<script>
+    let currentSort = 'rating', sortDirection = -1;
+
+    function calcRating(p) {
+        const s = p.stats; let ageCoef;
+        if (p.age >= 8 && p.age <= 11) ageCoef = 0.6;
+        else if (p.age >= 12 && p.age <= 13) ageCoef = 0.7;
+        else if (p.age >= 14 && p.age <= 15) ageCoef = 0.8;
+        else if (p.age >= 16 && p.age <= 18) ageCoef = 1.0;
+        else if (p.age >= 19 && p.age <= 21) ageCoef = 0.9; else ageCoef = 0.8;
+        let discipline;
+        if (s.redCards >= 2) discipline = 0.3;
+        else if (s.redCards >= 1) discipline = 0.5;
+        else if (s.yellowCards >= 4) discipline = 0.7;
+        else if (s.yellowCards >= 2) discipline = 0.9; else discipline = 1.0;
+        const priceNorm = p.price / 10;
+        const baseRating = (priceNorm * 5 * 0.5) + (ageCoef * 30 * 0.5);
+        let seasonBonus = 0;
+        if (p.position === 'forward') seasonBonus = (s.goals * 5 * 0.4) + (s.assists * 3 * 0.3) + (s.matches * 1 * 0.2) + (discipline * 50 * 0.1);
+        else if (p.position === 'midfielder') seasonBonus = (s.assists * 4 * 0.35) + (s.goals * 3 * 0.25) + (s.matches * 2 * 0.2) + (discipline * 50 * 0.2);
+        else if (p.position === 'defender') seasonBonus = (s.matches * 2 * 0.3) + (s.assists * 3 * 0.2) + (s.goals * 4 * 0.15) + (discipline * 50 * 0.35);
+        else if (p.position === 'goalkeeper') { const gs = p.goalieStats || { cleanSheets: 0 }; seasonBonus = (gs.cleanSheets * 6 * 0.4) + (s.matches * 2 * 0.2) + (discipline * 50 * 0.4); }
+        return Math.round(baseRating + seasonBonus);
+    }
+
+    function updateArrows() { document.querySelectorAll('.arrow').forEach(a => a.textContent = '▼'); const a = document.getElementById('arrow-' + currentSort); if (a) a.textContent = sortDirection === 1 ? '▲' : '▼'; }
+
+    function sortTable(field) { if (currentSort === field) sortDirection *= -1; else { currentSort = field; sortDirection = -1; } updateArrows(); renderTable(); }
+
+    function renderTable() {
+        let filtered = [...playersData];
+        const cf = document.getElementById('clubFilter').value, pf = document.getElementById('positionFilter').value;
+        if (cf !== 'all') filtered = filtered.filter(p => p.club === cf);
+        if (pf !== 'all') filtered = filtered.filter(p => p.positions.includes(pf));
+        filtered.sort((a, b) => {
+            let va, vb;
+            if (currentSort === 'name') return a.name.localeCompare(b.name) * sortDirection;
+            if (currentSort === 'age') { va = a.age; vb = b.age; }
+            else if (currentSort === 'price') { va = a.price; vb = b.price; }
+            else if (currentSort === 'rating') { va = a.ratingOverride > 0 ? a.ratingOverride : calcRating(a); vb = b.ratingOverride > 0 ? b.ratingOverride : calcRating(b); }
+            return (va - vb) * sortDirection;
+        });
+        const tbody = document.getElementById('tableBody'); tbody.innerHTML = '';
+        filtered.forEach((p, i) => {
+            const r = p.ratingOverride > 0 ? p.ratingOverride : calcRating(p);
+            tbody.innerHTML += `<tr><td>${i+1}</td><td><div class="player-cell"><img src="${p.photo}" alt="${p.name}"><a href="player-${p.id}.html">${p.name}</a></div></td><td>${p.mainPosition}</td><td>${p.age} лет</td><td>${p.club === 'ФК ПАЦАНЧИКИ' ? '<a href="club-patsanchiki.html">' + p.club + '</a>' : p.club === 'ФК ЖК Ломоносов' ? '<a href="club-lomonosov.html">' + p.club + '</a>' : p.club}</td><td>₽ ${p.price}</td><td><span class="rating-badge">${r}</span></td></tr>`;
+        });
+    }
+
+    const clubs = [...new Set(playersData.map(p => p.club))];
+    const cs = document.getElementById('clubFilter'); clubs.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; cs.appendChild(o); });
+    renderTable();
+
+    function toggleTheme() { document.body.classList.toggle('dark-theme'); const b = document.querySelector('.theme-toggle'); if (document.body.classList.contains('dark-theme')) { b.textContent = '☀️'; localStorage.setItem('theme', 'dark'); } else { b.textContent = '🌙'; localStorage.setItem('theme', 'light'); } }
+    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); document.querySelector('.theme-toggle').textContent = '☀️'; }
+    // Автоопределение темы системы
+    if (!localStorage.getItem('theme')) {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-theme');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+    }
+    function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
+
+    //Поиск игроков
+        function toggleSearch() {
+        document.getElementById('searchOverlay').classList.toggle('active');
+        if (document.getElementById('searchOverlay').classList.contains('active')) {
+            document.getElementById('searchInput').focus();
+        }
+    }
+
+    function searchPlayers() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const results = document.getElementById('searchResults');
+        if (q.length < 2) { results.innerHTML = ''; return; }
+        const found = playersData.filter(p => p.name.toLowerCase().includes(q));
+        results.innerHTML = found.map(p => `<div class="search-item" onclick="window.location.href='player-${p.id}.html'"><img src="${p.photo}" alt="${p.name}"><span>${p.name}</span></div>`).join('');
+    }
+</script>
+
+<!-- Кнопка наверх -->
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<style>
+    .scroll-top-btn { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: #003B7A; color: white; border: none; border-radius: 50%; font-size: 22px; cursor: pointer; z-index: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+    .scroll-top-btn.visible { opacity: 1; visibility: visible; }
+    .scroll-top-btn:hover { background: #00aaff; transform: translateY(-3px); }
+    body.dark-theme .scroll-top-btn { background: #00aaff; }
+</style>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) { btn.classList.add('visible'); }
+        else { btn.classList.remove('visible'); }
+    });
+
+     //Блок реклам и переходов (Приглашение игроков, Макс)
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, {threshold: 0.1});
+        fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
